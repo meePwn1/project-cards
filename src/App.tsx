@@ -1,3 +1,9 @@
+import { Button } from '@/components/ui'
+
 export const App = () => {
-  return <div>App</div>
+  return (
+    <div>
+      <Button>asd</Button>
+    </div>
+  )
 }
