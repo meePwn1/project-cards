@@ -4,16 +4,16 @@ import clsx from 'clsx'
 
 import s from './Button.module.scss'
 
-type ButtonProps<T extends ElementType = 'button'> = {
+type Props<T extends ElementType = 'button'> = {
   as?: T
   children: ReactNode
   className?: string
   fullWidth?: boolean
   variant?: 'primary' | 'secondary'
-  withIcon: boolean
+  withIcon?: boolean
 } & ComponentPropsWithoutRef<T>
 
-export const Button = <T extends ElementType = 'button'>(props: ButtonProps<T>) => {
+export const Button = <T extends ElementType = 'button'>(props: Props<T>) => {
   const { as: Component = 'button', className, fullWidth, variant = 'primary', ...rest } = props
 
   return (
