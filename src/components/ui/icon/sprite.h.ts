@@ -3,8 +3,8 @@ export interface SpritesMap {
     | 'chevron'
     | 'close'
     | 'edit'
-    | 'eye'
     | 'eye-closed'
+    | 'eye'
     | 'image'
     | 'log-out'
     | 'more'
@@ -20,9 +20,9 @@ export const SPRITES_META: {
     items: Record<
       SpritesMap[Key],
       {
-        height: number
         viewBox: string
         width: number
+        height: number
       }
     >
   }
@@ -31,69 +31,69 @@ export const SPRITES_META: {
     filePath: 'common.ef38869c.svg',
     items: {
       chevron: {
-        height: 12,
         viewBox: '0 0 12 12',
         width: 12,
+        height: 12,
       },
       close: {
-        height: 16,
         viewBox: '0 0 16 16',
         width: 16,
+        height: 16,
       },
       edit: {
-        height: 16,
         viewBox: '0 0 16 16',
         width: 16,
-      },
-      eye: {
-        height: 20,
-        viewBox: '0 0 20 20',
-        width: 20,
+        height: 16,
       },
       'eye-closed': {
-        height: 24,
         viewBox: '0 0 24 24',
         width: 24,
+        height: 24,
+      },
+      eye: {
+        viewBox: '0 0 20 20',
+        width: 20,
+        height: 20,
       },
       image: {
-        height: 16,
         viewBox: '0 0 17 16',
         width: 17,
+        height: 16,
       },
       'log-out': {
-        height: 16,
         viewBox: '0 0 16 16',
         width: 16,
+        height: 16,
       },
       more: {
-        height: 18,
         viewBox: '0 0 18 18',
         width: 18,
+        height: 18,
       },
       play: {
-        height: 16,
         viewBox: '0 0 16 16',
         width: 16,
+        height: 16,
       },
       profile: {
-        height: 16,
         viewBox: '0 0 16 16',
         width: 16,
+        height: 16,
       },
       search: {
-        height: 16,
         viewBox: '0 0 16 16',
         width: 16,
+        height: 16,
       },
       star: {
-        height: 16,
         viewBox: '0 0 16 16',
         width: 16,
+        height: 16,
       },
       trash: {
-        height: 16,
         viewBox: '0 0 16 16',
         width: 16,
+        height: 16,
       },
     },
   },

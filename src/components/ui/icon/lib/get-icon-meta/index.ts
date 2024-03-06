@@ -9,7 +9,15 @@ export const getIconMeta = <Key extends keyof SpritesMap>(name: IconName) => {
       [iconName]: { height, viewBox, width },
     },
   } = SPRITES_META[spriteName]
-  const axis = height === width ? 'xy' : width > height ? 'x' : 'y'
+  let axis
+
+  if (height === width) {
+    axis = 'xy'
+  } else if (width > height) {
+    axis = 'x'
+  } else {
+    axis = 'y'
+  }
 
   return { axis, filePath, iconName, viewBox }
 }
