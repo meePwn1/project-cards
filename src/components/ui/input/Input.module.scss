@@ -2,23 +2,6 @@
   overflow: hidden;
 }
 
-.inputWrapper {
-  position: relative;
-}
-
-.icon-right {
-  position: absolute;
-  top: 50%;
-  right: 0;
-  transform: translateY(-50%);
-
-  display: grid;
-  place-items: center;
-
-  width: 30px;
-  height: 100%;
-}
-
 .icon-left {
   position: absolute;
   top: 50%;
@@ -54,12 +37,6 @@
     color: var(--color-dark-300);
   }
 
-  &:focus,
-  &:focus ~ .icon-left {
-    color: var(--color-light-100);
-    border-color: var(--color-light-100);
-  }
-
   &.error {
     color: var(--color-danger-300);
     border-color: var(--color-danger-300);
@@ -70,6 +47,31 @@
       background-color: var(--color-dark-700);
     }
   }
+}
+
+.inputWrapper {
+  position: relative;
+
+  &:focus-within {
+    .input,
+    .icon-left {
+      color: var(--color-light-100);
+      border-color: var(--color-light-100);
+    }
+  }
+}
+
+.icon-right {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+
+  display: grid;
+  place-items: center;
+
+  width: 30px;
+  height: 100%;
 }
 
 .label {

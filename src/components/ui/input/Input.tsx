@@ -4,24 +4,26 @@ import clsx from 'clsx'
 
 import s from './Input.module.scss'
 
-import { Icon } from '..'
+import { Icon, Typography } from '..'
 import { useGetId } from './lib/use-get-id'
 
-type InputProps = {
+type Props = {
   error?: string
   hasError?: boolean
   label?: string
   onClear?: () => void
   search?: boolean
   togglePassword?: boolean
+  value?: string
 } & InputHTMLAttributes<HTMLInputElement>
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(
+export const Input = forwardRef<HTMLInputElement, Props>(
   ({ error, hasError, id, label, onClear, search, togglePassword, ...rest }, ref) => {
     const [inputType, setInputType] = useState<HTMLInputTypeAttribute>(() => {
       return togglePassword ? 'password' : 'text'
     })
     const inputId = useGetId(id)
+    const isShowResetIcon = rest.value?.length! > 0
 
     const handlePasswordType = () => {
       setInputType(prev => (prev === 'text' ? 'password' : 'text'))
@@ -42,7 +44,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             type={inputType}
             {...rest}
           />
-          {hasError && <div>{error}</div>}
+          {hasError && <Typography.Error>{error}</Typography.Error>}
           {togglePassword && (
             <button className={s['icon-right']} onClick={handlePasswordType} type={'button'}>
               <Icon name={inputType === 'text' ? 'common/eye' : 'common/eye-closed'} />
@@ -51,9 +53,11 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           {search && (
             <>
               <Icon className={s['icon-left']} name={'common/search'} size={20} />
-              <button className={s['icon-right']} onClick={onClear}>
-                <Icon name={'common/close'} size={20} />
-              </button>
+              {isShowResetIcon && (
+                <button className={s['icon-right']} onClick={onClear}>
+                  <Icon name={'common/close'} size={20} />
+                </button>
+              )}
             </>
           )}
         </div>
