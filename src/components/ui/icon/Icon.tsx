@@ -28,7 +28,6 @@ export function Icon({ className, name, size: sizeProp, ...props }: IconProps) {
       width={size}
       {...props}
     >
-      {/* For example, "/sprites/common.svg#favourite". Change a base path if you don't store sprites under the "/sprites". */}
       <use href={`/sprites/${filePath}#${iconName}`} />
     </svg>
   )

@@ -25,9 +25,11 @@
   font-size: $fontSize;
   font-weight: $fontWeight;
   line-height: $lineHeight;
+
   &.dark {
     color: var(--color-dark-900);
   }
+
   &.light {
     color: var(--color-light-100);
   }
@@ -36,44 +38,59 @@
 .ui-typography-h1 {
   @include typography(var(--font-size-xxl), var(--line-height-l), var(--font-weight-bold));
 }
+
 .ui-typography-h2 {
   @include typography(var(--font-size-xl), var(--line-height-l), var(--font-weight-bold));
 }
+
 .ui-typography-h3 {
   @include typography(var(--font-size-l), var(--line-height-m), var(--font-weight-bold));
 }
+
 .ui-typography-h4 {
   @include typography(var(--font-size-m), var(--line-height-m), var(--font-weight-bold));
 }
+
 .ui-typography-body1 {
   @include typography(var(--font-size-m), var(--line-height-m), var(--font-weight-regular));
 }
+
 .ui-typography-subtitle1 {
   @include typography(var(--font-size-m), var(--line-height-m), var(--font-weight-bold));
 }
+
 .ui-typography-body2 {
   @include typography(var(--font-size-s), var(--line-height-m), var(--font-weight-regular));
 }
+
 .ui-typography-subtitle2 {
   @include typography(var(--font-size-s), var(--line-height-m), var(--font-weight-bold));
 }
+
 .ui-typography-caption {
   @include typography(var(--font-size-xs), var(--line-height-s), var(--font-weight-regular));
 }
+
 .ui-typography-overline {
   @include typography(var(--font-size-xs), var(--line-height-s), var(--font-weight-bold));
 }
+
 .ui-typography-link1 {
   @include typography(var(--font-size-s), var(--line-height-m), var(--font-weight-regular));
+
   color: var(--color-info-500) !important;
   text-decoration: underline;
 }
+
 .ui-typography-link2 {
   @include typography(var(--font-size-xs), var(--line-height-s), var(--font-weight-regular));
+
   color: var(--color-info-500) !important;
   text-decoration: underline;
 }
+
 .ui-typography-error {
   @include typography(var(--font-size-xs), var(--line-height-s), var(--font-weight-regular));
+
   color: var(--color-danger-300) !important;
 }

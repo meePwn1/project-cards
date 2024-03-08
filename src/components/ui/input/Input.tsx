@@ -44,7 +44,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
             type={inputType}
             {...rest}
           />
-          {hasError && <Typography.Error>{error}</Typography.Error>}
+          {hasError && <Typography variant={'error'}>{error}</Typography>}
           {togglePassword && (
             <button className={s['icon-right']} onClick={handlePasswordType} type={'button'}>
               <Icon name={inputType === 'text' ? 'common/eye' : 'common/eye-closed'} />

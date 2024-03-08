@@ -1,25 +1,10 @@
-import {
-  CSSProperties,
-  ComponentProps,
-  ElementType,
-  FC,
-  JSXElementConstructor,
-  ReactNode,
-} from 'react'
+import { CSSProperties, ComponentPropsWithoutRef, ElementType } from 'react'
 
 import clsx from 'clsx'
-import { JSX } from 'react/jsx-runtime'
 
-export type PropsOf<TTag extends ReactTag> = TTag extends ElementType
-  ? Omit<ComponentProps<TTag>, 'ref'>
-  : never
-export type ReactTag = JSXElementConstructor<any> | keyof JSX.IntrinsicElements
-
-export type TypographyProps<Ttag extends ReactTag> = {
-  children: ReactNode
-  className?: string
+export type TypographyProps<T extends ElementType> = {
+  as?: T
   color?: CSSProperties['color']
-  component?: Ttag
   mb?: CSSProperties['marginBottom']
   ml?: CSSProperties['marginLeft']
   mr?: CSSProperties['marginRight']
@@ -27,16 +12,15 @@ export type TypographyProps<Ttag extends ReactTag> = {
   mx?: CSSProperties['marginRight']
   my?: CSSProperties['marginLeft']
   theme?: 'dark' | 'light'
-} & PropsOf<Ttag>
+  variant: Variant
+} & ComponentPropsWithoutRef<T>
 
-const createTypographyComponent = <T extends ReactTag>(
-  basicClassName: Variant
-): FC<TypographyProps<T>> => {
-  return ({
+export const Typography = <T extends ElementType>(props: TypographyProps<T>) => {
+  const {
+    as: TagName,
     children,
     className,
     color,
-    component,
     mb,
     ml,
     mr,
@@ -45,49 +29,33 @@ const createTypographyComponent = <T extends ReactTag>(
     my,
     style,
     theme = 'light',
+    variant,
     ...rest
-  }) => {
-    const Component = component || Variants[basicClassName] || 'span'
+  } = props
 
-    const classNames = clsx(
-      `ui-typography-${basicClassName}`,
-      theme === 'light' ? 'light' : 'dark',
-      className
-    )
+  const classNames = clsx(
+    `ui-typography-${variant}`,
+    theme === 'light' ? 'light' : 'dark',
+    className
+  )
 
-    const styles = {
-      ...(mx && { marginLeft: mx, marginRight: mx }),
-      ...(my && { marginBottom: my, marginTop: my }),
-      ...(mr && { marginRight: mr }),
-      ...(ml && { marginLeft: ml }),
-      ...(mt && { marginTop: mt }),
-      ...(mb && { marginBottom: mb }),
-      ...(color && { color }),
-      ...style,
-    }
-
-    return (
-      <Component className={classNames} style={styles} {...rest}>
-        {children}
-      </Component>
-    )
+  const styles = {
+    ...(mx && { marginLeft: mx, marginRight: mx }),
+    ...(my && { marginBottom: my, marginTop: my }),
+    ...(mr && { marginRight: mr }),
+    ...(ml && { marginLeft: ml }),
+    ...(mt && { marginTop: mt }),
+    ...(mb && { marginBottom: mb }),
+    ...(color && { color }),
+    ...style,
   }
-}
+  const Component = TagName || Variants[variant] || 'span'
 
-export const Typography = {
-  Body1: createTypographyComponent('body1'),
-  Body2: createTypographyComponent('body2'),
-  Caption: createTypographyComponent('caption'),
-  Error: createTypographyComponent('error'),
-  H1: createTypographyComponent('h1'),
-  H2: createTypographyComponent('h2'),
-  H3: createTypographyComponent('h3'),
-  H4: createTypographyComponent('h4'),
-  Link1: createTypographyComponent('link1'),
-  Link2: createTypographyComponent('link2'),
-  Overline: createTypographyComponent('overline'),
-  Subtitle1: createTypographyComponent('subtitle1'),
-  Subtitle2: createTypographyComponent('subtitle2'),
+  return (
+    <Component className={classNames} style={styles} {...rest}>
+      {children}
+    </Component>
+  )
 }
 
 const Variants = {
