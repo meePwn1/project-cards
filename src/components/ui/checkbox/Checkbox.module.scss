@@ -1,1 +1,60 @@
-/* stylelint-disable no-empty-source */
+.root {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.checkbox {
+  position: relative;
+
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+
+  width: 18px;
+  height: 18px;
+
+  border-radius: 2px;
+  outline: 1px solid var(--color-light-900);
+
+  &::before {
+    content: '';
+
+    position: absolute;
+    z-index: -1;
+    transform: scale(0);
+
+    width: 36px;
+    height: 36px;
+
+    background-color: transparent;
+    border-radius: 50%;
+
+    transition: all 0.3s ease 0s;
+  }
+
+  &:hover::before {
+    transform: scale(1);
+    background-color: var(--color-dark-500);
+  }
+
+  &:active::before {
+    transform: scale(1);
+    background-color: var(--color-dark-100);
+  }
+
+  &[data-state='checked'] {
+    outline: none;
+  }
+}
+
+.indicator {
+  width: 18px;
+  height: 18px;
+}
+
+.label {
+  font-size: var(--font-size-s);
+  line-height: var(--line-height-m);
+}

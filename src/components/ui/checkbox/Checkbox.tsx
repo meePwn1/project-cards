@@ -1,21 +1,22 @@
 import * as CheckboxRadix from '@radix-ui/react-checkbox'
-import { CheckIcon } from '@radix-ui/react-icons'
 
-import './styles.css'
+import s from './Checkbox.module.scss'
 
-export const Checkbox = () => (
-  <form>
-    <div style={{ alignItems: 'center', display: 'flex' }}>
-      <CheckboxRadix.Root className={'CheckboxRoot'} defaultChecked id={'c1'}>
-        <CheckboxRadix.Indicator className={'CheckboxIndicator'}>
-          <CheckIcon />
-        </CheckboxRadix.Indicator>
-      </CheckboxRadix.Root>
-      <label className={'Label'} htmlFor={'c1'}>
-        Accept terms and conditions.
+import { Icon } from '..'
+type Props = {
+  label?: string
+}
+export const Checkbox = ({ label }: Props) => (
+  <div className={s.root}>
+    <CheckboxRadix.Root className={s.checkbox} defaultChecked id={'c1'}>
+      <CheckboxRadix.Indicator className={s.indicator}>
+        <Icon name={'common/check'} size={18} />
+      </CheckboxRadix.Indicator>
+    </CheckboxRadix.Root>
+    {label && (
+      <label className={s.label} htmlFor={'c1'}>
+        {label}
       </label>
-    </div>
-  </form>
+    )}
+  </div>
 )
-
-export default CheckboxDemo

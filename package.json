@@ -24,7 +24,6 @@
     "@it-incubator/stylelint-config": "^1.0.3",
     "@neodx/svg": "^0.7.0",
     "@radix-ui/react-checkbox": "^1.0.4",
-    "@storybook/addon-docs": "^7.6.17",
     "@storybook/addon-essentials": "^7.6.17",
     "@storybook/addon-interactions": "^7.6.17",
     "@storybook/addon-links": "^7.6.17",

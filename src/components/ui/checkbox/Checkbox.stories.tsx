@@ -1,11 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/react'
-// @ts-ignore
-import { Typography } from '@/components/ui'
 
-const meta: Meta<typeof Typography> = {
-  component: Typography,
-  title: 'Components/Typography',
+import { Checkbox } from './Checkbox'
+
+const meta: Meta<typeof Checkbox> = {
+  component: Checkbox,
+  title: 'Components/Checkbox',
 }
 
 export default meta
-type Story = StoryObj<typeof Typography>
+type Story = StoryObj<typeof Checkbox>
+
+export const Primary: Story = {
+  args: {
+    label: 'asd',
+  },
+}
