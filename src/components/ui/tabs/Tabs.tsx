@@ -1,21 +1,62 @@
-import * as Tabs from '@radix-ui/react-tabs'
+import { ReactNode } from 'react'
+
+import * as TabsRadixUI from '@radix-ui/react-tabs'
+import clsx from 'clsx'
 
 import s from './Tabs.module.scss'
 
-type Props = {
-  orientation?: 'horizontal' | 'vertical'
+export type TabType = {
+  disabled?: boolean
+  title: string
+  value: string
 }
-export const TabsSwitcher = ({ orientation = 'horizontal' }: Props) => {
+type TabsProps = {
+  children?: ReactNode
+  defaultValue: string
+  fullWidth?: boolean
+  onValueChange?: (value: string) => void
+  orientation?: 'horizontal' | 'vertical'
+  tabs: TabType[]
+  value?: string
+}
+export const Tabs = ({
+  children,
+  defaultValue,
+  fullWidth = false,
+  onValueChange,
+  orientation = 'horizontal',
+  tabs,
+  value,
+}: TabsProps) => {
   return (
-    <Tabs.Root className={s.tabsRoot} defaultValue={'tab1'} orientation={orientation}>
-      <Tabs.List className={s.tabsList}>
-        <Tabs.Trigger className={s.tabsTitle} value={'tab1'}>
-          Account
-        </Tabs.Trigger>
-        <Tabs.Trigger className={s.tabsTitle} value={'tab2'}>
-          Password
-        </Tabs.Trigger>
-      </Tabs.List>
-    </Tabs.Root>
+    <TabsRadixUI.Root
+      className={clsx(s.tabsRoot, fullWidth && s.fullWidth)}
+      defaultValue={defaultValue}
+      onValueChange={onValueChange}
+      orientation={orientation}
+      value={value}
+    >
+      <TabsRadixUI.List className={s.tabsList}>
+        {tabs.map(tab => (
+          <TabsRadixUI.Trigger
+            className={s.tabsTitle}
+            disabled={tab.disabled}
+            key={tab.value}
+            value={tab.value}
+          >
+            {tab.title}
+          </TabsRadixUI.Trigger>
+        ))}
+      </TabsRadixUI.List>
+      {children}
+    </TabsRadixUI.Root>
   )
+}
+
+type TabsContentProps = {
+  children?: ReactNode
+  value: string
+}
+export const TabContent = ({ children, value }: TabsContentProps) => {
+  return <TabsRadixUI.Content value={value}>{children}</TabsRadixUI.Content>
 }

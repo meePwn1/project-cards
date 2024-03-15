@@ -1,1 +1,1 @@
-export { TabsSwitcher } from './Tabs'
+export { Tabs } from './Tabs'
