@@ -1,3 +1,9 @@
+import { Select } from './components/ui/select/Select'
+
 export const App = () => {
-  return <div></div>
+  return (
+    <div>
+      <Select />
+    </div>
+  )
 }
