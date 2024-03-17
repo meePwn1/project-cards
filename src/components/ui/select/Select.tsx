@@ -26,28 +26,31 @@ export const Select = ({
   ...rest
 }: SelectProps) => {
   return (
-    <RadixUISelect.Root defaultValue={defaultValue} {...rest}>
-      <RadixUISelect.Trigger
-        aria-label={'number'}
-        className={clsx(s.trigger, variant === 'pagination' && s.pagination)}
-      >
-        <RadixUISelect.Value placeholder={placeholder} />
-        <RadixUISelect.Icon className={s.icon}>
-          <Icon name={'common/chevron'} size={16} />
-        </RadixUISelect.Icon>
-      </RadixUISelect.Trigger>
-      <div>
-        <RadixUISelect.SelectContent className={s.content} position={'popper'}>
-          {options.map(el => {
-            return (
-              <SelectItem disabled={el.disabled} key={el.value} value={el.value}>
-                {el.text}
-              </SelectItem>
-            )
-          })}
-        </RadixUISelect.SelectContent>
-      </div>
-    </RadixUISelect.Root>
+    <>
+      {variant !== 'pagination' && <label className={s.label}>Select-box </label>}
+      <RadixUISelect.Root defaultValue={defaultValue} {...rest}>
+        <RadixUISelect.Trigger
+          aria-label={'number'}
+          className={clsx(s.trigger, variant === 'pagination' && s.pagination)}
+        >
+          <RadixUISelect.Value placeholder={placeholder} />
+          <RadixUISelect.Icon className={s.icon}>
+            <Icon name={'common/chevron'} size={16} />
+          </RadixUISelect.Icon>
+        </RadixUISelect.Trigger>
+        <div>
+          <RadixUISelect.SelectContent className={s.content} position={'popper'}>
+            {options.map(el => {
+              return (
+                <SelectItem disabled={el.disabled} key={el.value} value={el.value}>
+                  {el.text}
+                </SelectItem>
+              )
+            })}
+          </RadixUISelect.SelectContent>
+        </div>
+      </RadixUISelect.Root>
+    </>
   )
 }
 
