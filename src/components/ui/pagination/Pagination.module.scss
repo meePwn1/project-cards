@@ -1,1 +1,49 @@
-/* stylelint-disable no-empty-source */
+.root {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+
+  button {
+    width: 24px;
+    height: 24px;
+
+    &:disabled {
+      svg {
+        cursor: default;
+        color: var(--color-dark-100);
+      }
+    }
+  }
+}
+
+.list {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 24px;
+  height: 24px;
+
+  font-size: var(--font-size-s);
+
+  border-radius: 2px;
+}
+
+.active {
+  color: var(--color-dark-900);
+  background-color: var(--color-light-100);
+}
+
+.prev {
+  transform: rotate(-90deg);
+}
+
+.next {
+  transform: rotate(90deg);
+}

@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from 'react'
 
 // original code: https://www.freecodecamp.org/news/build-a-custom-pagination-component-in-react/
-
+type PaginationRange = ('...' | number)[]
 const range = (start: number, end: number) => {
   const length = end - start + 1
 
@@ -12,7 +12,7 @@ const range = (start: number, end: number) => {
   return Array.from({ length }, (_, idx) => idx + start)
 }
 
-const DOTS = '...'
+export const DOTS = '...'
 
 type UsePaginationParamType = {
   count: number
@@ -21,7 +21,6 @@ type UsePaginationParamType = {
   siblings?: number
 }
 
-type PaginationRange = ('...' | number)[]
 export const usePagination = ({ count, onChange, page, siblings = 1 }: UsePaginationParamType) => {
   const paginationRange = useMemo(() => {
     // Pages count is determined as siblings + firstPage + lastPage + currentPage + 2*DOTS
