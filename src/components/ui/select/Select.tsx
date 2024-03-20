@@ -7,19 +7,22 @@ import s from './Select.module.scss'
 
 import { Icon } from '..'
 
-type Option = {
-  disabled?: boolean
-  text: string
-  value: string
-}
+type Option =
+  | { disabled?: boolean; text: number; value: number }
+  | { disabled?: boolean; text: number; value: string }
+  | { disabled?: boolean; text: string; value: number }
+  | { disabled?: boolean; text: string; value: string }
+
 type SelectProps = {
-  options: Option[]
+  label?: string
+  options?: Option[]
   placeholder?: string
   variant: 'default' | 'pagination'
 } & RadixUISelect.SelectProps
 
 export const Select = ({
   defaultValue,
+  label = 'Select box',
   options,
   placeholder = 'Select...',
   variant = 'default',
@@ -27,7 +30,7 @@ export const Select = ({
 }: SelectProps) => {
   return (
     <>
-      {variant !== 'pagination' && <label className={s.label}>Select-box </label>}
+      {variant !== 'pagination' && <label className={s.label}>{label}</label>}
       <RadixUISelect.Root defaultValue={defaultValue} {...rest}>
         <RadixUISelect.Trigger
           aria-label={'number'}
@@ -40,9 +43,9 @@ export const Select = ({
         </RadixUISelect.Trigger>
         <div>
           <RadixUISelect.SelectContent className={s.content} position={'popper'}>
-            {options.map(el => {
+            {options?.map(el => {
               return (
-                <SelectItem disabled={el.disabled} key={el.value} value={el.value}>
+                <SelectItem disabled={el.disabled} key={el.value} value={String(el.value)}>
                   {el.text}
                 </SelectItem>
               )
