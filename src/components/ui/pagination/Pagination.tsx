@@ -73,19 +73,15 @@ export const Pagination = ({
 }
 const Dots: FC = () => {
   return (
-    <li>
-      <span className={s.item}>{DOTS}</span>
+    <li className={s.item}>
+      <span>{DOTS}</span>
     </li>
   )
 }
 const PageButton = ({ onPageChange, page, selected }: PageButtonProps) => {
   return (
-    <li>
-      <button
-        className={clsx(s.item, selected && s.active)}
-        onClick={() => onPageChange(page)}
-        type={'button'}
-      >
+    <li className={clsx(s.item, selected && s.active)}>
+      <button className={s.pageButton} onClick={() => onPageChange(page)} type={'button'}>
         {page}
       </button>
     </li>
