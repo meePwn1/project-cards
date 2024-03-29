@@ -4,6 +4,8 @@ import { getIconMeta } from '@/components/ui/icon/lib/get-icon-meta'
 import { IconName } from '@/components/ui/icon/types'
 import clsx from 'clsx'
 
+import s from './Icon.module.scss'
+
 interface IconProps extends Omit<SVGProps<SVGSVGElement>, 'name' | 'type'> {
   name: IconName
   size?: number
@@ -16,7 +18,7 @@ export function Icon({ className, name, size: sizeProp, ...props }: IconProps) {
   return (
     <svg
       aria-hidden
-      className={clsx('icon', className)}
+      className={clsx(s.icon, className)}
       /**
        * This prop is used by the "icon" class to set the icon's scaled size
        * @see https://github.com/secundant/neodx/issues/92
