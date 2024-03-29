@@ -4,6 +4,7 @@ import clsx from 'clsx'
 
 export type TypographyProps<T extends ElementType> = {
   as?: T
+  className?: string
   color?: CSSProperties['color']
   mb?: CSSProperties['marginBottom']
   ml?: CSSProperties['marginLeft']
