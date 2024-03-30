@@ -1,1 +1,1 @@
-export { DropdownMenu } from './Dropdown'
+export { DropdownMenu, DropdownMenuItem, DropdownMenuItemWithIcon } from './Dropdown'
