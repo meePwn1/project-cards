@@ -14,10 +14,49 @@ const meta: Meta<typeof Rating> = {
 export default meta
 type Story = StoryObj<typeof Rating>
 
-export const Primary: Story = {
+export const Default: Story = {
   render: args => {
-    const [value, setValue] = useState(1)
+    const [value, setValue] = useState(0)
 
-    return <Rating {...args} value={1} />
+    return (
+      <div>
+        <Rating {...args} onChange={v => setValue(v)} value={value} />
+        <div>Current value: {value}</div>
+      </div>
+    )
+  },
+}
+
+export const WithFractions: Story = {
+  render: args => {
+    const [value, setValue] = useState(0)
+    const [hoverValue, setHoverValue] = useState<number | undefined>(0)
+
+    return (
+      <div>
+        <Rating
+          {...args}
+          fractions={10}
+          onChange={v => setValue(v)}
+          onHover={v => setHoverValue(v)}
+          value={value}
+        />
+        <div>Hover value: {hoverValue}</div>
+        <div>Current value: {value}</div>
+      </div>
+    )
+  },
+}
+
+export const Readonly: Story = {
+  render: args => {
+    const [value, setValue] = useState(3)
+
+    return (
+      <div>
+        <Rating {...args} onChange={v => setValue(v)} readonly value={value} />
+        <div>Current value: {value}</div>
+      </div>
+    )
   },
 }
