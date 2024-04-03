@@ -35,8 +35,21 @@ export const ModalBase: Story = {
   },
 }
 
-// footer: (
-//   <>
-//
-//   </>
-// ),
+export const ModalBaseWithOneButton: Story = {
+  args: {
+    content: (
+      <>
+        <Input label={'Name Pack'} placeholder={'Name'} />
+        <ModalFooter
+          onPrimaryButtonClick={() => {
+            console.log('Hello')
+          }}
+          primaryButtonLabel={'primaryButton'}
+        />
+      </>
+    ),
+
+    title: 'Add New Deck',
+    triggerButton: <Button variant={'primary'}>Add New Card</Button>,
+  },
+}

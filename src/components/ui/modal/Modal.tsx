@@ -48,15 +48,14 @@ export const ModalFooter = (props: ModalFooterProps) => {
 
   return (
     <div className={s.footer}>
-      <Button onClick={onSecondaryButtonClick} variant={'secondary'}>
-        {secondaryButtonLabel}
-      </Button>
-
-      {primaryButtonLabel && onPrimaryButtonClick && (
-        <Button onClick={onPrimaryButtonClick} variant={'primary'}>
-          {primaryButtonLabel}
+      {secondaryButtonLabel && onSecondaryButtonClick && (
+        <Button onClick={onSecondaryButtonClick} variant={'secondary'}>
+          {secondaryButtonLabel}
         </Button>
       )}
+      <Button onClick={onPrimaryButtonClick} variant={'primary'}>
+        {primaryButtonLabel}
+      </Button>
     </div>
   )
 }

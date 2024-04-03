@@ -28,10 +28,11 @@
 
 .footer {
   display: flex;
+  justify-content: flex-end;
   justify-content: space-between;
   padding-top: 12px;
-}
 
-.content {
-  padding: 24px 0;
+  :last-child {
+    margin-left: auto;
+  }
 }
