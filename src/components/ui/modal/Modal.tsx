@@ -4,17 +4,17 @@ import * as Dialog from '@radix-ui/react-dialog'
 
 import s from './Modal.module.scss'
 
+import { Button } from '../button'
 import { Icon } from '../icon'
 import { Typography } from '../typography'
 
 type Props = {
   content: ReactNode
-  footer: ReactNode
   title: string
   triggerButton: ReactNode
 }
 export const Modal = (props: Props) => {
-  const { content, footer, title, triggerButton } = props
+  const { content, title, triggerButton } = props
 
   return (
     <Dialog.Root>
@@ -29,16 +29,34 @@ export const Modal = (props: Props) => {
             </Dialog.Close>
           </div>
           <div className={s.content}>{content}</div>
-          <div className={s.footer}>{footer}</div>
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>
   )
 }
 
-{
-  /* <div className={s.footer}>
-            <Button variant={'secondary'}>Cancel</Button>
-            <Button variant={'primary'}>Add New Card</Button>
-          </div> */
+type ModalFooterProps = {
+  onPrimaryButtonClick: () => void
+  onSecondaryButtonClick?: () => void
+  primaryButtonLabel: string
+  secondaryButtonLabel?: string
+}
+
+export const ModalFooter = (props: ModalFooterProps) => {
+  const { onPrimaryButtonClick, onSecondaryButtonClick, primaryButtonLabel, secondaryButtonLabel } =
+    props
+
+  return (
+    <div className={s.footer}>
+      <Button onClick={onSecondaryButtonClick} variant={'secondary'}>
+        {secondaryButtonLabel}
+      </Button>
+
+      {primaryButtonLabel && onPrimaryButtonClick && (
+        <Button onClick={onPrimaryButtonClick} variant={'primary'}>
+          {primaryButtonLabel}
+        </Button>
+      )}
+    </div>
+  )
 }
