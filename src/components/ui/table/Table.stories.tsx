@@ -1,5 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { useEffect, useState } from 'react'
+
+import axios from 'axios'
+
 import { Typography } from '..'
 import { Table } from './Table'
 
@@ -114,4 +118,80 @@ export const MappedTable: Story = {
     ),
   },
   render: args => <Table.Root {...args} />,
+}
+
+interface Author {
+  id: string
+  name: string
+}
+
+interface Card {
+  author: Author
+  cardsCount: number
+  cover: string
+  created: string // Можно заменить на тип Date, если требуется
+  id: string
+  isPrivate: boolean
+  name: string
+  updated: string // Можно заменить на тип Date, если требуется
+  userId: string
+}
+
+interface Pagination {
+  currentPage: number
+  itemsPerPage: number
+  totalItems: number
+  totalPages: number
+}
+
+interface ApiResponse {
+  items: Card[]
+  pagination: Pagination
+}
+const columns = [
+  { label: 'Name', value: 'name' },
+  { label: 'Cards', value: 'cardsCount' },
+  { label: 'Last Updated', value: 'updated' },
+  { label: 'Created by', value: 'author.name' },
+]
+
+export const SortableTable: Story = {
+  args: {},
+  render: args => {
+    const [decs, setDecs] = useState<Card[]>([])
+    const [sort, setSort] = useState<{
+      activeColumn: string
+      direction: 'asc' | 'desc'
+      orderBy: string
+    } | null>(null)
+
+    useEffect(() => {
+      axios
+        .get<ApiResponse>('https://api.flashcards.andrii.es/v2/decks', {
+          headers: {
+            'x-auth-skip': true,
+          },
+          params: {
+            orderBy: sort?.orderBy,
+          },
+        })
+        .then(res => setDecs(res.data.items))
+    }, [sort?.orderBy])
+
+    return (
+      <Table.Root {...args}>
+        <Table.Head>
+          <Table.Row>
+            {columns.map(item => {
+              return (
+                <Table.SortableHeadCell column={item} key={item.label} onSort={setSort} sort={sort}>
+                  <Typography variant={'subtitle2'}></Typography>
+                </Table.SortableHeadCell>
+              )
+            })}
+          </Table.Row>
+        </Table.Head>
+      </Table.Root>
+    )
+  },
 }
