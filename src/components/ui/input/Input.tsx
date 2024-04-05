@@ -9,7 +9,6 @@ import { useGetId } from './lib/use-get-id'
 
 type Props = {
   error?: string
-  hasError?: boolean
   label?: string
   onClear?: () => void
   search?: boolean
@@ -18,7 +17,7 @@ type Props = {
 } & InputHTMLAttributes<HTMLInputElement>
 
 export const Input = forwardRef<HTMLInputElement, Props>(
-  ({ error, hasError, id, label, onClear, search, togglePassword, ...rest }, ref) => {
+  ({ error, id, label, onClear, search, togglePassword, ...rest }, ref) => {
     const [inputType, setInputType] = useState<HTMLInputTypeAttribute>(() => {
       return togglePassword ? 'password' : 'text'
     })
@@ -38,13 +37,13 @@ export const Input = forwardRef<HTMLInputElement, Props>(
         )}
         <div className={s.inputWrapper}>
           <input
-            className={clsx('input-reset', s.input, search && s.search, hasError && s.error)}
+            className={clsx('input-reset', s.input, search && s.search, error && s.error)}
             id={inputId}
             ref={ref}
             type={inputType}
             {...rest}
           />
-          {hasError && <Typography variant={'error'}>{error}</Typography>}
+          {error && <Typography variant={'error'}>{error}</Typography>}
           {togglePassword && (
             <button className={s['icon-right']} onClick={handlePasswordType} type={'button'}>
               <Icon name={inputType === 'text' ? 'common/eye' : 'common/eye-closed'} />

@@ -32,19 +32,27 @@
     padding-left: 40px;
   }
 
+  &:focus::placeholder {
+    color: var(--color-light-100);
+  }
+
   &:disabled,
   &:disabled ~ .icon-left {
     color: var(--color-dark-300);
   }
 
   &.error {
-    color: var(--color-danger-300);
     border-color: var(--color-danger-300);
+  }
+
+  &.error::placeholder {
+    color: var(--color-danger-300);
   }
 
   @media (any-hover: hover) {
     &:not(:disabled):hover {
       background-color: var(--color-dark-700);
+      border-color: var(--color-dark-100);
     }
   }
 }
