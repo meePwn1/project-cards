@@ -55,5 +55,6 @@ export const Search = () => {
 export const Error: Story = {
   args: {
     ...baseArgs,
+    error: 'some error',
   },
 }
