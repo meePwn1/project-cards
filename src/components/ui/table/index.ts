@@ -1,1 +1,1 @@
-export { Body, Cell, Head, HeadCell, Row, Table } from './Table'
+export { type SortBy, type SortType, Table } from './Table'

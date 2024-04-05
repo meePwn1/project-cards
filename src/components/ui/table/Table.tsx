@@ -6,20 +6,24 @@ import s from './Table.module.scss'
 
 import { Icon } from '..'
 
-type SortType = {
-  activeColumn: string
-  direction: 'asc' | 'desc'
-  orderBy: string
-} | null
-
 type RootProps = ComponentProps<'table'>
 type TheadProps = ComponentProps<'thead'>
 type TbodyProps = ComponentProps<'tbody'>
 type TrProps = ComponentProps<'tr'>
 type ThProps = ComponentProps<'th'>
 type TdProps = ComponentProps<'td'>
+
+type Column = { sortBy: SortBy; title: string }
+
+export type SortBy = 'author.name' | 'cardsCount' | 'created' | 'name' | 'updated'
+
+export type SortType = {
+  direction: 'asc' | 'desc'
+  sortBy: SortBy
+} | null
+
 type SortTableProps = ThProps & {
-  column: { label: string; value: string }
+  column: Column
   onSort: (sort: SortType) => void
   sort: SortType
 }
@@ -49,40 +53,28 @@ export const Cell = ({ className, ...props }: TdProps) => {
 }
 
 export const SortableHeadCell = ({ className, column, onSort, sort, ...props }: SortTableProps) => {
-  const handleSort = (value: string, sortDirection: 'asc' | 'desc', activeColumn: string) => {
-    const orderBy = value + '-' + sortDirection
-
-    const direction = (() => {
-      if (column.value !== sort?.activeColumn) {
-        return 'asc'
-      }
-      switch (sortDirection) {
-        case 'asc':
-          return 'desc'
-        case 'desc':
-          return 'asc'
-        default:
-          return 'asc'
-      }
-    })()
-
-    onSort({ activeColumn, direction, orderBy })
+  const handleSort = () => {
+    if (sort?.sortBy !== column.sortBy) {
+      return onSort({ direction: 'asc', sortBy: column.sortBy })
+    }
+    // eslint-disable-next-line no-nested-ternary
+    sort.direction === 'asc'
+      ? onSort({ direction: 'desc', sortBy: column.sortBy })
+      : sort.direction === 'desc'
+        ? onSort(null)
+        : onSort({ direction: 'asc', sortBy: column.sortBy })
   }
-  const icon = (
-    <Icon
-      className={clsx(sort?.direction && s[sort.direction])}
-      name={'common/chevron'}
-      size={12}
-    />
-  )
 
   return (
-    <HeadCell
-      className={s.sortable}
-      onClick={() => handleSort(column.value, sort && sort.direction, column.value)}
-    >
-      {column.label}
-      {column.value === sort?.activeColumn && <span>{icon}</span>}
+    <HeadCell {...props} className={clsx(s.sortable, className)} onClick={handleSort}>
+      {column.title}
+      {sort?.sortBy === column.sortBy && (
+        <Icon
+          className={sort.direction === 'asc' ? s.asc : s.desc}
+          name={'common/chevron'}
+          size={12}
+        />
+      )}
     </HeadCell>
   )
 }

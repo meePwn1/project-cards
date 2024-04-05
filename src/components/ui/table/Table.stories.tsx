@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 
 import { Typography } from '..'
-import { Table } from './Table'
+import { SortBy, SortType, Table } from './Table'
 
 const meta: Meta<typeof Table.Root> = {
   component: Table.Root,
@@ -149,21 +149,19 @@ interface ApiResponse {
   pagination: Pagination
 }
 const columns = [
-  { label: 'Name', value: 'name' },
-  { label: 'Cards', value: 'cardsCount' },
-  { label: 'Last Updated', value: 'updated' },
-  { label: 'Created by', value: 'author.name' },
-]
+  { title: 'Question' },
+  { title: 'Answer' },
+  { sortBy: 'name', title: 'Name' },
+  { sortBy: 'cardsCount', title: 'Cards' },
+  { sortBy: 'updated', title: 'Last Updated' },
+  { sortBy: 'author.name', title: 'Created by' },
+] as { sortBy: SortBy; title: string }[]
 
 export const SortableTable: Story = {
   args: {},
   render: args => {
     const [decs, setDecs] = useState<Card[]>([])
-    const [sort, setSort] = useState<{
-      activeColumn: string
-      direction: 'asc' | 'desc'
-      orderBy: string
-    } | null>(null)
+    const [sort, setSort] = useState<SortType | null>(null)
 
     useEffect(() => {
       axios
@@ -172,25 +170,41 @@ export const SortableTable: Story = {
             'x-auth-skip': true,
           },
           params: {
-            orderBy: sort?.orderBy,
+            orderBy: sort && sort.sortBy + '-' + sort.direction,
           },
         })
         .then(res => setDecs(res.data.items))
-    }, [sort?.orderBy])
+    }, [sort])
 
     return (
       <Table.Root {...args}>
         <Table.Head>
           <Table.Row>
             {columns.map(item => {
-              return (
-                <Table.SortableHeadCell column={item} key={item.label} onSort={setSort} sort={sort}>
+              return item.sortBy ? (
+                <Table.SortableHeadCell column={item} key={item.title} onSort={setSort} sort={sort}>
                   <Typography variant={'subtitle2'}></Typography>
                 </Table.SortableHeadCell>
+              ) : (
+                <Table.HeadCell key={item.title}>
+                  <Typography variant={'subtitle2'}>{item.title}</Typography>
+                </Table.HeadCell>
               )
             })}
           </Table.Row>
         </Table.Head>
+        <Table.Body>
+          {decs.map(item => (
+            <Table.Row key={item.id}>
+              <Table.Cell></Table.Cell>
+              <Table.Cell></Table.Cell>
+              <Table.Cell>{item.name}</Table.Cell>
+              <Table.Cell>{item.cardsCount}</Table.Cell>
+              <Table.Cell>{item.updated}</Table.Cell>
+              <Table.Cell>{item.author.name}</Table.Cell>
+            </Table.Row>
+          ))}
+        </Table.Body>
       </Table.Root>
     )
   },
