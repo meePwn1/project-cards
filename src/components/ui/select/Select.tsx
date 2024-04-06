@@ -1,4 +1,4 @@
-import { ComponentPropsWithRef, ElementRef, ReactNode, forwardRef } from 'react'
+import { ElementRef, ReactNode, forwardRef } from 'react'
 
 import * as RadixUISelect from '@radix-ui/react-select'
 import clsx from 'clsx'
@@ -18,10 +18,9 @@ type SelectProps = {
   options?: Option[]
   placeholder?: string
   variant: 'default' | 'pagination'
-} & RadixUISelect.SelectProps &
-  ComponentPropsWithRef<'select'>
+} & RadixUISelect.SelectProps
 
-export const Select = forwardRef<ElementRef<typeof RadixUISelect.Root>, SelectProps>(
+export const Select = forwardRef<ElementRef<typeof RadixUISelect.Trigger>, SelectProps>(
   (
     {
       defaultValue,
@@ -29,6 +28,7 @@ export const Select = forwardRef<ElementRef<typeof RadixUISelect.Root>, SelectPr
       options,
       placeholder = 'Select...',
       variant = 'default',
+
       ...rest
     },
     ref
@@ -36,10 +36,11 @@ export const Select = forwardRef<ElementRef<typeof RadixUISelect.Root>, SelectPr
     return (
       <>
         {variant !== 'pagination' && <label className={s.label}>{label}</label>}
-        <RadixUISelect.Root defaultValue={defaultValue} ref={ref} {...rest}>
+        <RadixUISelect.Root defaultValue={defaultValue} {...rest}>
           <RadixUISelect.Trigger
             aria-label={'number'}
             className={clsx(s.trigger, variant === 'pagination' && s.pagination)}
+            ref={ref}
           >
             <RadixUISelect.Value placeholder={placeholder} />
             <RadixUISelect.Icon className={s.icon}>
