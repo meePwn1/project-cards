@@ -7,7 +7,7 @@ import s from './TextField.module.scss'
 
 import { Icon, Typography } from '..'
 
-type Props = {
+export type TextFieldProps = {
   error?: string
   label?: string
   onClear?: () => void
@@ -16,7 +16,7 @@ type Props = {
   value?: string
 } & ComponentPropsWithRef<'input'>
 
-export const TextField = forwardRef<HTMLInputElement, Props>(
+export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   ({ error, id, label, onClear, search, togglePassword, ...rest }, ref) => {
     const [inputType, setInputType] = useState<HTMLInputTypeAttribute>(() => {
       return togglePassword ? 'password' : 'text'

@@ -1,13 +1,12 @@
 import { FieldValues, UseControllerProps, useController } from 'react-hook-form'
 
-import { Checkbox, CheckboxProps } from '@/components/ui'
+import { TextField, TextFieldProps } from '@/components/ui'
 
 type Props<T extends FieldValues> = UseControllerProps<T> &
-  Omit<CheckboxProps, 'checked' | 'id' | 'onBlur' | 'onCheckedChange'>
+  Omit<TextFieldProps, 'id' | 'onBlur' | 'onChange' | 'value'>
 
-export const FormCheckbox = <T extends FieldValues>({
+export const FormTextField = <T extends FieldValues>({
   control,
-  defaultValue,
   disabled,
   name,
   shouldUnregister,
@@ -17,20 +16,19 @@ export const FormCheckbox = <T extends FieldValues>({
     field: { onBlur, onChange, ref, value, ...fields },
   } = useController({
     control,
-    defaultValue,
     disabled,
     name,
     shouldUnregister,
   })
 
   return (
-    <Checkbox
-      checked={value}
+    <TextField
       disabled={fields.disabled}
       id={fields.name}
       onBlur={onBlur}
-      onCheckedChange={onChange}
+      onChange={onChange}
       ref={ref}
+      value={value}
       {...rest}
     />
   )
