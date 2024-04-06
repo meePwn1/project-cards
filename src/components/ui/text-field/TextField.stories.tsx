@@ -2,13 +2,13 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { useRef, useState } from 'react'
 
-import { Input } from '@/components/ui/input/Input'
+import { TextField } from '.'
 
 const meta = {
-  component: Input,
+  component: TextField,
   tags: ['autodocs'],
-  title: 'Components/Input',
-} satisfies Meta<typeof Input>
+  title: 'Components/TextField',
+} satisfies Meta<typeof TextField>
 
 export default meta
 type Story = StoryObj<typeof meta>
@@ -41,7 +41,7 @@ export const Search = () => {
   }
 
   return (
-    <Input
+    <TextField
       {...baseArgs}
       onChange={e => setText(e.target.value)}
       onClear={handleReset}

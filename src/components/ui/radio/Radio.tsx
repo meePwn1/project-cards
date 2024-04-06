@@ -1,5 +1,4 @@
-import { useId } from 'react'
-
+import { useGetId } from '@/common/hooks'
 import * as RadixUIRadioGroup from '@radix-ui/react-radio-group'
 
 import s from './Radio.module.scss'
@@ -16,7 +15,7 @@ type RadioGroupProps = {
 } & RadixUIRadioGroup.RadioGroupProps
 
 export const RadioGroup = ({ options, ...rest }: RadioGroupProps) => {
-  const id = useId()
+  const htmlID = useGetId(rest.id)
 
   return (
     <RadixUIRadioGroup.Root {...rest}>
@@ -25,13 +24,13 @@ export const RadioGroup = ({ options, ...rest }: RadioGroupProps) => {
           <RadixUIRadioGroup.Item
             className={s.item}
             disabled={option.disabled}
-            id={`${id}-${option.value}`}
+            id={`${htmlID}-${option.value}`}
             required={option.required}
             value={option.value}
           >
             <RadixUIRadioGroup.Indicator className={s.indicator} />
           </RadixUIRadioGroup.Item>
-          <label htmlFor={`${id}-${option.value}`}>{option.label}</label>
+          <label htmlFor={`${htmlID}-${option.value}`}>{option.label}</label>
         </div>
       ))}
     </RadixUIRadioGroup.Root>

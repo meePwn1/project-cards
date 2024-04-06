@@ -1,5 +1,24 @@
+.label {
+  display: inline-block;
+
+  margin-bottom: 5px;
+
+  font-size: var(--font-size-m);
+  color: var(--color-dark-100);
+
+  transition: color 0.3s ease 0s;
+}
+
 .field {
   overflow: hidden;
+
+  &:focus-within .label {
+    color: var(--color-light-100);
+  }
+
+  .label.error {
+    color: var(--color-danger-300);
+  }
 }
 
 .icon-left {
@@ -7,9 +26,6 @@
   top: 50%;
   left: 10px;
   transform: translateY(-50%);
-
-  display: grid;
-  place-items: center;
 
   color: var(--color-dark-100);
 }
@@ -32,21 +48,14 @@
     padding-left: 40px;
   }
 
-  &:focus::placeholder {
-    color: var(--color-light-100);
-  }
-
   &:disabled,
   &:disabled ~ .icon-left {
     color: var(--color-dark-300);
   }
 
   &.error {
-    border-color: var(--color-danger-300);
-  }
-
-  &.error::placeholder {
-    color: var(--color-danger-300);
+    color: var(--color-danger-300) !important;
+    border-color: var(--color-danger-300) !important;
   }
 
   @media (any-hover: hover) {
@@ -75,16 +84,10 @@
   right: 0;
   transform: translateY(-50%);
 
-  display: grid;
-  place-items: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
   width: 30px;
   height: 100%;
-}
-
-.label {
-  display: inline-block;
-  margin-bottom: 5px;
-  font-size: var(--font-size-m);
-  color: var(--color-dark-100);
 }

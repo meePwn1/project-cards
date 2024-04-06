@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { Modal } from '.'
+import { TextField } from '..'
 import { Button } from '../button'
-import { Input } from '../input'
 import { ModalFooter } from './Modal'
 
 const meta: Meta<typeof Modal> = {
@@ -18,7 +18,7 @@ export const ModalBase: Story = {
   args: {
     content: (
       <>
-        <Input label={'Name Pack'} placeholder={'Name'} />
+        <TextField label={'Name Pack'} placeholder={'Name'} />
         <ModalFooter
           onPrimaryButtonClick={() => {
             console.log('Hello')
@@ -39,7 +39,7 @@ export const ModalBaseWithOneButton: Story = {
   args: {
     content: (
       <>
-        <Input label={'Name Pack'} placeholder={'Name'} />
+        <TextField label={'Name Pack'} placeholder={'Name'} />
         <ModalFooter
           onPrimaryButtonClick={() => {
             console.log('Hello')

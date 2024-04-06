@@ -1,11 +1,11 @@
-import { HTMLInputTypeAttribute, InputHTMLAttributes, forwardRef, useState } from 'react'
+import { ComponentPropsWithRef, HTMLInputTypeAttribute, forwardRef, useState } from 'react'
 
+import { useGetId } from '@/common/hooks'
 import clsx from 'clsx'
 
-import s from './Input.module.scss'
+import s from './TextField.module.scss'
 
 import { Icon, Typography } from '..'
-import { useGetId } from './lib/use-get-id'
 
 type Props = {
   error?: string
@@ -14,9 +14,9 @@ type Props = {
   search?: boolean
   togglePassword?: boolean
   value?: string
-} & InputHTMLAttributes<HTMLInputElement>
+} & ComponentPropsWithRef<'input'>
 
-export const Input = forwardRef<HTMLInputElement, Props>(
+export const TextField = forwardRef<HTMLInputElement, Props>(
   ({ error, id, label, onClear, search, togglePassword, ...rest }, ref) => {
     const [inputType, setInputType] = useState<HTMLInputTypeAttribute>(() => {
       return togglePassword ? 'password' : 'text'
@@ -24,14 +24,14 @@ export const Input = forwardRef<HTMLInputElement, Props>(
     const inputId = useGetId(id)
     const isShowResetIcon = rest.value?.length! > 0
 
-    const handlePasswordType = () => {
+    const handleChangePasswordType = () => {
       setInputType(prev => (prev === 'text' ? 'password' : 'text'))
     }
 
     return (
       <div className={s.field}>
         {label && (
-          <label className={s.label} htmlFor={inputId}>
+          <label className={clsx(s.label, error && s.error)} htmlFor={inputId}>
             {label}
           </label>
         )}
@@ -43,9 +43,9 @@ export const Input = forwardRef<HTMLInputElement, Props>(
             type={inputType}
             {...rest}
           />
-          {error && <Typography variant={'error'}>{error}</Typography>}
+
           {togglePassword && (
-            <button className={s['icon-right']} onClick={handlePasswordType} type={'button'}>
+            <button className={s['icon-right']} onClick={handleChangePasswordType} type={'button'}>
               <Icon name={inputType === 'text' ? 'common/eye' : 'common/eye-closed'} />
             </button>
           )}
@@ -60,6 +60,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
             </>
           )}
         </div>
+        {error && <Typography variant={'error'}>{error}</Typography>}
       </div>
     )
   }
