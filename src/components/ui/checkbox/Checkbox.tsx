@@ -1,36 +1,25 @@
-import { forwardRef } from 'react'
+import { ElementRef, forwardRef } from 'react'
 
 import { useGetId } from '@/common/hooks'
 import * as CheckboxRadix from '@radix-ui/react-checkbox'
+import clsx from 'clsx'
 
 import s from './Checkbox.module.scss'
 
 import { Icon } from '..'
 
-type Props = {
-  checked?: boolean
-  disabled?: boolean
-  id?: string
+export type CheckboxProps = {
+  className?: string
   label?: string
-  onChange?: (checked: boolean) => void
-  required?: boolean
-}
+} & CheckboxRadix.CheckboxProps
 
-export const Checkbox = forwardRef<HTMLButtonElement, Props>(
-  ({ checked, disabled, id, label, onChange, required }, ref) => {
+export const Checkbox = forwardRef<ElementRef<typeof CheckboxRadix.Root>, CheckboxProps>(
+  ({ className, id, label, ...rest }, ref) => {
     const htmlId = useGetId(id)
 
     return (
-      <div className={s.container}>
-        <CheckboxRadix.Root
-          checked={checked}
-          className={s.root}
-          disabled={disabled}
-          id={htmlId}
-          onCheckedChange={onChange}
-          ref={ref}
-          required={required}
-        >
+      <div className={clsx(s.container, className)}>
+        <CheckboxRadix.Root className={s.root} id={htmlId} ref={ref} {...rest}>
           <CheckboxRadix.Indicator className={s.indicator}>
             <Icon name={'common/check'} size={18} />
           </CheckboxRadix.Indicator>
