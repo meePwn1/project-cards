@@ -17,7 +17,7 @@ export type RadioGroupProps = {
 } & RadixUIRadioGroup.RadioGroupProps
 
 export const RadioGroup = forwardRef<ElementRef<typeof RadixUIRadioGroup.Root>, RadioGroupProps>(
-  ({ options, ...rest }: RadioGroupProps, ref) => {
+  ({ options, ...rest }, ref) => {
     const htmlID = useGetId(rest.id)
 
     return (
