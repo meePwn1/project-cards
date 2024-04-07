@@ -10,8 +10,6 @@
 }
 
 .field {
-  overflow: hidden;
-
   &:focus-within .label {
     color: var(--color-light-100);
   }
@@ -90,4 +88,10 @@
 
   width: 30px;
   height: 100%;
+}
+
+.errorLabel {
+  position: absolute;
+  top: 103%;
+  left: 0;
 }

@@ -70,6 +70,7 @@ const Variants = {
   h4: 'h4',
   link1: 'a',
   link2: 'a',
+  linkForm: 'a',
   overline: 'p',
   subtitle1: 'p',
   subtitle2: 'p',
