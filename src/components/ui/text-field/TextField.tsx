@@ -17,7 +17,7 @@ export type TextFieldProps = {
 } & ComponentPropsWithRef<'input'>
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
-  ({ error, id, label, onClear, search, togglePassword, ...rest }, ref) => {
+  ({ className, error, id, label, onClear, search, togglePassword, ...rest }, ref) => {
     const [inputType, setInputType] = useState<HTMLInputTypeAttribute>(() => {
       return togglePassword ? 'password' : 'text'
     })
@@ -29,7 +29,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     }
 
     return (
-      <div className={s.field}>
+      <div className={clsx(s.field, className)}>
         {label && (
           <label className={clsx(s.label, error && s.error)} htmlFor={inputId}>
             {label}

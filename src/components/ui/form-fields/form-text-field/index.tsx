@@ -1,35 +1,20 @@
-import { FieldValues, UseControllerProps, useController } from 'react-hook-form'
+import { Control, FieldValues, UseControllerProps, useController } from 'react-hook-form'
 
 import { TextField, TextFieldProps } from '@/components/ui'
 
-type Props<T extends FieldValues> = UseControllerProps<T> &
-  Omit<TextFieldProps, 'id' | 'onBlur' | 'onChange' | 'value'>
+type Props<T extends FieldValues> = Omit<UseControllerProps<T>, 'control'> & {
+  control: Control<T>
+} & Omit<TextFieldProps, 'id' | 'onBlur' | 'onChange' | 'value'>
 
-export const FormTextField = <T extends FieldValues>({
-  control,
-  disabled,
-  name,
-  shouldUnregister,
-  ...rest
-}: Props<T>) => {
-  const {
-    field: { onBlur, onChange, ref, value, ...fields },
-  } = useController({
-    control,
-    disabled,
-    name,
-    shouldUnregister,
+export const FormTextField = <T extends FieldValues>(props: Props<T>) => {
+  const { field } = useController({
+    control: props.control,
+    defaultValue: props.defaultValue,
+    disabled: props.disabled,
+    name: props.name,
+    rules: props.rules,
+    shouldUnregister: props.shouldUnregister,
   })
 
-  return (
-    <TextField
-      disabled={fields.disabled}
-      id={fields.name}
-      onBlur={onBlur}
-      onChange={onChange}
-      ref={ref}
-      value={value}
-      {...rest}
-    />
-  )
+  return <TextField id={props.name} {...{ ...props, ...field }} />
 }

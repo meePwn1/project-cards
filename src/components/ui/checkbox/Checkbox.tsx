@@ -6,7 +6,7 @@ import clsx from 'clsx'
 
 import s from './Checkbox.module.scss'
 
-import { Icon } from '..'
+import { Icon, Typography } from '..'
 
 export type CheckboxProps = {
   className?: string
@@ -25,9 +25,9 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxRadix.Root>, Checkb
           </CheckboxRadix.Indicator>
         </CheckboxRadix.Root>
         {label && (
-          <label className={s.label} htmlFor={htmlId}>
+          <Typography as={'label'} htmlFor={htmlId} variant={'body2'}>
             {label}
-          </label>
+          </Typography>
         )}
       </div>
     )
