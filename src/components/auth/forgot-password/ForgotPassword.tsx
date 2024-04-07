@@ -1,16 +1,16 @@
 import { useForm } from 'react-hook-form'
 
 import { FormValues, schema } from '@/common/schemas'
-import { Button, Card, FormCheckbox, FormTextField, Typography } from '@/components/ui'
+import { Button, Card, FormTextField, Typography } from '@/components/ui'
 import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import s from './SignIn.module.scss'
+import s from './ForgotPassword.module.scss'
 type Props = {
   onSubmit?: (data: FormValues) => void
 }
 
-export const SignIn = (props: Props) => {
+export const ForgotPassword = (props: Props) => {
   const {
     control,
     formState: { errors, isSubmitting },
@@ -27,7 +27,7 @@ export const SignIn = (props: Props) => {
     <Card className={s.root}>
       <DevTool control={control} />
       <Typography className={s.title} variant={'h1'}>
-        Sign In
+        Forgot your password?
       </Typography>
       <form className={s.form} onSubmit={handleSubmit(onHandleSubmit)}>
         <FormTextField
@@ -38,34 +38,20 @@ export const SignIn = (props: Props) => {
           name={'email'}
           placeholder={'Email'}
         />
-        <FormTextField
-          className={s.field}
-          control={control}
-          error={errors.password?.message}
-          label={'Password'}
-          name={'password'}
-          placeholder={'Password'}
-          togglePassword
-        />
-        <FormCheckbox
-          className={s.checkbox}
-          control={control}
-          label={'Remember me'}
-          name={'rememberMe'}
-        />
+
         <Typography as={'a'} className={s.forgot} href={'#'} variant={'body2'}>
-          Forgot Password?
+          Enter your email address and we will send you further instructions
         </Typography>
-        <Button className={s.button} disabled={isSubmitting} fullWidth>
-          Sign In
+        <Button className={s.button} disabled={isSubmitting} fullWidth type={'submit'}>
+          Send Instructions
         </Button>
       </form>
       <div className={s.footer}>
         <Typography className={s.text} variant={'body2'}>
-          Already have an account?
+          Did you remember your password?
         </Typography>
         <Typography as={'a'} href={'#'} variant={'linkForm'}>
-          Sign In
+          Try logging in
         </Typography>
       </div>
     </Card>
