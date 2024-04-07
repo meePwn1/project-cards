@@ -14,7 +14,7 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  render: args => {
+  render: () => {
     const [formData, setFormData] = useState({})
 
     console.log(formData)
