@@ -17,8 +17,6 @@ export const Default: Story = {
   render: () => {
     const [formData, setFormData] = useState({})
 
-    console.log(formData)
-
     return (
       <div style={{ margin: '0 auto', maxWidth: 420 }}>
         <SignUp onSubmit={setFormData} />

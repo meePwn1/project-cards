@@ -14,11 +14,18 @@ type Props = {
 export const SignUp = (props: Props) => {
   const {
     control,
-    formState: { errors, isDirty, isSubmitting },
+    formState: { dirtyFields, errors, isSubmitting },
     handleSubmit,
   } = useForm<FormValues>({
+    defaultValues: {
+      confirmPassword: '',
+      email: '',
+      password: '',
+    },
     resolver: zodResolver(schema),
   })
+
+  const isFieldsNotEmpty = dirtyFields.confirmPassword && dirtyFields.password && dirtyFields.email
 
   const onHandleSubmit = (data: FormValues) => {
     props.onSubmit?.(data)
@@ -54,7 +61,7 @@ export const SignUp = (props: Props) => {
           placeholder={'Confirm Password'}
           togglePassword
         />
-        <Button className={s.button} disabled={!isDirty || isSubmitting} fullWidth>
+        <Button className={s.button} disabled={!isFieldsNotEmpty || isSubmitting} fullWidth>
           Sign Up
         </Button>
       </form>
