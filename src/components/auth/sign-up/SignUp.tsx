@@ -11,19 +11,17 @@ type Props = {
   onSubmit?: (data: FormValues) => void
 }
 
-export const SignUp = ({ onSubmit }: Props) => {
+export const SignUp = (props: Props) => {
   const {
     control,
     formState: { errors, isDirty, isSubmitting },
     handleSubmit,
-    reset,
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
   })
 
   const onHandleSubmit = (data: FormValues) => {
-    onSubmit?.(data)
-    reset()
+    props.onSubmit?.(data)
   }
 
   return (
