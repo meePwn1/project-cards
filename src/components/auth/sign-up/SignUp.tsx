@@ -8,23 +8,17 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import s from './SignUp.module.scss'
 
 type Props = {
-  onSubmit?: (data: FormValues) => void
+  onSubmit: (data: FormValues) => void
 }
 
-export const SignUp = ({ onSubmit }: Props) => {
+export const SignUp = (props: Props) => {
   const {
     control,
     formState: { errors, isDirty, isSubmitting },
     handleSubmit,
-    reset,
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
   })
-
-  const onHandleSubmit = (data: FormValues) => {
-    onSubmit?.(data)
-    reset()
-  }
 
   return (
     <Card className={s.root}>
@@ -32,7 +26,7 @@ export const SignUp = ({ onSubmit }: Props) => {
       <Typography className={s.title} variant={'h1'}>
         Sign Up
       </Typography>
-      <form className={s.form} onSubmit={handleSubmit(onHandleSubmit)}>
+      <form className={s.form} onSubmit={handleSubmit(props.onSubmit)}>
         <FormTextField
           control={control}
           error={errors.email?.message}
