@@ -1,3 +1,3 @@
 # Project Cards on React + Redux Toolkit (RTK) + TypeScript
 
-- [Storybook](https://storybook-cards-meepwn.vercel.app){:target="_blank"} for this project
+- [Storybook](https://storybook-cards-meepwn.vercel.app) for this project
