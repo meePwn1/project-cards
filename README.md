@@ -1,3 +1,3 @@
-# Link for storybook for this project
+# Project Cards on React + Redux Toolkit (RTK) + TypeScript
 
-- [Project](https://storybook-cards-meepwn.vercel.app) 
+- [Storybook](https://storybook-cards-meepwn.vercel.app){:target="_blank"} for this project
