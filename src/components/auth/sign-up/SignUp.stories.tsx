@@ -13,12 +13,16 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Primary: Story = {
-  render: () => {
-    const [formData, setformData] = useState({})
+export const Default: Story = {
+  render: args => {
+    const [formData, setFormData] = useState({})
 
     console.log(formData)
 
-    return <SignUp onSubmit={setformData} />
+    return (
+      <div style={{ margin: '0 auto', maxWidth: 420 }}>
+        <SignUp onSubmit={setFormData} />
+      </div>
+    )
   },
 }
