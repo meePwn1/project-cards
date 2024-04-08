@@ -11,26 +11,25 @@ import s from './ProfileInfoEdit.module.scss'
 type Props = {
   className?: string
   onEditModeDeactivate?: (value: boolean) => void
-  updateUsername?: (data: FormValue) => void
+  onUpdateUsername?: (data: FormValue) => void
 }
 type FormValue = Pick<FormValues, 'username'>
+const schema = formSchema.pick({ username: true })
 
-export const ProfileInfoEdit = ({ className, onEditModeDeactivate, updateUsername }: Props) => {
+export const ProfileInfoEdit = ({ className, onEditModeDeactivate, onUpdateUsername }: Props) => {
   const {
     control,
     formState: { errors, isSubmitting, isValid },
     handleSubmit,
   } = useForm<FormValue>({
     defaultValues: { username: '' },
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(schema),
   })
   const handleUpdateUsername = (data: FormValue) => {
-    updateUsername?.(data)
+    onUpdateUsername?.(data)
   }
   const handleEditMode = () => {
-    if (isValid) {
-      onEditModeDeactivate?.(false)
-    }
+    isValid && onEditModeDeactivate?.(false)
   }
 
   return (
