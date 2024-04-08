@@ -38,11 +38,10 @@ export const ForgotPassword = (props: Props) => {
           name={'email'}
           placeholder={'Email'}
         />
-
-        <Typography className={s.forgot} href={'#'} variant={'body2'}>
+        <Typography className={s.text} variant={'body2'}>
           Enter your email address and we will send you further instructions
         </Typography>
-        <Button className={s.button} disabled={isSubmitting} fullWidth type={'submit'}>
+        <Button disabled={isSubmitting} fullWidth type={'submit'}>
           Send Instructions
         </Button>
       </form>
