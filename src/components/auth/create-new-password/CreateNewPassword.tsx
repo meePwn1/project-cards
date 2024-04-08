@@ -7,19 +7,21 @@ import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './CreateNewPassword.module.scss'
 type Props = {
-  onSubmit?: (data: FormValues) => void
+  onSubmit?: (data: FormValue) => void
 }
+type FormValue = Pick<FormValues, 'password'>
+const schema = formSchema.pick({ password: true })
 
 export const CreateNewPassword = (props: Props) => {
   const {
     control,
     formState: { errors, isSubmitting },
     handleSubmit,
-  } = useForm<FormValues>({
-    resolver: zodResolver(formSchema),
+  } = useForm<FormValue>({
+    resolver: zodResolver(schema),
   })
 
-  const onHandleSubmit = (data: FormValues) => {
+  const onHandleSubmit = (data: FormValue) => {
     props.onSubmit?.(data)
   }
 
