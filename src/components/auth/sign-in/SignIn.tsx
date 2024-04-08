@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form'
 
-import { FormValues, schema } from '@/common/schemas'
+import { FormValues, formSchema } from '@/common/schemas'
 import { Button, Card, FormCheckbox, FormTextField, Typography } from '@/components/ui'
 import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -16,7 +16,7 @@ export const SignIn = (props: Props) => {
     formState: { errors, isSubmitting },
     handleSubmit,
   } = useForm<FormValues>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(formSchema),
   })
 
   const onHandleSubmit = (data: FormValues) => {
