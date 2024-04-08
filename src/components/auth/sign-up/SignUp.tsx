@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form'
 
-import { FormValues, schema } from '@/common/schemas'
+import { FormValues, formSchema } from '@/common/schemas'
 import { Button, Card, FormTextField, Typography } from '@/components/ui'
 import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -22,7 +22,7 @@ export const SignUp = (props: Props) => {
       email: '',
       password: '',
     },
-    resolver: zodResolver(schema),
+    resolver: zodResolver(formSchema),
   })
 
   const isFieldsNotEmpty = dirtyFields.confirmPassword && dirtyFields.password && dirtyFields.email

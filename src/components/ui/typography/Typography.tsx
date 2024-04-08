@@ -12,7 +12,6 @@ export type TypographyProps<T extends ElementType> = {
   mt?: CSSProperties['marginTop']
   mx?: CSSProperties['marginRight']
   my?: CSSProperties['marginLeft']
-  theme?: 'dark' | 'light'
   variant: Variant
 } & ComponentPropsWithoutRef<T>
 
@@ -29,16 +28,11 @@ export const Typography = <T extends ElementType>(props: TypographyProps<T>) => 
     mx,
     my,
     style,
-    theme = 'light',
     variant,
     ...rest
   } = props
 
-  const classNames = clsx(
-    `ui-typography-${variant}`,
-    theme === 'light' ? 'light' : 'dark',
-    className
-  )
+  const classNames = clsx(`ui-typography-${variant}`, className)
 
   const styles = {
     ...(mx && { marginLeft: mx, marginRight: mx }),

@@ -1,0 +1,26 @@
+.username {
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.editButton {
+  padding: 4px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease 0s;
+
+  &:active {
+    background-color: var(--color-dark-500);
+  }
+
+  @media (any-hover: hover) {
+    &:not(:active):hover {
+      background-color: var(--color-dark-300);
+    }
+  }
+}
+
+.email {
+  margin-bottom: 15px;
+  color: var(--color-dark-100);
+}

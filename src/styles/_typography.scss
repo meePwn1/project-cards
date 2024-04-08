@@ -25,14 +25,6 @@
   font-size: $fontSize;
   font-weight: $fontWeight;
   line-height: $lineHeight;
-
-  &.dark {
-    color: var(--color-dark-900);
-  }
-
-  &.light {
-    color: var(--color-light-100);
-  }
 }
 
 .ui-typography-h1 {
@@ -78,13 +70,13 @@
 .ui-typography-linkForm {
   @include typography(var(--font-size-m), var(--line-height-m), var(--font-weight-bold));
 
-  color: var(--color-accent-500) !important;
+  color: var(--color-accent-500);
   text-decoration: underline;
   transition: color 0.3s ease 0s;
 
   @media (any-hover: hover) {
     &:hover {
-      color: var(--color-accent-700) !important;
+      color: var(--color-accent-700);
     }
   }
 }
@@ -92,19 +84,19 @@
 .ui-typography-link1 {
   @include typography(var(--font-size-s), var(--line-height-m), var(--font-weight-regular));
 
-  color: var(--color-info-500) !important;
+  color: var(--color-info-500);
   text-decoration: underline;
 }
 
 .ui-typography-link2 {
   @include typography(var(--font-size-xs), var(--line-height-s), var(--font-weight-regular));
 
-  color: var(--color-info-500) !important;
+  color: var(--color-info-500);
   text-decoration: underline;
 }
 
 .ui-typography-error {
   @include typography(var(--font-size-xs), var(--line-height-s), var(--font-weight-regular));
 
-  color: var(--color-danger-300) !important;
+  color: var(--color-danger-300);
 }
