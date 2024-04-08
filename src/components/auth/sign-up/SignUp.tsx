@@ -8,26 +8,31 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import s from './SignUp.module.scss'
 
 type Props = {
-  onSubmit?: (data: FormValues) => void
+  onSubmit?: (data: FormValue) => void
 }
+type FormValue = Omit<FormValues, 'rememberMe' | 'username'>
+const schema = formSchema.refine(data => data.password === data.confirmPassword, {
+  message: 'Passwords do not match',
+  path: ['confirmPassword'],
+})
 
 export const SignUp = (props: Props) => {
   const {
     control,
     formState: { dirtyFields, errors, isSubmitting },
     handleSubmit,
-  } = useForm<FormValues>({
+  } = useForm<FormValue>({
     defaultValues: {
       confirmPassword: '',
       email: '',
       password: '',
     },
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(schema),
   })
 
   const isFieldsNotEmpty = dirtyFields.confirmPassword && dirtyFields.password && dirtyFields.email
 
-  const onHandleSubmit = (data: FormValues) => {
+  const onHandleSubmit = (data: FormValue) => {
     props.onSubmit?.(data)
   }
 
