@@ -1,10 +1,10 @@
 import { CSSProperties, ComponentPropsWithoutRef } from 'react'
 
+import avatar from '@/assets/avatar.png'
 import clsx from 'clsx'
 
 import s from './Avatar.module.scss'
 
-import avatar from './assets/avatar.png'
 type Props = {
   alt?: string
   size?: CSSProperties['width']
