@@ -1,3 +1,4 @@
+import checkEmail from '@/assets/check-email.png'
 import { Button, Card, Typography } from '@/components/ui'
 import clsx from 'clsx'
 
@@ -11,8 +12,8 @@ export const CheckEmail = ({ className }: Props) => {
       <Typography className={s.title} variant={'h1'}>
         Check Email
       </Typography>
-      <div>
-        <img alt={'check email icon'} src={''} />
+      <div className={s.image}>
+        <img alt={'check email icon'} src={checkEmail} />
       </div>
       <Typography className={s.text} variant={'body2'}>
         We’ve sent an Email with instructions to example@mail.com
