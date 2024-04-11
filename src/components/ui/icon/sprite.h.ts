@@ -3,6 +3,7 @@ export interface SpritesMap {
     | 'check'
     | 'chevron'
     | 'close'
+    | 'divider-horizontal'
     | 'edit'
     | 'eye-closed'
     | 'eye'
@@ -30,7 +31,7 @@ export const SPRITES_META: {
   }
 } = {
   common: {
-    filePath: 'common.a56f645a.svg',
+    filePath: 'common.c0d39b65.svg',
     items: {
       check: {
         viewBox: '0 0 18 18',
@@ -46,6 +47,11 @@ export const SPRITES_META: {
         viewBox: '0 0 16 16',
         width: 16,
         height: 16,
+      },
+      'divider-horizontal': {
+        viewBox: '0 0 15 15',
+        width: 800,
+        height: 800,
       },
       edit: {
         viewBox: '0 0 16 16',
