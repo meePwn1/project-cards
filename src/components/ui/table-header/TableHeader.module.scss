@@ -1,0 +1,19 @@
+.sortable {
+  cursor: pointer;
+
+  display: flex;
+  gap: 5px;
+  align-items: center;
+
+  transition: all 0.3s ease 0s;
+
+  @media (any-hover: hover) {
+    &:hover {
+      background-color: var(--color-dark-300);
+    }
+  }
+}
+
+.asc {
+  transform: rotate(-180deg);
+}
