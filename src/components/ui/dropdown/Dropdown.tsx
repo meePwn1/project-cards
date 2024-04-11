@@ -59,12 +59,20 @@ export const DropdownMenu = ({
 
 type DropdownMenuItemProps = {
   children?: ReactNode
+  icon?: ReactNode
   text?: string
 } & RadixUIDropdown.DropdownMenuItemProps
 
-export const DropdownMenuItem = ({ children, text, ...rest }: DropdownMenuItemProps) => {
+export const DropdownMenuItem = ({
+  children,
+  className,
+  icon,
+  text,
+  ...rest
+}: DropdownMenuItemProps) => {
   return (
-    <RadixUIDropdown.Item className={s.item} {...rest}>
+    <RadixUIDropdown.Item className={clsx(s.item, className)} {...rest}>
+      {icon && <div>{icon}</div>}
       {children ? (
         children
       ) : (
@@ -78,24 +86,25 @@ export const DropdownMenuItem = ({ children, text, ...rest }: DropdownMenuItemPr
 
 type DropdownMenuItemWithIconProps = {
   icon: ReactNode
-} & DropdownMenuItemProps
+} & Omit<DropdownMenuItemProps, 'icon'>
 
-export const DropdownMenuItemWithIcon = ({
+export const DropdownMenuItemWithIcon = ({ icon, ...rest }: DropdownMenuItemWithIconProps) => {
+  return <DropdownMenuItem {...rest} icon={icon} />
+}
+
+type DropdownMenuLabelProps = RadixUIDropdown.DropdownMenuLabelProps & {
+  icon?: ReactNode
+}
+export const DropdownMenuLabel = ({
   children,
+  className,
   icon,
-  text,
   ...rest
-}: DropdownMenuItemWithIconProps) => {
+}: DropdownMenuLabelProps) => {
   return (
-    <RadixUIDropdown.Item className={s.item} {...rest}>
+    <RadixUIDropdown.Label {...rest} className={clsx(s.label, className)}>
       {icon && <div>{icon}</div>}
-      {children ? (
-        children
-      ) : (
-        <Typography className={s.text} variant={'caption'}>
-          {text}
-        </Typography>
-      )}
-    </RadixUIDropdown.Item>
+      {children}
+    </RadixUIDropdown.Label>
   )
 }
