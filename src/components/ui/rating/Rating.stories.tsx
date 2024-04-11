@@ -8,7 +8,7 @@ import { Rating } from '@/components/ui'
 const meta: Meta<typeof Rating> = {
   component: Rating,
   tags: ['autodocs'],
-  title: 'Components/Rating',
+  title: 'UI/Rating',
 }
 
 export default meta
