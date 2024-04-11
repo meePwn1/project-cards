@@ -5,7 +5,7 @@ import { Button } from '@/components/ui'
 const meta = {
   component: Button,
   tags: ['autodocs'],
-  title: 'Components/Button',
+  title: 'UI/Button',
 } satisfies Meta<typeof Button>
 
 export default meta

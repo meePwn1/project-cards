@@ -8,7 +8,7 @@ import { ModalFooter } from './Modal'
 const meta: Meta<typeof Modal> = {
   component: Modal,
   tags: ['autodocs'],
-  title: 'Components/Modal',
+  title: 'UI/Modal',
 }
 
 export default meta
