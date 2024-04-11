@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { Icon, Typography } from '..'
-import { DropdownMenu, DropdownMenuItemWithIcon } from './Dropdown'
+import { DropdownMenu, DropdownMenuItemWithIcon, DropdownMenuLabel } from './Dropdown'
 
 const meta: Meta<typeof DropdownMenu> = {
   component: DropdownMenu,
   tags: ['autodocs'],
-  title: 'Components/DropdownMenu',
+  title: 'UI/DropdownMenu',
 }
 
 export default meta
@@ -39,14 +39,14 @@ export const User: Story = {
   args: {},
   render: args => (
     <DropdownMenu trigger={<Avatar />} {...args}>
-      <DropdownMenuItemWithIcon icon={<Avatar />} style={{ gap: 10 }}>
+      <DropdownMenuLabel icon={<Avatar />}>
         <div>
           <Typography variant={'subtitle2'}>Deadpool</Typography>
           <Typography style={{ color: '#808080' }} variant={'caption'}>
             j&johnson@gmail.com
           </Typography>
         </div>
-      </DropdownMenuItemWithIcon>
+      </DropdownMenuLabel>
       <DropdownMenuItemWithIcon
         icon={<Icon name={'common/edit'} size={16} />}
         text={'My Profile'}
