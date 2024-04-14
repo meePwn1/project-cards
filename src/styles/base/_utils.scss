@@ -1,0 +1,94 @@
+/* stylelint-disable scss/percent-placeholder-pattern */
+// Счетчик для списка
+%listCounter {
+  counter-reset: item;
+  list-style-type: none;
+
+  li {
+    position: relative;
+
+    &::before {
+      content: counter(item);
+      counter-increment: item;
+
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
+}
+
+// Адаптивное видео
+%responsiveVideo {
+  position: relative;
+  overflow: hidden;
+  height: 0;
+  padding-bottom: 56.25%;
+
+  video,
+  iframe,
+  object,
+  embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+  }
+}
+
+// Видео как фон
+%videoBackground {
+  video,
+  iframe,
+  object,
+  embed {
+    position: fixed;
+    z-index: -100;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+
+    width: auto;
+    min-width: 100%;
+    height: auto;
+    min-height: 100%;
+
+    background-size: cover;
+  }
+}
+
+// Серый фильтр
+%grayfilter {
+  filter: grayscale(1);
+  transition: all 0.3s ease 0s;
+
+  @media (any-hover: hover) {
+    &:hover {
+      filter: grayscale(0);
+    }
+  }
+}
+
+// Отменить выделение
+%noselect {
+  user-select: none;
+}
+
+// Зеркальное отражение
+%mirror {
+  transform: scale(-1, 1);
+}
+
+// Плавный скролл
+%smoothscroll {
+  -webkit-overflow-scrolling: touch;
+}
+
+// Скрыть скролл
+%hidescroll {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
