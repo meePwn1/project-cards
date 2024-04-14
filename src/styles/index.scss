@@ -1,3 +1,38 @@
+@use 'sass:math';
+
 @import 'colors';
 @import 'typography';
-@import 'boilerplate';
+@import 'base/style';
+@import 'base/null';
+
+body {
+  background-color: var(--color-dark-900);
+
+  // Скролл заблокирован
+  .lock & {
+    touch-action: none;
+    overflow: hidden;
+    overscroll-behavior: none;
+  }
+}
+
+.wrapper {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+
+  @supports (overflow: clip) {
+    overflow: clip;
+  }
+
+  // Прижимаем footer
+  > main {
+    flex: 1 1 auto;
+  }
+
+  // Фикс для слайдеров
+  > * {
+    min-width: 0;
+  }
+}
