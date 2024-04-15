@@ -1,9 +1,10 @@
 import { SignIn } from '@/components/auth'
+import { Page } from '@/components/layout'
 
 export const Login = () => {
   return (
-    <div>
+    <Page centered>
       <SignIn />
-    </div>
+    </Page>
   )
 }
