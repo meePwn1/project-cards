@@ -1,4 +1,4 @@
-import { CSSProperties, ComponentPropsWithoutRef } from 'react'
+import { CSSProperties, ComponentPropsWithoutRef, forwardRef } from 'react'
 
 import avatar from '@/assets/avatar.png'
 import clsx from 'clsx'
@@ -9,15 +9,14 @@ type Props = {
   alt?: string
   size?: CSSProperties['width']
   src?: string
-} & ComponentPropsWithoutRef<'img'>
+} & ComponentPropsWithoutRef<'span'>
 
-export const Avatar = ({ alt, className, size = 36, src, style, ...rest }: Props) => {
+export const Avatar = forwardRef<HTMLSpanElement, Props>((props, ref) => {
+  const { alt, className, size = 36, src, style, ...rest } = props
+  const styles: CSSProperties = { ...style, height: size, width: size }
+
   return (
-    <span
-      className={clsx(s.avatar, className)}
-      {...rest}
-      style={{ ...style, height: size, width: size }}
-    >
+    <span className={clsx(s.avatar, className)} ref={ref} style={styles} {...rest}>
       {src ? (
         <img alt={alt} className={s.image} src={src} />
       ) : (
@@ -25,4 +24,4 @@ export const Avatar = ({ alt, className, size = 36, src, style, ...rest }: Props
       )}
     </span>
   )
-}
+})
