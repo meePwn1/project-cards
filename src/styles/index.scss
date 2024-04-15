@@ -36,3 +36,9 @@ body {
     min-width: 0;
   }
 }
+
+.container {
+  max-width: rem($containerWidth);
+  margin: 0 auto;
+  padding: 0 rem(math.div($containerPadding, 2));
+}
