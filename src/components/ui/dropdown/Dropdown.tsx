@@ -5,11 +5,15 @@ import clsx from 'clsx'
 
 import s from './Dropdown.module.scss'
 
-import { Card, Typography } from '..'
+import { Typography } from '..'
 
 type DropdownMenuProps = {
   children: ReactNode
   className?: string
+  defaultOpen?: boolean
+  modal?: boolean
+  onOpenChange?: (value: boolean) => void
+  open?: boolean
   trigger?: ReactNode
   withSeparator?: boolean
 } & RadixUIDropdown.DropdownMenuContentProps
@@ -17,6 +21,10 @@ type DropdownMenuProps = {
 export const DropdownMenu = ({
   children,
   className,
+  defaultOpen,
+  modal = false,
+  onOpenChange,
+  open,
   trigger,
   withSeparator = true,
   ...rest
@@ -37,19 +45,23 @@ export const DropdownMenu = ({
   }
 
   return (
-    <RadixUIDropdown.Root>
-      <RadixUIDropdown.Trigger asChild>
+    <RadixUIDropdown.Root
+      defaultOpen={defaultOpen}
+      modal={modal}
+      onOpenChange={onOpenChange}
+      open={open}
+    >
+      <RadixUIDropdown.Trigger asChild style={{ outline: 'none' }}>
         {trigger && <button>{trigger}</button>}
       </RadixUIDropdown.Trigger>
 
       <RadixUIDropdown.Portal>
         <RadixUIDropdown.Content
           className={clsx(s.content, className)}
-          collisionPadding={5}
-          sideOffset={5}
+          collisionPadding={15}
           {...rest}
         >
-          <Card>{withSeparator ? addSeparators(children) : children}</Card>
+          {withSeparator ? addSeparators(children) : children}
           <RadixUIDropdown.Arrow className={s.arrow} />
         </RadixUIDropdown.Content>
       </RadixUIDropdown.Portal>
