@@ -4,6 +4,7 @@ export const ROUTES = {
   newPassword: '/password/new',
   notFound: '/not-found',
   resetPassword: '/password/reset',
+  rest: '/*',
   signIn: '/login',
   signUp: '/register',
 } as const

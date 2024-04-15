@@ -5,6 +5,13 @@ import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 
 export default defineConfig({
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@use "./src/styles/base/style.scss" as *;`,
+      },
+    },
+  },
   plugins: [
     react(),
     svg({
