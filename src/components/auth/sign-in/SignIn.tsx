@@ -1,5 +1,7 @@
 import { useForm } from 'react-hook-form'
+import { Link } from 'react-router-dom'
 
+import { ROUTES } from '@/common/constants'
 import { FormValues, formSchema } from '@/common/schemas'
 import { Button, Card, FormCheckbox, FormTextField, Typography } from '@/components/ui'
 import { DevTool } from '@hookform/devtools'
@@ -9,7 +11,7 @@ import s from './SignIn.module.scss'
 type Props = {
   onSubmit?: (data: FormValue) => void
 }
-type FormValue = Pick<FormValues, 'email' | 'password' | 'rememberMe'>
+export type FormValue = Pick<FormValues, 'email' | 'password' | 'rememberMe'>
 const schema = formSchema.pick({ email: true, password: true, rememberMe: true })
 
 export const SignIn = (props: Props) => {
@@ -55,8 +57,8 @@ export const SignIn = (props: Props) => {
           label={'Remember me'}
           name={'rememberMe'}
         />
-        <Typography as={'a'} className={s.forgot} href={'#'} variant={'body2'}>
-          Forgot Password?
+        <Typography className={s.forgot} variant={'body2'}>
+          <Link to={ROUTES.resetPassword}>Forgot Password?</Link>
         </Typography>
         <Button className={s.button} disabled={isSubmitting} fullWidth>
           Sign In
@@ -66,8 +68,8 @@ export const SignIn = (props: Props) => {
         <Typography className={s.text} variant={'body2'}>
           Already have an account?
         </Typography>
-        <Typography as={'a'} href={'#'} variant={'linkForm'}>
-          Sign In
+        <Typography variant={'linkForm'}>
+          <Link to={ROUTES.signUp}>Sign Up</Link>
         </Typography>
       </div>
     </Card>
