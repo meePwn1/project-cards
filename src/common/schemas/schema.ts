@@ -1,9 +1,9 @@
 import { z } from 'zod'
 
 export const formSchema = z.object({
-  confirmPassword: z.string().min(6),
+  confirmPassword: z.string().min(4),
   email: z.string().email(),
-  password: z.string().min(6),
+  password: z.string().min(4),
   rememberMe: z.boolean().optional(),
   username: z.string().min(3),
 })

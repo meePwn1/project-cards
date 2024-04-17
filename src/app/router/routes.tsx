@@ -1,23 +1,26 @@
 import { RouteObject } from 'react-router-dom'
 
 import { ROUTES } from '@/common/constants'
-import { Login } from '@/pages/login'
-import { Register } from '@/pages/register'
+import { Desks, ResetPasswordPage, SignInPage, SignUpPage } from '@/pages'
 
 export const publicRoutes: RouteObject[] = [
   {
-    element: <Login />,
+    element: <SignInPage />,
     path: ROUTES.signIn,
   },
   {
-    element: <Register />,
+    element: <SignUpPage />,
     path: ROUTES.signUp,
+  },
+  {
+    element: <ResetPasswordPage />,
+    path: ROUTES.resetPassword,
   },
 ]
 
 export const privateRoutes: RouteObject[] = [
   {
-    element: <div>main</div>,
+    element: <Desks />,
     path: '/',
   },
 ]

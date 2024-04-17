@@ -1,5 +1,7 @@
 import { useForm } from 'react-hook-form'
+import { Link } from 'react-router-dom'
 
+import { ROUTES } from '@/common/constants'
 import { FormValues, formSchema } from '@/common/schemas'
 import { Button, Card, FormTextField, Typography } from '@/components/ui'
 import { DevTool } from '@hookform/devtools'
@@ -52,8 +54,8 @@ export const ForgotPassword = (props: Props) => {
         <Typography className={s.text} variant={'body2'}>
           Did you remember your password?
         </Typography>
-        <Typography as={'a'} href={'#'} variant={'linkForm'}>
-          Try logging in
+        <Typography variant={'linkForm'}>
+          <Link to={ROUTES.signIn}>Try logging in</Link>
         </Typography>
       </div>
     </Card>
