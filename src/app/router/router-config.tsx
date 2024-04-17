@@ -2,10 +2,11 @@ import { Navigate, Outlet, RouterProvider, createBrowserRouter } from 'react-rou
 
 import { ROUTES } from '@/common/constants'
 import { Layout } from '@/components/layout'
+import { useMeQuery } from '@/services/auth/auth.service'
 
 import { privateRoutes, publicRoutes } from './routes'
 
-const router = createBrowserRouter([
+export const router = createBrowserRouter([
   {
     children: [
       {
@@ -20,9 +21,15 @@ const router = createBrowserRouter([
 ])
 
 function PrivateRoutes() {
-  const isAuthenticated = true
+  const { isError, isLoading } = useMeQuery()
 
-  return isAuthenticated ? <Outlet /> : <Navigate to={'/login'} />
+  if (isLoading) {
+    return <div>...loading</div>
+  }
+
+  const isAuthenticated = !isError
+
+  return isAuthenticated ? <Outlet /> : <Navigate to={ROUTES.signIn} />
 }
 export const Router = () => {
   return <RouterProvider router={router} />

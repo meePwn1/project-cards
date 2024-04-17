@@ -1,14 +1,12 @@
-import { API_URL } from '@/common/constants'
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { createApi } from '@reduxjs/toolkit/query/react'
+
+import { baseQueryWithReauth } from './base-query-with-reauth'
 
 export const baseApi = createApi({
-  baseQuery: fetchBaseQuery({
-    baseUrl: API_URL,
-    credentials: 'include',
-    prepareHeaders: headers => {
-      headers.append('x-auth-skip', 'true')
-    },
-  }),
-  endpoints: () => ({}),
+  baseQuery: baseQueryWithReauth,
+  endpoints: () => {
+    return {}
+  },
   reducerPath: 'baseApi',
+  tagTypes: ['Decks', 'Me'],
 })
