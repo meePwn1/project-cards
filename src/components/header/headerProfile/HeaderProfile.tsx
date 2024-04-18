@@ -6,26 +6,29 @@ import {
   Icon,
   Typography,
 } from '@/components/ui'
+import { useLogoutMutation, useMeQuery } from '@/services/auth/auth.service'
 
 import s from './HeaderProfile.module.scss'
 
-type Props = {
-  data?: any
-}
+export const HeaderProfile = () => {
+  const { data } = useMeQuery()
+  const [logout] = useLogoutMutation()
 
-export const HeaderProfile = ({}: Props) => {
+  const handleLogout = () => {
+    logout()
+  }
   const trigger = <Avatar size={36} />
 
   return (
     <div className={s.headerProfile}>
       <Typography className={s.username} variant={'subtitle1'}>
-        user
+        {data?.name}
       </Typography>
       <DropdownMenu className={s.dropdown} trigger={trigger}>
         <DropdownMenuLabel icon={trigger}>
           <div>
-            <Typography variant={'subtitle2'}>Deadpool</Typography>
-            <Typography variant={'caption'}>j&johnson@gmail.com</Typography>
+            <Typography variant={'subtitle2'}> {data?.name}</Typography>
+            <Typography variant={'caption'}>j& {data?.email}</Typography>
           </div>
         </DropdownMenuLabel>
         <DropdownMenuItemWithIcon
@@ -34,6 +37,7 @@ export const HeaderProfile = ({}: Props) => {
         />
         <DropdownMenuItemWithIcon
           icon={<Icon name={'common/trash'} size={16} />}
+          onClick={handleLogout}
           text={'Sign Out'}
         />
       </DropdownMenu>

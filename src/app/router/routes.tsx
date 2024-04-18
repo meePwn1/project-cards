@@ -2,6 +2,7 @@ import { RouteObject } from 'react-router-dom'
 
 import { ROUTES } from '@/common/constants'
 import { Desks, ResetPasswordPage, SignInPage, SignUpPage } from '@/pages'
+import { CheckEmailPage } from '@/pages/auth/checkEmail'
 
 export const publicRoutes: RouteObject[] = [
   {
@@ -14,7 +15,11 @@ export const publicRoutes: RouteObject[] = [
   },
   {
     element: <ResetPasswordPage />,
-    path: ROUTES.resetPassword,
+    path: ROUTES.recoverPassword,
+  },
+  {
+    element: <CheckEmailPage />,
+    path: ROUTES.checkEmail,
   },
 ]
 

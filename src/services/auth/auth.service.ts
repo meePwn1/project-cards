@@ -1,4 +1,4 @@
-import { LoginArgs, User } from '@/pages'
+import { LoginArgs, RecoverPasswordArgs, SignUnArgs, User } from '@/pages'
 
 import { baseApi } from './../base-api'
 export const authService = baseApi.injectEndpoints({
@@ -26,8 +26,30 @@ export const authService = baseApi.injectEndpoints({
           url: `v1/auth/me`,
         }),
       }),
+      recoverPassword: builder.mutation<any, RecoverPasswordArgs>({
+        invalidatesTags: ['Me'],
+        query: args => ({
+          body: args,
+          method: 'POST',
+          url: '/v1/auth/recover-password',
+        }),
+      }),
+      singUp: builder.mutation<User, SignUnArgs>({
+        invalidatesTags: ['Me'],
+        query: args => ({
+          body: args,
+          method: 'POST',
+          url: '/v1/auth/sign-up',
+        }),
+      }),
     }
   },
 })
 
-export const { useLoginMutation, useLogoutMutation, useMeQuery } = authService
+export const {
+  useLoginMutation,
+  useLogoutMutation,
+  useMeQuery,
+  useRecoverPasswordMutation,
+  useSingUpMutation,
+} = authService
