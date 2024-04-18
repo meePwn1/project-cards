@@ -3,7 +3,7 @@ export const ROUTES = {
   home: '/',
   newPassword: '/password/new',
   notFound: '/not-found',
-  resetPassword: '/password/reset',
+  recoverPassword: '/password/recover',
   rest: '/*',
   signIn: '/login',
   signUp: '/register',

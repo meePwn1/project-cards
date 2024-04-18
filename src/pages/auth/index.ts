@@ -1,4 +1,4 @@
 export * from './signIn'
 export * from './singUp'
-export * from './resetPassword'
-
+export * from './recoverPassword'
+export * from './auth.types'

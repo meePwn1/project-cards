@@ -13,3 +13,12 @@ export type LoginArgs = {
   password: string
   rememberMe?: boolean
 }
+
+export type SignUnArgs = {
+  email: string
+  password: string
+}
+export type RecoverPasswordArgs = {
+  email: string
+  html: string
+}

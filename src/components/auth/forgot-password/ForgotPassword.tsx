@@ -12,7 +12,7 @@ type Props = {
   onSubmit?: (data: FormValue) => void
 }
 
-type FormValue = Pick<FormValues, 'email'>
+export type FormValue = Pick<FormValues, 'email'>
 const schema = formSchema.pick({ email: true })
 
 export const ForgotPassword = (props: Props) => {

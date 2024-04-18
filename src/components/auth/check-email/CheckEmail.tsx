@@ -1,4 +1,7 @@
+import { Link } from 'react-router-dom'
+
 import checkEmail from '@/assets/check-email.png'
+import { ROUTES } from '@/common/constants'
 import { Button, Card, Typography } from '@/components/ui'
 import clsx from 'clsx'
 
@@ -18,8 +21,8 @@ export const CheckEmail = ({ className }: Props) => {
       <Typography className={s.text} variant={'body2'}>
         We’ve sent an Email with instructions to example@mail.com
       </Typography>
-      <Button as={'a'} className={s.button} fullWidth href={'#'} type={'submit'}>
-        Back to Sign In
+      <Button className={s.button} fullWidth type={'submit'}>
+        <Link to={ROUTES.signIn}> Back to Sign In</Link>
       </Button>
     </Card>
   )

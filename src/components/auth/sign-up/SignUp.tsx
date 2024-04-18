@@ -12,11 +12,13 @@ import s from './SignUp.module.scss'
 type Props = {
   onSubmit?: (data: FormValue) => void
 }
-type FormValue = Omit<FormValues, 'rememberMe' | 'username'>
-const schema = formSchema.refine(data => data.password === data.confirmPassword, {
-  message: 'Passwords do not match',
-  path: ['confirmPassword'],
-})
+type FormValue = Pick<FormValues, 'confirmPassword' | 'email' | 'password'>
+const schema = formSchema
+  .pick({ confirmPassword: true, email: true, password: true })
+  .refine(data => data.password === data.confirmPassword, {
+    message: 'Passwords do not match',
+    path: ['confirmPassword'],
+  })
 
 export const SignUp = (props: Props) => {
   const {
