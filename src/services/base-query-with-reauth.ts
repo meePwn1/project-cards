@@ -1,4 +1,5 @@
 import { router } from '@/app/router'
+import { ROUTES } from '@/common/constants'
 import {
   type BaseQueryFn,
   type FetchArgs,
@@ -41,8 +42,8 @@ export const baseQueryWithReauth: BaseQueryFn<
         } else {
           const path = window.location.pathname
 
-          if (path !== '/register') {
-            router.navigate('/login')
+          if (path !== ROUTES.signUp && path !== ROUTES.checkEmail) {
+            router.navigate(ROUTES.signIn)
           }
         }
       } finally {

@@ -58,7 +58,7 @@ export const SignIn = (props: Props) => {
           name={'rememberMe'}
         />
         <Typography className={s.forgot} variant={'body2'}>
-          <Link to={ROUTES.resetPassword}>Forgot Password?</Link>
+          <Link to={ROUTES.recoverPassword}>Forgot Password?</Link>
         </Typography>
         <Button className={s.button} disabled={isSubmitting} fullWidth>
           Sign In

@@ -1,4 +1,5 @@
 import { router } from '@/app/router'
+import { ROUTES } from '@/common/constants'
 import { SignIn } from '@/components/auth'
 import { FormValue } from '@/components/auth/sign-in/SignIn'
 import { Page } from '@/components/layout'
@@ -10,7 +11,7 @@ export const SignInPage = () => {
   const handleLogin = (data: FormValue) => {
     login(data)
       .unwrap()
-      .then(() => router.navigate('/'))
+      .then(() => router.navigate(ROUTES.home))
   }
 
   return (
