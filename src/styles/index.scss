@@ -5,6 +5,12 @@
 @import 'base/style';
 @import 'base/null';
 
+html {
+  scroll-behavior: smooth;
+  scrollbar-color: var(--color-accent-300) var(--color-dark-700);
+  scrollbar-width: thin;
+}
+
 body {
   background-color: var(--color-dark-900);
 

@@ -11,7 +11,7 @@ import { Mutex } from 'async-mutex'
 // create a new mutex
 const mutex = new Mutex()
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'https://api.flashcards.andrii.es',
+  baseUrl: import.meta.env.VITE_API_URL,
   credentials: 'include',
 })
 
