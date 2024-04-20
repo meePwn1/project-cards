@@ -1,4 +1,5 @@
+export * from './auth.types'
+export * from './checkEmail'
+export * from './recoverPassword'
 export * from './signIn'
 export * from './singUp'
-export * from './recoverPassword'
-export * from './auth.types'

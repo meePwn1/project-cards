@@ -5,6 +5,8 @@ import clsx from 'clsx'
 
 import s from './Tabs.module.scss'
 
+import { Typography } from '..'
+
 export type TabType = {
   disabled?: boolean
   title: string
@@ -14,6 +16,7 @@ type TabsProps = {
   children?: ReactNode
   defaultValue: string
   fullWidth?: boolean
+  label?: string
   onValueChange?: (value: string) => void
   orientation?: 'horizontal' | 'vertical'
   tabs: TabType[]
@@ -23,6 +26,7 @@ export const Tabs = ({
   children,
   defaultValue,
   fullWidth = false,
+  label,
   onValueChange,
   orientation = 'horizontal',
   tabs,
@@ -36,6 +40,7 @@ export const Tabs = ({
       orientation={orientation}
       value={value}
     >
+      {label && <Typography variant={'body2'}>{label}</Typography>}
       <TabsRadixUI.List className={s.tabsList}>
         {tabs.map(tab => (
           <TabsRadixUI.Trigger

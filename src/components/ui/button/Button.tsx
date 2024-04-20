@@ -6,7 +6,7 @@ import s from './Button.module.scss'
 
 type Props<T extends ElementType = 'button'> = {
   as?: T
-  children: ReactNode
+  children?: ReactNode
   className?: string
   fullWidth?: boolean
   variant?: 'primary' | 'secondary'
