@@ -1,8 +1,8 @@
 import { RouteObject } from 'react-router-dom'
 
 import { ROUTES } from '@/common/constants'
-import { Desks, ResetPasswordPage, SignInPage, SignUpPage } from '@/pages'
-import { CheckEmailPage } from '@/pages/auth/checkEmail'
+import { CheckEmailPage, ResetPasswordPage, SignInPage, SignUpPage } from '@/pages/auth'
+import { Decks } from '@/pages/decks'
 
 export const publicRoutes: RouteObject[] = [
   {
@@ -25,7 +25,7 @@ export const publicRoutes: RouteObject[] = [
 
 export const privateRoutes: RouteObject[] = [
   {
-    element: <Desks />,
+    element: <Decks />,
     path: '/',
   },
 ]

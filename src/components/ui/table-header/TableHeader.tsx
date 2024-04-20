@@ -4,12 +4,12 @@ import clsx from 'clsx'
 
 import s from './TableHeader.module.scss'
 
-import { Head, HeadCell, Icon, Row } from '..'
+import { Icon, Table } from '..'
 import { getSortDirection } from './lib/get-sort-direction'
 
 export type TableColumn = { key: SortBy; sortable?: boolean; title: string }
 
-export type SortBy = 'author.name' | 'cardsCount' | 'created' | 'name' | 'updated'
+export type SortBy = 'author.name' | 'cardsCount' | 'created' | 'name' | 'updated' | null
 
 export type SortType = {
   direction: 'asc' | 'desc'
@@ -18,35 +18,35 @@ export type SortType = {
 
 type Props = {
   columns: TableColumn[]
-  onSort: (sort: SortType) => void
-  sort: SortType
+  onSort?: (sort: SortType) => void
+  sort?: SortType
 } & ComponentPropsWithoutRef<'thead'>
 
 export const TableHeader = ({ className, columns, onSort, sort, ...props }: Props) => {
   const handleSort = (key: SortBy) => () => {
     if (sort?.sortBy !== key) {
-      return onSort({ direction: 'asc', sortBy: key })
+      return onSort?.({ direction: 'asc', sortBy: key })
     }
-    getSortDirection(key, sort, onSort)
+    sort && onSort && getSortDirection(key, sort, onSort)
   }
   const direction = sort?.direction === 'asc' ? 'asc' : 'desc'
 
   return (
-    <Head className={clsx(s.tableHeader, className)} {...props}>
-      <Row>
+    <Table.Head className={clsx(s.tableHeader, className)} {...props}>
+      <Table.Row>
         {columns.map(({ key, sortable, title }) => {
           return sortable ? (
-            <HeadCell className={s.sortable} key={key} onClick={handleSort(key)}>
+            <Table.HeadCell className={s.sortable} key={key} onClick={handleSort(key)}>
               {title}
               {sort?.sortBy === key && (
                 <Icon className={s[direction]} name={'common/chevron'} size={14} />
               )}
-            </HeadCell>
+            </Table.HeadCell>
           ) : (
-            <HeadCell key={key}>{title}</HeadCell>
+            <Table.HeadCell key={key}>{title}</Table.HeadCell>
           )
         })}
-      </Row>
-    </Head>
+      </Table.Row>
+    </Table.Head>
   )
 }

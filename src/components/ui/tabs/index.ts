@@ -1,1 +1,1 @@
-export { Tabs } from './Tabs'
+export { type TabType, Tabs } from './Tabs'

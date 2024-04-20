@@ -6,7 +6,7 @@ import s from './Page.module.scss'
 
 type Props = {
   centered?: boolean
-  children: ReactNode
+  children?: ReactNode
   pt?: CSSProperties['paddingTop']
 } & ComponentPropsWithoutRef<'div'>
 
