@@ -16,7 +16,8 @@
   left: 50%;
   transform: translate(-50%, -50%);
 
-  min-width: 524px;
+  width: 100%;
+  max-width: 524px;
 
   background-color: var(--color-dark-700);
 }
