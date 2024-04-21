@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 
 import { ROUTES } from '@/common/constants'
 import { useMeQuery } from '@/services/auth/auth.service'
@@ -12,6 +12,10 @@ import { Logo } from './logo'
 
 export const Header = () => {
   const { isError } = useMeQuery()
+
+  if (!isError) {
+    return <Navigate to={ROUTES.home} />
+  }
 
   return (
     <header className={s.header}>
