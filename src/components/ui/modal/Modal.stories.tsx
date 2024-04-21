@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { useState } from 'react'
+
 import { Modal } from '.'
-import { TextField } from '..'
-import { Button } from '../button'
-import { ModalFooter } from './Modal'
+import { Button } from '..'
 
 const meta: Meta<typeof Modal> = {
   component: Modal,
@@ -14,42 +14,18 @@ const meta: Meta<typeof Modal> = {
 export default meta
 type Story = StoryObj<typeof Modal>
 
-export const ModalBase: Story = {
+export const Default: Story = {
   args: {
-    content: (
-      <>
-        <TextField label={'Name Pack'} placeholder={'Name'} />
-        <ModalFooter
-          onPrimaryButtonClick={() => {
-            console.log('Hello')
-          }}
-          onSecondaryButtonClick={() => console.log('Hello')}
-          primaryButtonLabel={'primaryButton'}
-          secondaryButtonLabel={'secondaryButton'}
-        />
-      </>
-    ),
-
     title: 'Add New Deck',
-    triggerButton: <Button variant={'primary'}>Add New Card</Button>,
   },
-}
+  render: args => {
+    const [open, setOpen] = useState(false)
 
-export const ModalBaseWithOneButton: Story = {
-  args: {
-    content: (
+    return (
       <>
-        <TextField label={'Name Pack'} placeholder={'Name'} />
-        <ModalFooter
-          onPrimaryButtonClick={() => {
-            console.log('Hello')
-          }}
-          primaryButtonLabel={'primaryButton'}
-        />
+        <Button onClick={() => setOpen(true)}>open modal</Button>
+        <Modal onOpenChange={setOpen} open={open} {...args}></Modal>
       </>
-    ),
-
-    title: 'Add New Deck',
-    triggerButton: <Button variant={'primary'}>Add New Card</Button>,
+    )
   },
 }
