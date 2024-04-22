@@ -21,6 +21,7 @@ export const ForgotPassword = (props: Props) => {
     formState: { errors, isSubmitting },
     handleSubmit,
   } = useForm<FormValue>({
+    mode: 'onBlur',
     resolver: zodResolver(schema),
   })
 
