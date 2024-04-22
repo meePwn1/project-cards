@@ -3,6 +3,7 @@ import { RouteObject } from 'react-router-dom'
 import { ROUTES } from '@/common/constants'
 import { CheckEmailPage, ResetPasswordPage, SignInPage, SignUpPage } from '@/pages/auth'
 import { Decks } from '@/pages/decks'
+import { ProfilePage } from '@/pages/profile'
 
 export const publicRoutes: RouteObject[] = [
   {
@@ -28,4 +29,5 @@ export const privateRoutes: RouteObject[] = [
     element: <Decks />,
     path: '/',
   },
+  { element: <ProfilePage />, path: ROUTES.profile },
 ]

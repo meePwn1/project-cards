@@ -14,8 +14,12 @@ import { Logo } from './logo'
 export const Header = () => {
   const { isError } = useMeQuery()
 
+  const pathname = window.location.pathname
+
   if (!isError) {
-    router.navigate(ROUTES.home)
+    if (pathname !== ROUTES.profile) {
+      router.navigate(ROUTES.home)
+    }
   }
 
   return (

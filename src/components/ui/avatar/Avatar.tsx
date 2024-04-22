@@ -8,7 +8,7 @@ import s from './Avatar.module.scss'
 type Props = {
   alt?: string
   size?: CSSProperties['width']
-  src?: string
+  src?: null | string
 } & ComponentPropsWithoutRef<'span'>
 
 export const Avatar = forwardRef<HTMLSpanElement, Props>((props, ref) => {
