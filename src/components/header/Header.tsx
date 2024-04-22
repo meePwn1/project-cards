@@ -1,5 +1,6 @@
-import { Link, Navigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
+import { router } from '@/app/router'
 import { ROUTES } from '@/common/constants'
 import { useMeQuery } from '@/services/auth/auth.service'
 import clsx from 'clsx'
@@ -14,7 +15,7 @@ export const Header = () => {
   const { isError } = useMeQuery()
 
   if (!isError) {
-    return <Navigate to={ROUTES.home} />
+    router.navigate(ROUTES.home)
   }
 
   return (
