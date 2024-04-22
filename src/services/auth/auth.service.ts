@@ -1,4 +1,4 @@
-import { LoginArgs, RecoverPasswordArgs, SignUnArgs, User } from '@/pages/auth'
+import { LoginArgs, RecoverPasswordArgs, SignUnArgs, UpdateUserDataArgs, User } from '@/pages/auth'
 
 import { baseApi } from './../base-api'
 export const authService = baseApi.injectEndpoints({
@@ -42,6 +42,14 @@ export const authService = baseApi.injectEndpoints({
           url: '/v1/auth/sign-up',
         }),
       }),
+      updateUserData: builder.mutation<any, UpdateUserDataArgs>({
+        invalidatesTags: ['Me'],
+        query: args => ({
+          body: args,
+          method: 'PATCH',
+          url: '/v1/auth/me',
+        }),
+      }),
     }
   },
 })
@@ -52,4 +60,5 @@ export const {
   useMeQuery,
   useRecoverPasswordMutation,
   useSingUpMutation,
+  useUpdateUserDataMutation,
 } = authService
