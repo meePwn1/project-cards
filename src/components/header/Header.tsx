@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 
+import { router } from '@/app/router'
 import { ROUTES } from '@/common/constants'
 import { useMeQuery } from '@/services/auth/auth.service'
 import clsx from 'clsx'
@@ -12,6 +13,14 @@ import { Logo } from './logo'
 
 export const Header = () => {
   const { isError } = useMeQuery()
+
+  const pathname = window.location.pathname
+
+  if (!isError) {
+    if (pathname !== ROUTES.profile) {
+      router.navigate(ROUTES.home)
+    }
+  }
 
   return (
     <header className={s.header}>

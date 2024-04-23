@@ -1,3 +1,5 @@
+import { router } from '@/app/router'
+import { ROUTES } from '@/common/constants'
 import {
   Avatar,
   DropdownMenu,
@@ -17,7 +19,7 @@ export const HeaderProfile = () => {
   const handleLogout = () => {
     logout()
   }
-  const trigger = <Avatar size={36} />
+  const trigger = <Avatar size={36} src={data?.avatar} />
 
   return (
     <div className={s.headerProfile}>
@@ -28,11 +30,12 @@ export const HeaderProfile = () => {
         <DropdownMenuLabel icon={trigger}>
           <div>
             <Typography variant={'subtitle2'}> {data?.name}</Typography>
-            <Typography variant={'caption'}>j& {data?.email}</Typography>
+            <Typography variant={'caption'}> {data?.email}</Typography>
           </div>
         </DropdownMenuLabel>
         <DropdownMenuItemWithIcon
           icon={<Icon name={'common/edit'} size={16} />}
+          onClick={() => router.navigate(ROUTES.profile)}
           text={'My Profile'}
         />
         <DropdownMenuItemWithIcon

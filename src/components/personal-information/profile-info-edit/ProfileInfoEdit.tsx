@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form'
 
 import { FormValues, formSchema } from '@/common/schemas'
 import { Button, FormTextField } from '@/components/ui'
+import { useUpdateUserDataMutation } from '@/services/auth/auth.service'
 import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 import clsx from 'clsx'
@@ -11,12 +12,11 @@ import s from './ProfileInfoEdit.module.scss'
 type Props = {
   className?: string
   onEditModeDeactivate?: (value: boolean) => void
-  onUpdateUsername?: (data: FormValue) => void
 }
 type FormValue = Pick<FormValues, 'username'>
 const schema = formSchema.pick({ username: true })
 
-export const ProfileInfoEdit = ({ className, onEditModeDeactivate, onUpdateUsername }: Props) => {
+export const ProfileInfoEdit = ({ className, onEditModeDeactivate }: Props) => {
   const {
     control,
     formState: { errors, isSubmitting, isValid },
@@ -25,11 +25,15 @@ export const ProfileInfoEdit = ({ className, onEditModeDeactivate, onUpdateUsern
     defaultValues: { username: '' },
     resolver: zodResolver(schema),
   })
+  const [updateUserData] = useUpdateUserDataMutation()
+
   const handleUpdateUsername = (data: FormValue) => {
-    onUpdateUsername?.(data)
-  }
-  const handleEditMode = () => {
-    isValid && onEditModeDeactivate?.(false)
+    updateUserData({ name: data.username })
+      .unwrap()
+      .then(() => isValid && onEditModeDeactivate?.(false))
+    // .unwrap()
+    // .then(() => {
+    //   isValid && onEditModeDeactivate?.(false)
   }
 
   return (
@@ -44,7 +48,7 @@ export const ProfileInfoEdit = ({ className, onEditModeDeactivate, onUpdateUsern
           name={'username'}
           placeholder={'Nickname'}
         />
-        <Button disabled={isSubmitting} fullWidth onClick={handleEditMode} type={'submit'}>
+        <Button disabled={isSubmitting} fullWidth type={'submit'}>
           Save Changes
         </Button>
       </form>
