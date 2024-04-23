@@ -1,63 +1,40 @@
-import { CreateDeckArg, Deck, DesksResponse, GetDesksArgs, PatchDeskArg } from '@/pages'
+import { CreateDeckParams, Deck, DecksParams, DecksResponse, UpdateDeckParams } from '.'
+import { baseApi } from '..'
 
-import { baseApi } from '../base-api'
 export const decksService = baseApi.injectEndpoints({
-  endpoints: builder => {
+  endpoints: build => {
     return {
-      createDeck: builder.mutation<Deck, CreateDeckArg>({
+      createDeck: build.mutation<Deck, CreateDeckParams>({
         invalidatesTags: ['Decks'],
-        query: args => ({
-          body: args,
+        query: data => ({
+          body: data,
           method: 'POST',
-          url: `v1/decks`,
+          url: '/v1/decks',
         }),
       }),
-      getDecks: builder.query<DesksResponse, GetDesksArgs | void>({
-        providesTags: ['Decks'],
-        query: params => ({
-          params: params ?? undefined,
-          url: `v1/decks`,
-        }),
-      }),
-      removeDeck: builder.mutation<void, { id: string }>({
+      deleteDeck: build.mutation<Deck, { id: string }>({
         invalidatesTags: ['Decks'],
-
-        async onQueryStarted({ id }, { dispatch, queryFulfilled }) {
-          const patchResult = dispatch(
-            decksService.util.updateQueryData(
-              'getDecks',
-              {
-                currentPage: 1,
-                name: '',
-              },
-              draft => {
-                const index = draft.items.findIndex(deck => deck.id === id)
-
-                if (index > -1) {
-                  draft.items.splice(index, 1)
-                }
-              }
-            )
-          )
-
-          try {
-            await queryFulfilled
-          } catch {
-            patchResult.undo()
+        query: ({ id }) => ({
+          method: 'DELETE',
+          url: `/v1/decks/${id}`,
+        }),
+      }),
+      getDecks: build.query<DecksResponse, DecksParams | void>({
+        providesTags: ['Decks'],
+        query: params => {
+          return {
+            method: 'GET',
+            params: params ?? {},
+            url: '/v2/decks',
           }
         },
-        query: args => ({
-          method: 'DELETE',
-          url: `v1/decks/${args.id}`,
-        }),
       }),
-      updateDesk: builder.mutation<Deck, PatchDeskArg>({
+      updateDeck: build.mutation<Deck, { data: UpdateDeckParams; id: string }>({
         invalidatesTags: ['Decks'],
-
-        query: ({ id, ...args }) => ({
-          body: args,
+        query: ({ data, id }) => ({
+          body: data,
           method: 'PATCH',
-          url: `v1/decks/${id}`,
+          url: `/v1/decks/${id}`,
         }),
       }),
     }
@@ -66,7 +43,7 @@ export const decksService = baseApi.injectEndpoints({
 
 export const {
   useCreateDeckMutation,
+  useDeleteDeckMutation,
   useGetDecksQuery,
-  useRemoveDeckMutation,
-  useUpdateDeskMutation,
+  useUpdateDeckMutation,
 } = decksService
