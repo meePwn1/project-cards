@@ -1,4 +1,3 @@
-export * from './auth.types'
 export * from './checkEmail'
 export * from './recoverPassword'
 export * from './signIn'

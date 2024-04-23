@@ -1,5 +1,4 @@
-import { LoginArgs, RecoverPasswordArgs, SignUnArgs, User } from '@/pages'
-
+import { LoginArgs, RecoverPasswordArgs, SignUnArgs, User } from '.'
 import { baseApi } from './../base-api'
 export const authService = baseApi.injectEndpoints({
   endpoints: builder => {
