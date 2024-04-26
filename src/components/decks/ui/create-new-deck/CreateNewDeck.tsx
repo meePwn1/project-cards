@@ -1,17 +1,20 @@
 import { useState } from 'react'
 
-import { Button, Dialog, Typography } from '@/components/ui'
+import { Button, Modal, Typography } from '@/components/ui'
 
 import { CreateDeckForm } from '../forms/create-deck-form'
 
 export const CreateNewDeck = () => {
   const [open, setOpen] = useState(false)
+  const handleSubmit = (data: FormData) => {
+    console.log(data)
+  }
 
   return (
     <>
-      <Dialog onOpenChange={setOpen} open={open} title={'Add New Deck'}>
-        <CreateDeckForm />
-      </Dialog>
+      <Modal onOpenChange={setOpen} open={open} title={'Add New Deck'}>
+        <CreateDeckForm onSubmit={handleSubmit} setOpen={setOpen} />
+      </Modal>
       <Button onClick={() => setOpen(true)}>
         <Typography variant={'subtitle2'}>Add New Deck</Typography>
       </Button>
