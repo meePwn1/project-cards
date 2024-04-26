@@ -1,19 +1,24 @@
-import { useState } from 'react'
+import { useCallback } from 'react'
 
 import { CreateNewDeck } from '@/components/decks/ui/create-new-deck'
+import { DeckFilters } from '@/components/decks/ui/deck-filters'
 import { Page } from '@/components/layout'
-import { Button, Icon, Slider, Table, Tabs, TextField, Typography } from '@/components/ui'
+import { Table, Typography } from '@/components/ui'
 import { TableColumn, TableHeader } from '@/components/ui/table-header'
-import { TabType } from '@/components/ui/tabs'
+import { DecksParams, useLazyGetDecksQuery } from '@/services/decks'
 
 import s from './Decks.module.scss'
 
 export const Decks = () => {
-  const [sliderValue, setSliderValue] = useState([0, 10])
-  const tabs: TabType[] = [
-    { title: 'My cards', value: 'my-cards' },
-    { title: 'All cards', value: '' },
-  ]
+  const [lazyGetDecks, { data: decks }] = useLazyGetDecksQuery()
+
+  const getDecks = useCallback(
+    (options: DecksParams) => {
+      lazyGetDecks(options)
+    },
+    [lazyGetDecks]
+  )
+
   const columns: TableColumn[] = [
     { key: 'name', sortable: true, title: 'Name' },
     { key: 'cardsCount', sortable: true, title: 'Cards Count' },
@@ -28,26 +33,13 @@ export const Decks = () => {
         <Typography variant={'h1'}>Decks list</Typography>
         <CreateNewDeck />
       </div>
-      <div className={s.filterActions}>
-        <TextField placeholder={'Search...'} search />
-        <Tabs defaultValue={''} label={'Show decks cards'} tabs={tabs} />
-        <Slider
-          label={'Number of cards'}
-          max={100}
-          min={0}
-          onValueChange={setSliderValue}
-          value={sliderValue}
-        />
-        <Button variant={'secondary'} withIcon>
-          <Icon name={'common/trash'} size={16} />
-          <Typography variant={'subtitle2'}>Clear Filter</Typography>
-        </Button>
-      </div>
+      <DeckFilters getDecks={getDecks} />
       <div className={s.tableContainer}>
         <Table.Root>
           <TableHeader columns={columns} />
         </Table.Root>
       </div>
+      <ul>{decks?.items.map(item => <div key={item.id}>{item.name}</div>)}</ul>
     </Page>
   )
 }
