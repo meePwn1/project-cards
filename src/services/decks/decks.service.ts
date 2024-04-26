@@ -1,10 +1,10 @@
-import { CreateDeckParams, Deck, DecksParams, DecksResponse, UpdateDeckParams } from '.'
+import { Deck, DecksParams, DecksResponse, UpdateDeckParams } from '.'
 import { baseApi } from '..'
 
 export const decksService = baseApi.injectEndpoints({
   endpoints: build => {
     return {
-      createDeck: build.mutation<Deck, CreateDeckParams>({
+      createDeck: build.mutation<Deck, FormData>({
         invalidatesTags: ['Decks'],
         query: data => ({
           body: data,
