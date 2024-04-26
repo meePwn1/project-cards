@@ -1,4 +1,5 @@
 import { ChangeEvent, useRef } from 'react'
+import { toast } from 'react-toastify'
 
 import { Button } from '@/components/ui/button'
 
@@ -27,8 +28,12 @@ export const FileUploader = (props: Props) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
 
-    if (file) {
+    e.target.value = ''
+
+    if (file && file.size <= 1024 * 1024) {
       setFile(file)
+    } else {
+      toast.error('Max image size is 1MB')
     }
   }
 
@@ -38,6 +43,7 @@ export const FileUploader = (props: Props) => {
         className={className}
         fullWidth={fullWidth}
         onClick={() => inputRef.current?.click()}
+        type={'button'}
         variant={'secondary'}
         withIcon
       >
@@ -50,6 +56,7 @@ export const FileUploader = (props: Props) => {
         name={name}
         onChange={handleChange}
         ref={inputRef}
+        style={{ display: 'none' }}
         type={'file'}
       />
     </>
