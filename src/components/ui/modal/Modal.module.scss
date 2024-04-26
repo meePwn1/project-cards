@@ -1,25 +1,78 @@
-.dialogOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
+@keyframes scale-in {
+  from {
+    transform: scale(0);
+  }
 
-  width: 100%;
-  height: 100%;
+  to {
+    transform: scale(1);
+  }
+}
 
-  opacity: 0.5;
-  background-color: var(--color-dark-900);
+@keyframes scale-out {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(0);
+  }
 }
 
 .dialogContent {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  z-index: 1;
 
   width: 100%;
   max-width: 524px;
 
   background-color: var(--color-dark-700);
+  border-radius: 20px;
+
+  transition: transform 0.3s ease 0s;
+
+  &[data-state='open'] {
+    animation: scale-in 300ms ease-out;
+  }
+
+  &[data-state='close'] {
+    animation: sclae-out 300ms ease-in;
+  }
+}
+
+.root {
+  position: fixed;
+  z-index: 150;
+  top: 0;
+  left: 0;
+
+  overflow: hidden auto;
+
+  width: 100%;
+  height: 100%;
+  padding: 30px 10px;
+
+  &::before {
+    content: '';
+
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    opacity: 0.5;
+    background-color: var(--color-dark-900);
+  }
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  min-height: 100%;
 }
 
 .header {
