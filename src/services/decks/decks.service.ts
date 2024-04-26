@@ -45,5 +45,6 @@ export const {
   useCreateDeckMutation,
   useDeleteDeckMutation,
   useGetDecksQuery,
+  useLazyGetDecksQuery,
   useUpdateDeckMutation,
 } = decksService
