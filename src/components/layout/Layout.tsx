@@ -1,4 +1,5 @@
 import { Outlet } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify'
 
 import { Header } from '../header'
 
@@ -13,6 +14,7 @@ export const Layout = () => {
           </div>
         </section>
       </main>
+      <ToastContainer />
     </>
   )
 }
