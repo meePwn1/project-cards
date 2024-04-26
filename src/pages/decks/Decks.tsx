@@ -1,5 +1,6 @@
 import { useState } from 'react'
 
+import { CreateNewDeck } from '@/components/decks/ui/create-new-deck'
 import { Page } from '@/components/layout'
 import { Button, Icon, Slider, Table, Tabs, TextField, Typography } from '@/components/ui'
 import { TableColumn, TableHeader } from '@/components/ui/table-header'
@@ -25,9 +26,7 @@ export const Decks = () => {
     <Page>
       <div className={s.pageHeader}>
         <Typography variant={'h1'}>Decks list</Typography>
-        <Button>
-          <Typography variant={'subtitle2'}>Add New Deck</Typography>
-        </Button>
+        <CreateNewDeck />
       </div>
       <div className={s.filterActions}>
         <TextField placeholder={'Search...'} search />
@@ -44,7 +43,7 @@ export const Decks = () => {
           <Typography variant={'subtitle2'}>Clear Filter</Typography>
         </Button>
       </div>
-      <div>
+      <div className={s.tableContainer}>
         <Table.Root>
           <TableHeader columns={columns} />
         </Table.Root>
