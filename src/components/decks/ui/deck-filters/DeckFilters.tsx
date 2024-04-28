@@ -43,14 +43,26 @@ export const DeckFilters = (props: Props) => {
     debouncedGetDecks()
   }, [debouncedGetDecks])
 
+  const clearFilter = () => {
+    setSliderValue([0, 10])
+    setSearchValue('')
+    setTabsValue('')
+  }
+
   return (
     <div className={s.filterActions}>
-      <TextField onChange={e => setSearchValue(e.target.value)} placeholder={'Search...'} search />
+      <TextField
+        onChange={e => setSearchValue(e.target.value)}
+        placeholder={'Search...'}
+        search
+        value={searchValue}
+      />
       <Tabs
         defaultValue={''}
         label={'Show decks cards'}
         onValueChange={value => setTabsValue(value)}
         tabs={tabs}
+        value={tabsValue}
       />
       <Slider
         label={'Number of cards'}
@@ -59,7 +71,7 @@ export const DeckFilters = (props: Props) => {
         onValueChange={setSliderValue}
         value={sliderValue}
       />
-      <Button variant={'secondary'} withIcon>
+      <Button onClick={() => clearFilter()} variant={'secondary'} withIcon>
         <Icon name={'common/trash'} size={16} />
         <Typography variant={'subtitle2'}>Clear Filter</Typography>
       </Button>
