@@ -35,6 +35,7 @@ export type MinMaxCards = {
 }
 
 export type DecksParams = {
+  authorId?: string
   currentPage?: number
   itemsPerPage?: number
   maxCardsCount?: number
