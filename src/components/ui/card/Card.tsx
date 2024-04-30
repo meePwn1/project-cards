@@ -10,7 +10,7 @@ type Props<T extends ElementType = 'div'> = {
 } & ComponentPropsWithoutRef<T>
 
 export const Card = <T extends ElementType = 'div'>(props: Props<T>) => {
-  const { as: Component = 'div', className, px, py, style, ...rest } = props
+  const { as: Component = 'div', className, ...rest } = props
 
   return <Component className={clsx(s.root, className)} {...rest} />
 }

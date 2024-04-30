@@ -1,9 +1,5 @@
-import { Navigate, Outlet } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
-
-import { router } from '@/app/router'
-import { ROUTES } from '@/common/constants'
-import { useMeQuery } from '@/services/auth'
 
 import { Header } from '../header'
 
@@ -30,7 +26,7 @@ export const Layout = () => {
           </div>
         </section>
       </main>
-      <ToastContainer />
+      <ToastContainer autoClose={4000} theme={'dark'} />
     </>
   )
 }
