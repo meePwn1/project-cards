@@ -9,6 +9,7 @@ html {
   scroll-behavior: smooth;
   scrollbar-color: var(--color-accent-300) var(--color-dark-700);
   scrollbar-width: thin;
+  scrollbar-gutter: stable;
 }
 
 body {
@@ -47,4 +48,8 @@ body {
   max-width: rem($containerWidth);
   margin: 0 auto;
   padding: 0 rem(math.div($containerPadding, 2));
+}
+
+[data-radix-aspect-ratio-wrapper] {
+  transition: all 0.3s ease 0s;
 }
