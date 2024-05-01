@@ -13,6 +13,7 @@ export interface SpritesMap {
     | 'play'
     | 'profile'
     | 'search'
+    | 'spinner'
     | 'star-border'
     | 'star'
     | 'trash'
@@ -31,7 +32,7 @@ export const SPRITES_META: {
   }
 } = {
   common: {
-    filePath: 'common.c0d39b65.svg',
+    filePath: 'common.663d90af.svg',
     items: {
       check: {
         viewBox: '0 0 18 18',
@@ -97,6 +98,11 @@ export const SPRITES_META: {
         viewBox: '0 0 16 16',
         width: 16,
         height: 16,
+      },
+      spinner: {
+        viewBox: '0 0 1792 1792',
+        width: 20,
+        height: 20,
       },
       'star-border': {
         viewBox: '0 0 14 14',

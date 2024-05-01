@@ -7,6 +7,7 @@ import { Button, Modal } from '..'
 type Props = {
   buttonText?: string
   children?: ReactNode
+  isLoading?: boolean
   modal?: boolean
   onConfirm?: () => void
   onOpenChange?: (value: boolean) => void
@@ -18,6 +19,7 @@ type Props = {
 export const Dialog = ({
   buttonText,
   children,
+  isLoading,
   modal = true,
   onConfirm,
   onOpenChange,
@@ -32,12 +34,14 @@ export const Dialog = ({
   return (
     <>
       <Modal modal={modal} onOpenChange={onOpenChange} open={open} title={title} trigger={trigger}>
-        <div>{children}</div>
+        <div className={s.content}>{children}</div>
         <div className={s.buttons}>
           <Button onClick={handleCancelClick} variant={'secondary'}>
             Cancel
           </Button>
-          <Button onClick={onConfirm}>{buttonText || 'Confirm'}</Button>
+          <Button isLoading={isLoading} onClick={onConfirm}>
+            {buttonText || 'Confirm'}
+          </Button>
         </div>
       </Modal>
     </>
