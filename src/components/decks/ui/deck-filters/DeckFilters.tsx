@@ -18,9 +18,16 @@ export const DeckFilters = () => {
     setSearchParams(searchParams)
   }
 
-  const clearInputHandler = (value: string) => {
-    searchParams.set('name', value)
+  // const clearInputHandler = (value: string) => {
+  //   searchParams.set('name', value)
+  //   setSearchParams(searchParams)
+  //   console.log('test')
+  // }
+
+  const clearInputHandler = () => {
+    searchParams.delete('name')
     setSearchParams(searchParams)
+    console.log()
   }
 
   const handleSetTabsParams = (is: string) => {
@@ -42,6 +49,7 @@ export const DeckFilters = () => {
 
   const handleClearFilter = () => {
     setSearchParams({})
+    setSliderValues([1, 10])
   }
 
   const tabs: TabType[] = [
@@ -53,7 +61,7 @@ export const DeckFilters = () => {
     <div className={s.filterActions}>
       <TextField
         onChange={handleSetSearchParams}
-        onClear={() => clearInputHandler}
+        onClear={clearInputHandler}
         placeholder={'Search...'}
         search
         value={searchValue}

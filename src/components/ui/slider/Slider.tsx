@@ -23,6 +23,8 @@ type Props = {
 }
 
 export const Slider = ({ defaultValue, label, max, min, value, ...rest }: Props) => {
+  console.log(value)
+
   return (
     <div>
       {label && (
