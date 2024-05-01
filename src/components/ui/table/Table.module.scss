@@ -1,17 +1,35 @@
 .table {
   border-collapse: collapse;
   width: 100%;
-  border-right: 1px solid var(--color-dark-500);
-  border-left: 1px solid var(--color-dark-500);
 }
 
 .thead {
   text-align: left;
   background-color: var(--color-dark-500);
+  border-right: 1px solid var(--color-dark-500);
+  border-left: 1px solid var(--color-dark-500);
+}
+
+.tbody {
+  position: relative;
+  min-height: 100px;
+  border: 1px solid var(--color-dark-500);
+
+  tr {
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: var(--color-dark-700);
+      }
+    }
+  }
 }
 
 .tr {
   display: flex;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid var(--color-dark-500);
+  }
 }
 
 .th {
@@ -34,6 +52,14 @@
   font-size: var(--font-size-s);
   font-weight: var(--font-weight-regular);
   line-height: var(--line-height-m);
+}
 
-  border-bottom: 1px solid var(--color-dark-500);
+.loading {
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba($color: #000, $alpha: 50%)
+      url('@/components/ui/icon/assets/common/spinner.svg') center / 50px no-repeat;
+  }
 }

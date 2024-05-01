@@ -3,14 +3,3 @@
   justify-content: space-between;
   margin-bottom: 10px;
 }
-
-.tableContainer {
-  table {
-    min-width: 768px;
-  }
-
-  @media (max-width: $tablet) {
-    overflow-x: auto;
-    padding-bottom: 30px;
-  }
-}

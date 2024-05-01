@@ -1,6 +1,5 @@
-import { Link, Navigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-import { router } from '@/app/router'
 import { ROUTES } from '@/common/constants'
 import { useMeQuery } from '@/services/auth/auth.service'
 import clsx from 'clsx'

@@ -32,7 +32,7 @@ export const SPRITES_META: {
   }
 } = {
   common: {
-    filePath: 'common.663d90af.svg',
+    filePath: 'common.0de850ee.svg',
     items: {
       check: {
         viewBox: '0 0 18 18',

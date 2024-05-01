@@ -37,7 +37,7 @@ export const CreateDeckForm = ({ isLoading, onSubmit, setOpen }: Props) => {
         <Button onClick={handleCancelClick} type={'button'} variant={'secondary'}>
           Cancel
         </Button>
-        <Button disabled={isLoading} type={'submit'}>
+        <Button isLoading={isLoading} type={'submit'}>
           Add New Pack
         </Button>
       </div>
