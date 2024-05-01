@@ -12,8 +12,13 @@ const Head = ({ className, ...props }: ComponentProps<'thead'>) => {
   return <thead {...props} className={clsx(s.thead, className)} />
 }
 
-const Body = ({ className, ...props }: ComponentProps<'tbody'>) => {
-  return <tbody {...props} className={clsx(s.tbody, className)} />
+type TBodyProps = { isLoading?: boolean } & ComponentProps<'tbody'>
+const Body = ({ children, className, isLoading, ...props }: TBodyProps) => {
+  return (
+    <tbody {...props} className={clsx(s.tbody, className, isLoading && s.loading)}>
+      {children}
+    </tbody>
+  )
 }
 
 const Row = ({ className, ...props }: ComponentProps<'tr'>) => {
