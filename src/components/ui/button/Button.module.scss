@@ -1,6 +1,8 @@
 .button {
   cursor: pointer;
 
+  position: relative;
+
   overflow: hidden;
 
   padding: 6px 28px;
@@ -69,4 +71,13 @@
   width: 100%;
   max-width: 100%;
   text-align: center;
+}
+
+.loading {
+  color: transparent !important;
+}
+
+.spinner {
+  position: absolute;
+  color: #fff;
 }

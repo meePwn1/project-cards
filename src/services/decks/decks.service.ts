@@ -9,7 +9,7 @@ export const decksService = baseApi.injectEndpoints({
         query: data => ({
           body: data,
           method: 'POST',
-          url: '/v1/decks1',
+          url: '/v1/decks',
         }),
       }),
       deleteDeck: build.mutation<Deck, { id: string }>({

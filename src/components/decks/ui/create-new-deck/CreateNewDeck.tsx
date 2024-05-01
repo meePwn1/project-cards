@@ -19,8 +19,6 @@ export const CreateNewDeck = () => {
       })
   }
 
-  console.log(isLoading)
-
   return (
     <>
       <Modal onOpenChange={setOpen} open={open} title={'Add New Deck'}>
