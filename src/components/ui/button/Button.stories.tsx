@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Button } from '@/components/ui'
+import { useState } from 'react'
+
+import { Button, Icon } from '@/components/ui'
 
 const meta = {
   component: Button,
@@ -52,5 +54,25 @@ export const AsLink: Story = {
     href: 'https://google.com',
     target: '_blank',
     variant: 'primary',
+  },
+}
+
+export const Loading: Story = {
+  render: () => {
+    const [isLoading, setIsLoading] = useState(false)
+
+    const handleClick = () => {
+      setIsLoading(true)
+      setTimeout(() => {
+        setIsLoading(false)
+      }, 3000)
+    }
+
+    return (
+      <Button isLoading={isLoading} onClick={handleClick} withIcon>
+        <Icon name={'common/play'} size={20} />
+        button
+      </Button>
+    )
   },
 }

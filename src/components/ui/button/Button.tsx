@@ -4,11 +4,14 @@ import clsx from 'clsx'
 
 import s from './Button.module.scss'
 
+import { Spinner } from '../spinner'
+
 type Props<T extends ElementType = 'button'> = {
   as?: T
   children?: ReactNode
   className?: string
   fullWidth?: boolean
+  isLoading?: boolean
   variant?: 'primary' | 'secondary'
   withIcon?: boolean
 } & ComponentPropsWithoutRef<T>
@@ -16,8 +19,11 @@ type Props<T extends ElementType = 'button'> = {
 export const Button = <T extends ElementType = 'button'>(props: Props<T>) => {
   const {
     as: Component = 'button',
+    children,
     className,
+    disabled,
     fullWidth,
+    isLoading,
     variant = 'primary',
     withIcon,
     ...rest
@@ -29,10 +35,15 @@ export const Button = <T extends ElementType = 'button'>(props: Props<T>) => {
         s.button,
         s[variant],
         fullWidth && s.fullWidth,
-        withIcon && s.withIcon,
+        (withIcon || isLoading) && s.withIcon,
+        isLoading && s.loading,
         className
       )}
+      disabled={disabled || isLoading}
       {...rest}
-    />
+    >
+      {children}
+      {isLoading && <Spinner className={s.spinner} />}
+    </Component>
   )
 }
