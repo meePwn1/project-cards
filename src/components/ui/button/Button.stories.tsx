@@ -69,7 +69,7 @@ export const Loading: Story = {
     }
 
     return (
-      <Button isLoading={isLoading} onClick={handleClick} withIcon>
+      <Button isLoading={isLoading} onClick={handleClick}>
         <Icon name={'common/play'} size={20} />
         button
       </Button>
