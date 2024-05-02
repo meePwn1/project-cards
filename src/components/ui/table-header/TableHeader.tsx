@@ -37,10 +37,14 @@ export const TableHeader = ({ className, columns, onSort, sort, ...props }: Prop
         {columns.map(({ key, sortable, title }) => {
           return sortable ? (
             <Table.HeadCell className={s.sortable} key={key} onClick={handleSort(key)}>
-              {title}
-              {sort?.sortBy === key && (
-                <Icon className={s[direction]} name={'common/chevron'} size={14} />
-              )}
+              <div>
+                {title}
+                {sort?.sortBy === key && (
+                  <span>
+                    <Icon className={s[direction]} name={'common/chevron'} size={14} />
+                  </span>
+                )}
+              </div>
             </Table.HeadCell>
           ) : (
             <Table.HeadCell key={key}>{title}</Table.HeadCell>

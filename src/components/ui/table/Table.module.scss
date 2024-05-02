@@ -12,7 +12,6 @@
 
 .tbody {
   position: relative;
-  min-height: 100px;
   border: 1px solid var(--color-dark-500);
 
   tr {
@@ -25,8 +24,6 @@
 }
 
 .tr {
-  display: flex;
-
   &:not(:last-child) {
     border-bottom: 1px solid var(--color-dark-500);
   }
@@ -34,8 +31,6 @@
 
 .th {
   user-select: none;
-
-  flex: 1;
 
   padding: 10px 24px;
 
@@ -45,10 +40,7 @@
 }
 
 .td {
-  flex: 1;
-
   padding: 10px 24px;
-
   font-size: var(--font-size-s);
   font-weight: var(--font-weight-regular);
   line-height: var(--line-height-m);
@@ -57,9 +49,36 @@
 .loading {
   &::after {
     content: '';
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+
+    display: block;
+
+    width: 50px;
+    height: 50px;
+
+    background: url('@/components/ui/icon/assets/common/spinner.svg') center / 50px no-repeat;
+
+    animation: spin 1s linear infinite;
+  }
+
+  &::before {
+    content: '';
     position: absolute;
     inset: 0;
-    background: rgba($color: #000, $alpha: 50%)
-      url('@/components/ui/icon/assets/common/spinner.svg') center / 50px no-repeat;
+    background: rgba($color: #000, $alpha: 50%);
+  }
+}
+
+@keyframes spin {
+  0% {
+    rotate: 0deg;
+  }
+
+  100% {
+    rotate: 360deg;
   }
 }
