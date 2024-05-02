@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { toast } from 'react-toastify'
 
-import { Dialog, Icon } from '@/components/ui'
+import { Button, Dialog, Icon } from '@/components/ui'
 import { useDeleteDeckMutation } from '@/services/decks'
 
 type Props = {
@@ -38,9 +38,9 @@ export const DeleteDeck = ({ deckName, id }: Props) => {
         Do you really want to remove <b>{deckName}</b>? <br />
         All cards will be deleted.
       </Dialog>
-      <button onClick={handleOpenDialog}>
+      <Button onClick={handleOpenDialog} variant={'icon'}>
         <Icon name={'common/trash'} size={20} />
-      </button>
+      </Button>
     </>
   )
 }

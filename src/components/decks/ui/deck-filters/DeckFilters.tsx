@@ -27,7 +27,6 @@ export const DeckFilters = () => {
   const clearInputHandler = () => {
     searchParams.delete('name')
     setSearchParams(searchParams)
-    console.log()
   }
 
   const handleSetTabsParams = (is: string) => {
@@ -81,7 +80,7 @@ export const DeckFilters = () => {
         value={sliderValues}
       />
 
-      <Button onClick={() => handleClearFilter()} variant={'secondary'} withIcon>
+      <Button onClick={() => handleClearFilter()} variant={'secondary'}>
         <Icon name={'common/trash'} size={16} />
         <Typography variant={'subtitle2'}>Clear Filter</Typography>
       </Button>

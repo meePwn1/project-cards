@@ -51,7 +51,7 @@ export const FileUploaderWithPreview = ({ img, setImg }: Props) => {
       </AspectRatio>
       <div className={clsx(s.controlButtons, img && s.flex)}>
         {img && (
-          <Button onClick={handleDeleteFile} type={'button'} variant={'secondary'} withIcon>
+          <Button onClick={handleDeleteFile} type={'button'} variant={'secondary'}>
             <Icon name={'common/trash'} />
             Delete file
           </Button>

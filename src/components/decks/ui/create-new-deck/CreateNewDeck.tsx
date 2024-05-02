@@ -22,7 +22,12 @@ export const CreateNewDeck = () => {
   return (
     <>
       <Modal onOpenChange={setOpen} open={open} title={'Add New Deck'}>
-        <CreateDeckForm isLoading={isLoading} onSubmit={handleSubmit} setOpen={setOpen} />
+        <CreateDeckForm
+          isLoading={isLoading}
+          onSubmit={handleSubmit}
+          setOpen={setOpen}
+          submitText={'Create deck'}
+        />
       </Modal>
       <Button onClick={() => setOpen(true)}>
         <Typography variant={'subtitle2'}>Add New Deck</Typography>
