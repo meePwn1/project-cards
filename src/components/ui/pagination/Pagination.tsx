@@ -17,6 +17,7 @@ type NavigationButtonProps = {
   onClick: () => void
 }
 type PaginationProps = {
+  className?: string
   count: number
   onPageChange: (page: number) => void
   onPerPageChange?: (pageSize: number) => void
@@ -26,6 +27,7 @@ type PaginationProps = {
   siblings?: number
 }
 export const Pagination = ({
+  className,
   count,
   onPageChange,
   onPerPageChange,
@@ -51,7 +53,7 @@ export const Pagination = ({
   const isShowPerPageSelect = perPageOptions?.length && perPage && onPerPageChange
 
   return (
-    <div className={s.root}>
+    <div className={clsx(s.root, className)}>
       <div className={s.pagination}>
         <PrevPageButton disabled={isFirstPage} onClick={handlePrevPageChange} />
         <PaginationPages

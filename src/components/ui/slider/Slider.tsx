@@ -1,3 +1,5 @@
+import { AriaAttributes } from 'react'
+
 import * as RadixUISlider from '@radix-ui/react-slider'
 
 import s from './Slider.module.scss'
@@ -17,14 +19,12 @@ type Props = {
   name?: string
   onValueChange?(value: number[]): void
   onValueCommit?(value: number[]): void
-  orientation?: React.AriaAttributes['aria-orientation']
+  orientation?: AriaAttributes['aria-orientation']
   step?: number
   value: number[]
 }
 
 export const Slider = ({ defaultValue, label, max, min, value, ...rest }: Props) => {
-  console.log(value)
-
   return (
     <div>
       {label && (
