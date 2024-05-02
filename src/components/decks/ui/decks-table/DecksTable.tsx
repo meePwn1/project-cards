@@ -1,4 +1,6 @@
+import cover from '@/assets/image-placeholder.png'
 import { Icon, ScrollArea, Table } from '@/components/ui'
+import { Spinner } from '@/components/ui/spinner'
 import { SortType, TableColumn, TableHeader } from '@/components/ui/table-header'
 import { DecksResponse } from '@/services/decks'
 
@@ -22,9 +24,9 @@ type Props = {
 }
 
 export const DecksTable = ({ decks, isLoading, onSort, sort, userID }: Props) => {
-  return (
+  return decks?.length ? (
     <ScrollArea className={s.tableContainer}>
-      <Table.Root>
+      <Table.Root className={s.table}>
         <TableHeader columns={columns} onSort={onSort} sort={sort} />
         <Table.Body isLoading={isLoading}>
           {decks?.map(item => {
@@ -32,18 +34,25 @@ export const DecksTable = ({ decks, isLoading, onSort, sort, userID }: Props) =>
 
             return (
               <Table.Row key={item.id}>
-                <Table.Cell>{item.name}</Table.Cell>
+                <Table.Cell className={s.name}>
+                  <div className={s.cover}>
+                    <img alt={'deck cover'} src={item.cover || cover} />
+                  </div>
+                  {item.name}
+                </Table.Cell>
                 <Table.Cell>{item.cardsCount}</Table.Cell>
                 <Table.Cell>{new Date(item.updated).toLocaleDateString()}</Table.Cell>
                 <Table.Cell>{item.author.name}</Table.Cell>
-                <Table.Cell className={s.actions}>
-                  <Icon name={'common/play'} size={20} />
-                  {isMyDeck && (
-                    <>
-                      <Icon name={'common/edit'} size={20} />
-                      <DeleteDeck deckName={item.name} id={item.id} />
-                    </>
-                  )}
+                <Table.Cell>
+                  <div className={s.actions}>
+                    <Icon name={'common/play'} size={20} />
+                    {isMyDeck && (
+                      <>
+                        <Icon name={'common/edit'} size={20} />
+                        <DeleteDeck deckName={item.name} id={item.id} />
+                      </>
+                    )}
+                  </div>
                 </Table.Cell>
               </Table.Row>
             )
@@ -51,5 +60,12 @@ export const DecksTable = ({ decks, isLoading, onSort, sort, userID }: Props) =>
         </Table.Body>
       </Table.Root>
     </ScrollArea>
+  ) : (
+    <div className={s.empty}>
+      <span>
+        No content with these terms...
+        {isLoading && <Spinner className={s.loader} />}
+      </span>
+    </div>
   )
 }
