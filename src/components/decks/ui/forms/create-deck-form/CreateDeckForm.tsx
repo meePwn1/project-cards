@@ -11,9 +11,10 @@ type Props = {
   isLoading?: boolean
   onSubmit: (data: FormData) => void
   setOpen(value: boolean): void
+  submitText?: string
 }
 
-export const CreateDeckForm = ({ isLoading, onSubmit, setOpen }: Props) => {
+export const CreateDeckForm = ({ isLoading, onSubmit, setOpen, submitText }: Props) => {
   const [img, setImg] = useState<File | null>(null)
   const { control, errors, handleSubmit, onHandleSubmit } = useCreateDeckForm(onSubmit, img)
 
@@ -38,7 +39,7 @@ export const CreateDeckForm = ({ isLoading, onSubmit, setOpen }: Props) => {
           Cancel
         </Button>
         <Button isLoading={isLoading} type={'submit'}>
-          Add New Pack
+          {submitText ?? 'Send'}
         </Button>
       </div>
     </form>

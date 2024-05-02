@@ -12,8 +12,7 @@ type Props<T extends ElementType = 'button'> = {
   className?: string
   fullWidth?: boolean
   isLoading?: boolean
-  variant?: 'primary' | 'secondary'
-  withIcon?: boolean
+  variant?: 'icon' | 'primary' | 'secondary'
 } & ComponentPropsWithoutRef<T>
 
 export const Button = <T extends ElementType = 'button'>(props: Props<T>) => {
@@ -25,7 +24,6 @@ export const Button = <T extends ElementType = 'button'>(props: Props<T>) => {
     fullWidth,
     isLoading,
     variant = 'primary',
-    withIcon,
     ...rest
   } = props
 
@@ -35,7 +33,6 @@ export const Button = <T extends ElementType = 'button'>(props: Props<T>) => {
         s.button,
         s[variant],
         fullWidth && s.fullWidth,
-        (withIcon || isLoading) && s.withIcon,
         isLoading && s.loading,
         className
       )}

@@ -4,6 +4,10 @@
   position: relative;
 
   overflow: hidden;
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
 
   padding: 6px 28px;
 
@@ -15,13 +19,6 @@
 
   &:focus-visible {
     outline: 2px solid var(--color-info-700);
-  }
-
-  &.withIcon {
-    display: inline-flex;
-    gap: 10px;
-    align-items: center;
-    justify-content: center;
   }
 }
 
@@ -66,8 +63,42 @@
   }
 }
 
+.icon {
+  overflow: initial;
+  padding: 0;
+  border-radius: 50%;
+
+  &::before {
+    content: '';
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+
+    width: 25px;
+    height: 25px;
+
+    background-color: var(--color-dark-100);
+    border-radius: 50%;
+
+    transition: transform 0.3s ease 0s;
+  }
+
+  svg {
+    z-index: 1;
+  }
+
+  @media (any-hover: hover) {
+    &:hover {
+      &::before {
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+  }
+}
+
 .fullWidth {
-  display: block;
   width: 100%;
   max-width: 100%;
   text-align: center;

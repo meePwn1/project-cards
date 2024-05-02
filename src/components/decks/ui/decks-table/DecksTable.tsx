@@ -7,6 +7,7 @@ import { DecksResponse } from '@/services/decks'
 import s from './DecksTable.module.scss'
 
 import { DeleteDeck } from '../delete-deck/DeleteDeck'
+import { EditDeck } from '../edit-deck'
 const columns: TableColumn[] = [
   { key: 'name', sortable: true, title: 'Name' },
   { key: 'cardsCount', sortable: true, title: 'Cards' },
@@ -48,7 +49,7 @@ export const DecksTable = ({ decks, isLoading, onSort, sort, userID }: Props) =>
                     <Icon name={'common/play'} size={20} />
                     {isMyDeck && (
                       <>
-                        <Icon name={'common/edit'} size={20} />
+                        <EditDeck id={item.id} />
                         <DeleteDeck deckName={item.name} id={item.id} />
                       </>
                     )}

@@ -38,7 +38,7 @@ export const ProfileInfo = ({ className, onEditModeActivate }: Props) => {
       <Typography className={s.email} variant={'body2'}>
         {data?.email}
       </Typography>
-      <Button onClick={handleLogOut} type={'button'} variant={'secondary'} withIcon>
+      <Button onClick={handleLogOut} type={'button'} variant={'secondary'}>
         <Icon name={'common/log-out'} />
         Logout
       </Button>

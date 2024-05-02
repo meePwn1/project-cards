@@ -45,7 +45,6 @@ export const FileUploader = (props: Props) => {
         onClick={() => inputRef.current?.click()}
         type={'button'}
         variant={'secondary'}
-        withIcon
       >
         <Icon name={'common/edit'} />
         {text ?? text}
