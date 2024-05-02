@@ -21,11 +21,7 @@ export const Decks = () => {
   const [searchParams] = useSearchParams()
   const debouncedValue = useDebounce<string>(searchParams.get('name') || '', 500)
   const params = Object.fromEntries(searchParams)
-  const {
-    data: decks,
-    isFetching,
-    isLoading,
-  } = useGetDecksQuery({
+  const { data: decks, isFetching } = useGetDecksQuery({
     ...params,
     name: debouncedValue,
     orderBy,
