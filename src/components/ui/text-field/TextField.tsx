@@ -1,4 +1,10 @@
-import { ComponentPropsWithRef, HTMLInputTypeAttribute, forwardRef, useState } from 'react'
+import {
+  ChangeEvent,
+  ComponentPropsWithRef,
+  HTMLInputTypeAttribute,
+  forwardRef,
+  useState,
+} from 'react'
 
 import { useGetId } from '@/common/hooks'
 import clsx from 'clsx'
@@ -11,13 +17,28 @@ export type TextFieldProps = {
   error?: string
   label?: string
   onClear?: () => void
+  onValueChange?: (value: string) => void
   search?: boolean
   togglePassword?: boolean
   value?: string
 } & ComponentPropsWithRef<'input'>
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
-  ({ className, error, id, label, onClear, search, togglePassword, ...rest }, ref) => {
+  (
+    {
+      className,
+      error,
+      id,
+      label,
+      onChange,
+      onClear,
+      onValueChange,
+      search,
+      togglePassword,
+      ...rest
+    },
+    ref
+  ) => {
     const [inputType, setInputType] = useState<HTMLInputTypeAttribute>(() => {
       return togglePassword ? 'password' : 'text'
     })
@@ -26,6 +47,13 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
 
     const handleChangePasswordType = () => {
       setInputType(prev => (prev === 'text' ? 'password' : 'text'))
+    }
+    const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
+      onChange?.(e)
+      onValueChange?.(e.currentTarget.value)
+    }
+    const handleClearInput = () => {
+      onValueChange?.('') || onClear?.()
     }
 
     return (
@@ -39,6 +67,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           <input
             className={clsx('input-reset', s.input, search && s.search, error && s.error)}
             id={inputId}
+            onChange={handleChangeInput}
             ref={ref}
             type={inputType}
             {...rest}
@@ -53,7 +82,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
             <>
               <Icon className={s['icon-left']} name={'common/search'} size={20} />
               {isShowResetIcon && (
-                <button className={s['icon-right']} onClick={onClear}>
+                <button className={s['icon-right']} onClick={handleClearInput}>
                   <Icon name={'common/close'} size={20} />
                 </button>
               )}
