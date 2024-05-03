@@ -1,4 +1,4 @@
-import { Deck, DecksParams, DecksResponse } from '.'
+import { Deck, DecksParams, DecksResponse, MinMaxCards } from '.'
 import { baseApi } from '..'
 
 export const decksService = baseApi.injectEndpoints({
@@ -29,6 +29,13 @@ export const decksService = baseApi.injectEndpoints({
           }
         },
       }),
+      getMinMaxCards: build.query<MinMaxCards, void>({
+        providesTags: ['Decks'],
+        query: () => ({
+          method: 'GET',
+          url: '/v2/decks/min-max-cards',
+        }),
+      }),
       updateDeck: build.mutation<Deck, { data: FormData; id: string }>({
         invalidatesTags: ['Decks'],
         query: ({ data, id }) => ({
@@ -45,6 +52,7 @@ export const {
   useCreateDeckMutation,
   useDeleteDeckMutation,
   useGetDecksQuery,
+  useGetMinMaxCardsQuery,
   useLazyGetDecksQuery,
   useUpdateDeckMutation,
 } = decksService
