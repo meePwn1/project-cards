@@ -28,7 +28,6 @@ export const decksService = baseApi.injectEndpoints({
           }
         },
       }),
-      getDecks: build.query<DecksResponse, DecksParams | void>({
       getDecks: build.query<DecksResponse, DecksParams>({
         providesTags: ['Decks'],
         query: params => {
