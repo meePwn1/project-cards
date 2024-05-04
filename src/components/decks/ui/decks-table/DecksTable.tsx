@@ -1,5 +1,7 @@
+import { Link } from 'react-router-dom'
+
 import cover from '@/assets/image-placeholder.png'
-import { Icon, ScrollArea, Table } from '@/components/ui'
+import { Button, Icon, ScrollArea, Table } from '@/components/ui'
 import { Spinner } from '@/components/ui/spinner'
 import { SortType, TableColumn, TableHeader } from '@/components/ui/table-header'
 import { DecksResponse } from '@/services/decks'
@@ -46,7 +48,10 @@ export const DecksTable = ({ decks, isLoading, onSort, sort, userID }: Props) =>
                 <Table.Cell>{item.author.name}</Table.Cell>
                 <Table.Cell>
                   <div className={s.actions}>
-                    <Icon name={'common/play'} size={20} />
+                    <Button as={Link} to={`/decks/${item.id}/learn`} variant={'icon'}>
+                      <Icon name={'common/play'} size={20} />
+                    </Button>
+
                     {isMyDeck && (
                       <>
                         <EditDeck id={item.id} />

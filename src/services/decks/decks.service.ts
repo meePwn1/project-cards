@@ -19,6 +19,15 @@ export const decksService = baseApi.injectEndpoints({
           url: `/v1/decks/${id}`,
         }),
       }),
+      getCurrentDeck: build.query<Deck, { id: string }>({
+        providesTags: ['Decks'],
+        query: ({ id }) => {
+          return {
+            method: 'GET',
+            url: `/v1/decks/${id}`,
+          }
+        },
+      }),
       getDecks: build.query<DecksResponse, DecksParams | void>({
         providesTags: ['Decks'],
         query: params => {
@@ -44,6 +53,7 @@ export const decksService = baseApi.injectEndpoints({
 export const {
   useCreateDeckMutation,
   useDeleteDeckMutation,
+  useGetCurrentDeckQuery,
   useGetDecksQuery,
   useLazyGetDecksQuery,
   useUpdateDeckMutation,
