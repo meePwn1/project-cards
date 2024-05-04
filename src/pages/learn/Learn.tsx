@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router-dom'
 import { Page } from '@/components/layout'
 import { Button, Card, Icon, RadioGroup, Typography } from '@/components/ui'
 import { Option } from '@/components/ui/radio/Radio'
+import { Spinner } from '@/components/ui/spinner'
 import { useGetCurrentDeckQuery } from '@/services/decks'
 import { useGetLearnQuery, usePostLearnMutation } from '@/services/learn/learn.service'
 
@@ -16,7 +17,7 @@ export const Learn = () => {
   const [grade, setGrade] = useState<string>('1')
 
   const { data: deck } = useGetCurrentDeckQuery({ id: id || '' })
-  const { data: learn, isError } = useGetLearnQuery({ id: id || '' })
+  const { data: learn, isError, isFetching } = useGetLearnQuery({ id: id || '' })
   const [getNextQuestion] = usePostLearnMutation()
 
   const reteYourself: Option[] = [
@@ -32,7 +33,7 @@ export const Learn = () => {
     getNextQuestion({ cardId: learn!.id, grade: +grade, id: id || '' })
   }
 
-  const handleChangeGrade = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const handleChangeGrade = (e: React.MouseEvent<HTMLButtonElement>) => {
     setGrade(e.target.value)
   }
 
@@ -43,57 +44,63 @@ export const Learn = () => {
       </Link>
 
       <Page centered pt={36}>
-        {!isError ? (
-          <Card className={s.root}>
-            <Typography className={s.title} variant={'h1'}>
-              Learn “{deck?.name}”
-            </Typography>
-            <div className={s.exercise}>
-              <Typography variant={'body1'}>
-                <Typography as={'span'} variant={'subtitle1'}>
-                  Question:
-                </Typography>
-                {learn?.question}
-              </Typography>
-              <Typography color={'var(--color-dark-100)'} variant={'body2'}>
-                Количество попыток ответов на вопрос: {learn?.shots}
-              </Typography>
-            </div>
-            {isShowAnswer ? (
-              <div>
-                <Typography variant={'body1'}>
-                  <Typography as={'span'} variant={'subtitle1'}>
-                    Answer:
-                  </Typography>
-                  {learn?.answer}
-                </Typography>
-
-                <Typography as={'span'} variant={'subtitle1'}>
-                  Rate yourself:
-                </Typography>
-                <RadioGroup
-                  onClick={e => handleChangeGrade(e)}
-                  options={reteYourself}
-                  value={grade}
-                />
-                <Button fullWidth onClick={handleGetNextQuestion} variant={'primary'}>
-                  Next Question
-                </Button>
-              </div>
-            ) : (
-              <Button
-                fullWidth
-                onClick={() => setIsShowAnswer(prevState => !prevState)}
-                variant={'primary'}
-              >
-                Show Answer
-              </Button>
-            )}
-          </Card>
+        {isFetching ? (
+          <Spinner />
         ) : (
-          <Typography variant={'body2'}>
-            This deck is empty, there is nothing to learn here.
-          </Typography>
+          <>
+            {!isError ? (
+              <Card className={s.root}>
+                <Typography className={s.title} variant={'h1'}>
+                  Learn “{deck?.name}”
+                </Typography>
+                <div className={s.exercise}>
+                  <Typography variant={'body1'}>
+                    <Typography as={'span'} variant={'subtitle1'}>
+                      Question:
+                    </Typography>
+                    {learn?.question}
+                  </Typography>
+                  <Typography color={'var(--color-dark-100)'} variant={'body2'}>
+                    Количество попыток ответов на вопрос: {learn?.shots}
+                  </Typography>
+                </div>
+                {isShowAnswer ? (
+                  <div>
+                    <Typography variant={'body1'}>
+                      <Typography as={'span'} variant={'subtitle1'}>
+                        Answer:
+                      </Typography>
+                      {learn?.answer}
+                    </Typography>
+
+                    <Typography as={'span'} variant={'subtitle1'}>
+                      Rate yourself:
+                    </Typography>
+                    <RadioGroup
+                      onClick={e => handleChangeGrade(e)}
+                      options={reteYourself}
+                      value={grade}
+                    />
+                    <Button fullWidth onClick={handleGetNextQuestion} variant={'primary'}>
+                      Next Question
+                    </Button>
+                  </div>
+                ) : (
+                  <Button
+                    fullWidth
+                    onClick={() => setIsShowAnswer(prevState => !prevState)}
+                    variant={'primary'}
+                  >
+                    Show Answer
+                  </Button>
+                )}
+              </Card>
+            ) : (
+              <Typography variant={'body2'}>
+                This deck is empty, there is nothing to learn here.
+              </Typography>
+            )}
+          </>
         )}
       </Page>
     </div>
