@@ -7,13 +7,11 @@ import s from './TableHeader.module.scss'
 import { Icon, Table } from '..'
 import { getSortDirection } from './lib/get-sort-direction'
 
-export type TableColumn = { key: SortBy; sortable?: boolean; title: string }
-
-export type SortBy = 'author.name' | 'cardsCount' | 'created' | 'name' | 'updated' | null
+export type TableColumn = { key: null | string; sortable?: boolean; title: string }
 
 export type SortType = {
   direction: 'asc' | 'desc'
-  sortBy: SortBy
+  sortBy: null | string
 } | null
 
 type Props = {
@@ -23,7 +21,7 @@ type Props = {
 } & ComponentPropsWithoutRef<'thead'>
 
 export const TableHeader = ({ className, columns, onSort, sort, ...props }: Props) => {
-  const handleSort = (key: SortBy) => () => {
+  const handleSort = (key: null | string) => () => {
     if (sort?.sortBy !== key) {
       return onSort?.({ direction: 'asc', sortBy: key })
     }

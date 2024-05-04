@@ -1,4 +1,5 @@
 import cover from '@/assets/image-placeholder.png'
+import { SORT_BY } from '@/common/constants/sortBy'
 import { Icon, ScrollArea, Table } from '@/components/ui'
 import { Spinner } from '@/components/ui/spinner'
 import { SortType, TableColumn, TableHeader } from '@/components/ui/table-header'
@@ -9,10 +10,10 @@ import s from './DecksTable.module.scss'
 import { DeleteDeck } from '../delete-deck/DeleteDeck'
 import { EditDeck } from '../edit-deck'
 const columns: TableColumn[] = [
-  { key: 'name', sortable: true, title: 'Name' },
-  { key: 'cardsCount', sortable: true, title: 'Cards' },
-  { key: 'updated', sortable: true, title: 'Last Updated' },
-  { key: 'author.name', sortable: true, title: 'Created by' },
+  { key: SORT_BY.NAME, sortable: true, title: 'Name' },
+  { key: SORT_BY.CARDS_COUNT, sortable: true, title: 'Cards' },
+  { key: SORT_BY.UPDATED, sortable: true, title: 'Last Updated' },
+  { key: SORT_BY.AUTHOR_NAME, sortable: true, title: 'Created by' },
   { key: null, title: '' },
 ]
 
@@ -47,6 +48,7 @@ export const DecksTable = ({ decks, isLoading, onSort, sort, userID }: Props) =>
                 <Table.Cell>
                   <div className={s.actions}>
                     <Icon name={'common/play'} size={20} />
+
                     {isMyDeck && (
                       <>
                         <EditDeck id={item.id} />

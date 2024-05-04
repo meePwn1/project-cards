@@ -26,7 +26,7 @@ export const Layout = () => {
           </div>
         </section>
       </main>
-      <ToastContainer autoClose={4000} theme={'dark'} />
+      <ToastContainer autoClose={3000} theme={'dark'} />
     </>
   )
 }
