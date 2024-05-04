@@ -1,86 +1,95 @@
-import { ChangeEvent, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
+import { PARAMS } from '@/common/constants'
 import { Button, Icon, Slider, TabType, Tabs, TextField, Typography } from '@/components/ui'
-import { useMeQuery } from '@/services/auth'
+import { useGetMinMaxCardsQuery } from '@/services/decks'
 
 import s from './DeckFilters.module.scss'
 
-export const DeckFilters = () => {
-  const { data: meData } = useMeQuery()
+const tabs: TabType[] = [
+  { title: 'My cards', value: 'my' },
+  { title: 'All cards', value: '' },
+]
+
+type Props = {
+  maxCardsCount?: number
+  minCardsCount?: number
+  search: string
+  sliderValues: number[]
+  tabValue: string
+}
+export const DeckFilters = ({
+  maxCardsCount,
+  minCardsCount,
+  search,
+  sliderValues,
+  tabValue,
+}: Props) => {
+  const { data: minMaxCards } = useGetMinMaxCardsQuery()
   const [searchParams, setSearchParams] = useSearchParams()
-  const searchValue = searchParams.get('name') || ''
 
-  const [sliderValues, setSliderValues] = useState([1, 10])
-
-  const handleSetSearchParams = (e: ChangeEvent<HTMLInputElement>) => {
-    searchParams.set('name', `${e.currentTarget.value}`)
+  const handleChangeSearchValue = (searchValue: string) => {
+    if (searchValue) {
+      searchParams.set(PARAMS.SEARCH, searchValue)
+    } else {
+      searchParams.delete(PARAMS.SEARCH)
+    }
+    setSearchParams(searchParams)
+  }
+  const handleChangeTabValue = (tabValue: string) => {
+    if (tabValue) {
+      searchParams.set(PARAMS.TAB, tabValue)
+    } else {
+      searchParams.delete(PARAMS.TAB)
+    }
+    searchParams.delete(PARAMS.SEARCH)
+    searchParams.delete(PARAMS.MIN)
+    searchParams.delete(PARAMS.MAX)
+    searchParams.delete(PARAMS.PAGE)
     setSearchParams(searchParams)
   }
 
-  // const clearInputHandler = (value: string) => {
-  //   searchParams.set('name', value)
-  //   setSearchParams(searchParams)
-  //   console.log('test')
-  // }
-
-  const clearInputHandler = () => {
-    searchParams.delete('name')
-    setSearchParams(searchParams)
-  }
-
-  const handleSetTabsParams = (is: string) => {
-    is ? searchParams.set('authorId', `${meData?.id}`) : searchParams.delete('authorId')
-
-    setSearchParams(searchParams)
-  }
-
-  const handleChangeSliderValue = (values: number[]) => {
-    setSliderValues(values)
-  }
-
-  const handleCommitSliderValue = (values: number[]) => {
-    // searchParams.set('currentPage', `1`)
-    searchParams.set('minCardsCount', `${values[0]}`)
-    searchParams.set('maxCardsCount', `${values[1]}`)
+  const handleChangeSliderValues = (sliderValues: number[]) => {
+    if (sliderValues[0] !== minMaxCards?.min) {
+      searchParams.set(PARAMS.MIN, sliderValues[0].toString())
+    } else {
+      searchParams.delete(PARAMS.MIN)
+    }
+    if (sliderValues[1] !== minMaxCards?.max) {
+      searchParams.set(PARAMS.MAX, sliderValues[1].toString())
+    } else {
+      searchParams.delete(PARAMS.MAX)
+    }
     setSearchParams(searchParams)
   }
 
   const handleClearFilter = () => {
     setSearchParams({})
-    setSliderValues([1, 10])
   }
-
-  const tabs: TabType[] = [
-    { title: 'My cards', value: 'my-cards' },
-    { title: 'All cards', value: '' },
-  ]
 
   return (
     <div className={s.filterActions}>
       <TextField
-        onChange={handleSetSearchParams}
-        onClear={clearInputHandler}
+        onValueChange={handleChangeSearchValue}
         placeholder={'Search...'}
         search
-        value={searchValue}
+        value={search}
       />
       <Tabs
-        defaultValue={''}
         label={'Show decks cards'}
-        onValueChange={value => handleSetTabsParams(value)}
+        onValueChange={handleChangeTabValue}
         tabs={tabs}
+        value={tabValue}
       />
       <Slider
         label={'Number of cards'}
-        max={100}
-        min={0}
-        onValueChange={handleChangeSliderValue}
-        onValueCommit={handleCommitSliderValue}
+        max={maxCardsCount}
+        min={minCardsCount}
+        onValueChange={handleChangeSliderValues}
         value={sliderValues}
       />
 
-      <Button onClick={() => handleClearFilter()} variant={'secondary'}>
+      <Button onClick={handleClearFilter} variant={'secondary'}>
         <Icon name={'common/trash'} size={16} />
         <Typography variant={'subtitle2'}>Clear Filter</Typography>
       </Button>

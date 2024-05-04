@@ -1,3 +1,5 @@
 export * from './api'
 export * from './colors'
+export * from './params'
 export * from './routes'
+export * from './sortBy'

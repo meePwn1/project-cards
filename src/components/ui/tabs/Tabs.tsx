@@ -14,7 +14,7 @@ export type TabType = {
 }
 type TabsProps = {
   children?: ReactNode
-  defaultValue: string
+  defaultValue?: string
   fullWidth?: boolean
   label?: string
   onValueChange?: (value: string) => void
