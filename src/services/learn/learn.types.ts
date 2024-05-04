@@ -14,3 +14,9 @@ export type Card = {
   updated: string
   userId: string
 }
+
+export type PostLearnParams = {
+  cardId: string
+  grade: number
+  id: string
+}

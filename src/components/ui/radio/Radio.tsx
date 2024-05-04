@@ -5,7 +5,7 @@ import * as RadixUIRadioGroup from '@radix-ui/react-radio-group'
 
 import s from './Radio.module.scss'
 
-type Option = {
+export type Option = {
   disabled?: boolean
   label: string
   required?: boolean
