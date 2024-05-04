@@ -24,7 +24,7 @@ type Props = {
   value: number[]
 }
 
-export const Slider = ({ defaultValue, label, max, min, value, ...rest }: Props) => {
+export const Slider = ({ defaultValue, label, max, min = 0, value, ...rest }: Props) => {
   return (
     <div>
       {label && (

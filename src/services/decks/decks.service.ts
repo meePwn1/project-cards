@@ -19,12 +19,12 @@ export const decksService = baseApi.injectEndpoints({
           url: `/v1/decks/${id}`,
         }),
       }),
-      getDecks: build.query<DecksResponse, DecksParams | void>({
+      getDecks: build.query<DecksResponse, DecksParams>({
         providesTags: ['Decks'],
         query: params => {
           return {
             method: 'GET',
-            params: params ?? {},
+            params,
             url: '/v2/decks',
           }
         },
