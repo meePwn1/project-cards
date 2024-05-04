@@ -1,5 +1,6 @@
 export interface SpritesMap {
   common:
+    | 'arrow-back-outline'
     | 'check'
     | 'chevron'
     | 'close'
@@ -32,8 +33,13 @@ export const SPRITES_META: {
   }
 } = {
   common: {
-    filePath: 'common.0de850ee.svg',
+    filePath: 'common.1d737234.svg',
     items: {
+      'arrow-back-outline': {
+        viewBox: '0 0 16 14',
+        width: 16,
+        height: 14,
+      },
       check: {
         viewBox: '0 0 18 18',
         width: 18,

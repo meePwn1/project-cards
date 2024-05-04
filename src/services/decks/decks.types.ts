@@ -1,4 +1,4 @@
-import { Card } from '../cards'
+import { Card } from '../learn'
 
 export type DeckAuthor = {
   id: string
