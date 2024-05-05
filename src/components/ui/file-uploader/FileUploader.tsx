@@ -3,15 +3,17 @@ import { toast } from 'react-toastify'
 
 import { Button } from '@/components/ui/button'
 
-import { Icon } from '..'
+import { Icon, IconName } from '..'
 
 type Props = {
   accept?: string
   className?: string
   fullWidth?: boolean
+  icon?: IconName
   name: string
   setFile: (file: File | null) => void
   text?: string
+  variant?: 'icon' | 'primary' | 'secondary'
 }
 
 export const FileUploader = (props: Props) => {
@@ -19,9 +21,11 @@ export const FileUploader = (props: Props) => {
     accept = 'image/*,.png,.jpg,.jpeg,.webp',
     className,
     fullWidth,
+    icon = 'common/edit',
     name,
     setFile,
-    text = 'Upload file',
+    text,
+    variant = 'secondary',
   } = props
 
   const inputRef = useRef<HTMLInputElement>(null)
@@ -44,9 +48,9 @@ export const FileUploader = (props: Props) => {
         fullWidth={fullWidth}
         onClick={() => inputRef.current?.click()}
         type={'button'}
-        variant={'secondary'}
+        variant={variant}
       >
-        <Icon name={'common/edit'} />
+        <Icon name={icon} />
         {text ?? text}
       </Button>
       <input

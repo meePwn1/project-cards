@@ -50,7 +50,7 @@ export const Learn = () => {
           <>
             {!isError ? (
               <Card className={s.root}>
-                <Typography className={s.title} variant={'h1'}>
+                <Typography className={s.title} color={'red'} variant={'h1'}>
                   Learn “{deck?.name}”
                 </Typography>
                 <div className={s.exercise}>
