@@ -11,6 +11,8 @@ export const CreateNewDeck = () => {
   const [createDeck, { isLoading }] = useCreateDeckMutation()
 
   const handleSubmit = (data: FormData) => {
+    console.log(data)
+
     createDeck(data)
       .unwrap()
       .then(() => {
