@@ -6,8 +6,8 @@ export interface SpritesMap {
     | 'close'
     | 'divider-horizontal'
     | 'edit'
-    | 'eye-closed'
     | 'eye'
+    | 'eye-closed'
     | 'image'
     | 'log-out'
     | 'more'
@@ -15,8 +15,8 @@ export interface SpritesMap {
     | 'profile'
     | 'search'
     | 'spinner'
-    | 'star-border'
     | 'star'
+    | 'star-border'
     | 'trash'
 }
 export const SPRITES_META: {
@@ -25,9 +25,9 @@ export const SPRITES_META: {
     items: Record<
       SpritesMap[Key],
       {
+        height: number
         viewBox: string
         width: number
-        height: number
       }
     >
   }
@@ -36,94 +36,94 @@ export const SPRITES_META: {
     filePath: 'common.1d737234.svg',
     items: {
       'arrow-back-outline': {
+        height: 14,
         viewBox: '0 0 16 14',
         width: 16,
-        height: 14,
       },
       check: {
+        height: 18,
         viewBox: '0 0 18 18',
         width: 18,
-        height: 18,
       },
       chevron: {
+        height: 12,
         viewBox: '0 0 12 12',
         width: 12,
-        height: 12,
       },
       close: {
+        height: 16,
         viewBox: '0 0 16 16',
         width: 16,
-        height: 16,
       },
       'divider-horizontal': {
+        height: 800,
         viewBox: '0 0 15 15',
         width: 800,
-        height: 800,
       },
       edit: {
+        height: 16,
         viewBox: '0 0 16 16',
         width: 16,
-        height: 16,
-      },
-      'eye-closed': {
-        viewBox: '0 0 24 24',
-        width: 24,
-        height: 24,
       },
       eye: {
+        height: 20,
         viewBox: '0 0 20 20',
         width: 20,
-        height: 20,
+      },
+      'eye-closed': {
+        height: 24,
+        viewBox: '0 0 24 24',
+        width: 24,
       },
       image: {
+        height: 16,
         viewBox: '0 0 17 16',
         width: 17,
-        height: 16,
       },
       'log-out': {
+        height: 16,
         viewBox: '0 0 16 16',
         width: 16,
-        height: 16,
       },
       more: {
+        height: 18,
         viewBox: '0 0 18 18',
         width: 18,
-        height: 18,
       },
       play: {
+        height: 16,
         viewBox: '0 0 16 16',
         width: 16,
-        height: 16,
       },
       profile: {
+        height: 16,
         viewBox: '0 0 16 16',
         width: 16,
-        height: 16,
       },
       search: {
+        height: 16,
         viewBox: '0 0 16 16',
         width: 16,
-        height: 16,
       },
       spinner: {
+        height: 20,
         viewBox: '0 0 1792 1792',
         width: 20,
-        height: 20,
-      },
-      'star-border': {
-        viewBox: '0 0 14 14',
-        width: 14,
-        height: 14,
       },
       star: {
+        height: 17,
         viewBox: '0 0 16 17',
         width: 16,
-        height: 17,
+      },
+      'star-border': {
+        height: 14,
+        viewBox: '0 0 14 14',
+        width: 14,
       },
       trash: {
+        height: 16,
         viewBox: '0 0 16 16',
         width: 16,
-        height: 16,
       },
     },
   },
