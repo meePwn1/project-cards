@@ -11,7 +11,7 @@ type Props = {
   fullWidth?: boolean
   icon?: IconName
   name: string
-  setFile: (file: File | null) => void
+  setFile: (file: File) => void
   text?: string
   variant?: 'icon' | 'primary' | 'secondary'
 }
@@ -50,7 +50,7 @@ export const FileUploader = (props: Props) => {
         type={'button'}
         variant={variant}
       >
-        <Icon name={icon} />
+        <Icon name={icon} size={16} />
         {text ?? text}
       </Button>
       <input
