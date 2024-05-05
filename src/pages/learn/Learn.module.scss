@@ -1,16 +1,11 @@
-.learn {
-  margin-top: 24px;
+.back {
+  align-self: flex-start;
+  margin-bottom: 24px;
 }
 
 .root {
   max-width: 420px;
   padding: 33px 36px 36px;
-}
-
-.backLink {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
 }
 
 .title {
@@ -22,4 +17,8 @@
   flex-direction: column;
   row-gap: 12px;
   margin-bottom: 41px;
+}
+
+.empty {
+  color: var(--color-dark-100);
 }

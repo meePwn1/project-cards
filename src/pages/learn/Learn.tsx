@@ -1,8 +1,9 @@
 import { useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
+import { BackToPage } from '@/components/back-to-page/BackToPage'
 import { Page } from '@/components/layout'
-import { Button, Card, Icon, RadioGroup, Typography } from '@/components/ui'
+import { Button, Card, RadioGroup, Typography } from '@/components/ui'
 import { Option } from '@/components/ui/radio/Radio'
 import { useGetCurrentDeckQuery } from '@/services/decks'
 import { useGetLearnQuery, usePostLearnMutation } from '@/services/learn/learn.service'
@@ -37,65 +38,60 @@ export const Learn = () => {
   }
 
   return (
-    <div className={s.learn}>
-      <Link className={s.backLink} to={'/'}>
-        <Icon height={10} name={'common/arrow-back-outline'} /> Back to Decks List
-      </Link>
-
-      <Page centered pt={36}>
-        {!isError ? (
-          <Card className={s.root}>
-            <Typography className={s.title} variant={'h1'}>
-              Learn “{deck?.name}”
+    <Page centered pt={24}>
+      <BackToPage className={s.back} />
+      {!isError ? (
+        <Card className={s.root}>
+          <Typography className={s.title} variant={'h1'}>
+            Learn “{deck?.name}”
+          </Typography>
+          <div className={s.exercise}>
+            <Typography variant={'body1'}>
+              <Typography as={'span'} variant={'subtitle1'}>
+                Question:
+              </Typography>
+              {learn?.question}
             </Typography>
-            <div className={s.exercise}>
+            <Typography color={'var(--color-dark-100)'} variant={'body2'}>
+              Количество попыток ответов на вопрос: {learn?.shots}
+            </Typography>
+          </div>
+          {isShowAnswer ? (
+            <div>
               <Typography variant={'body1'}>
                 <Typography as={'span'} variant={'subtitle1'}>
-                  Question:
+                  Answer:
                 </Typography>
-                {learn?.question}
+                {learn?.answer}
               </Typography>
-              <Typography color={'var(--color-dark-100)'} variant={'body2'}>
-                Количество попыток ответов на вопрос: {learn?.shots}
-              </Typography>
-            </div>
-            {isShowAnswer ? (
-              <div>
-                <Typography variant={'body1'}>
-                  <Typography as={'span'} variant={'subtitle1'}>
-                    Answer:
-                  </Typography>
-                  {learn?.answer}
-                </Typography>
 
-                <Typography as={'span'} variant={'subtitle1'}>
-                  Rate yourself:
-                </Typography>
-                <RadioGroup
-                  onClick={e => handleChangeGrade(e)}
-                  options={reteYourself}
-                  value={grade}
-                />
-                <Button fullWidth onClick={handleGetNextQuestion} variant={'primary'}>
-                  Next Question
-                </Button>
-              </div>
-            ) : (
-              <Button
-                fullWidth
-                onClick={() => setIsShowAnswer(prevState => !prevState)}
-                variant={'primary'}
-              >
-                Show Answer
+              <Typography as={'span'} variant={'subtitle1'}>
+                Rate yourself:
+              </Typography>
+              <RadioGroup
+                onClick={e => handleChangeGrade(e)}
+                options={reteYourself}
+                value={grade}
+              />
+              <Button fullWidth onClick={handleGetNextQuestion} variant={'primary'}>
+                Next Question
               </Button>
-            )}
-          </Card>
-        ) : (
-          <Typography variant={'body2'}>
-            This deck is empty, there is nothing to learn here.
-          </Typography>
-        )}
-      </Page>
-    </div>
+            </div>
+          ) : (
+            <Button
+              fullWidth
+              onClick={() => setIsShowAnswer(prevState => !prevState)}
+              variant={'primary'}
+            >
+              Show Answer
+            </Button>
+          )}
+        </Card>
+      ) : (
+        <Typography className={s.empty} variant={'body1'}>
+          This deck is empty, there is nothing to learn here.
+        </Typography>
+      )}
+    </Page>
   )
 }
