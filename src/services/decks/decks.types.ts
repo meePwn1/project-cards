@@ -1,5 +1,3 @@
-import { Card } from '../learn'
-
 export type DeckAuthor = {
   id: string
   name: string
@@ -18,6 +16,7 @@ export type Deck = {
   updated: string
   userId: string
 }
+export type DeckByIdResponse = Omit<Deck, 'author'>
 export type Pagination = {
   currentPage: number
   itemsPerPage: number
@@ -66,51 +65,4 @@ export type UpdateDeckParams = {
   cover?: File
   isPrivate?: boolean
   name?: string
-}
-
-export type CardsResponse = {
-  items: Card[]
-  pagination: Pagination
-}
-
-export type CreateCardParams = {
-  /**
-   * @minLength 3
-   * @maxLength 500
-   */
-  answer: string
-  /**
-   * @minLength 0
-   * @maxLength 0
-   */
-  answerImg?: string
-  /**
-   * @minLength 3
-   * @maxLength 500
-   */
-  answerVideo?: string
-  /**
-   * @minLength 3
-   * @maxLength 500
-   */
-  question: string
-  /**
-   * @minLength 0
-   * @maxLength 0
-   */
-  questionImg?: string
-  /**
-   * @minLength 3
-   * @maxLength 500
-   */
-  questionVideo?: string
-}
-
-export type SaveGradeParams = {
-  cardId: string
-  /**
-   * @min 1
-   * @max 5
-   */
-  grade: number
 }
