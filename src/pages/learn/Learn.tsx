@@ -5,20 +5,20 @@ import { BackToPage } from '@/components/back-to-page/BackToPage'
 import { Page } from '@/components/layout'
 import { Button, Card, RadioGroup, Typography } from '@/components/ui'
 import { Option } from '@/components/ui/radio/Radio'
-import { useGetCurrentDeckQuery } from '@/services/decks'
-import { useGetLearnQuery, usePostLearnMutation } from '@/services/learn/learn.service'
+import { useGetRandomCardQuery, useSaveGradeMutation } from '@/services/cards'
+import { useGetDeckByIdQuery } from '@/services/decks'
 
 import s from './Learn.module.scss'
 
 export const Learn = () => {
-  const { id } = useParams()
+  const { deckId } = useParams()
 
   const [isShowAnswer, setIsShowAnswer] = useState<boolean>(false)
   const [grade, setGrade] = useState<string>('1')
 
-  const { data: deck } = useGetCurrentDeckQuery({ id: id || '' })
-  const { data: learn, isError } = useGetLearnQuery({ id: id || '' })
-  const [getNextQuestion] = usePostLearnMutation()
+  const { data: deck } = useGetDeckByIdQuery({ id: deckId || '' })
+  const { data: learn, isError } = useGetRandomCardQuery({ id: deckId || '' })
+  const [getNextQuestion] = useSaveGradeMutation()
 
   const reteYourself: Option[] = [
     { label: 'Did not know', value: '1' },
@@ -30,7 +30,7 @@ export const Learn = () => {
 
   const handleGetNextQuestion = () => {
     setIsShowAnswer(prevState => !prevState)
-    getNextQuestion({ cardId: learn!.id, grade: +grade, id: id || '' })
+    getNextQuestion({ cardId: learn!.id, grade: +grade, id: deckId || '' })
   }
 
   const handleChangeGrade = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
