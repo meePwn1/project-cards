@@ -2,6 +2,7 @@ import { RouteObject } from 'react-router-dom'
 
 import { ROUTES } from '@/common/constants'
 import { CheckEmailPage, ResetPasswordPage, SignInPage, SignUpPage } from '@/pages/auth'
+import { Cards } from '@/pages/cards/Cards'
 import { Decks } from '@/pages/decks'
 import { Learn } from '@/pages/learn'
 import { ProfilePage } from '@/pages/profile'
@@ -9,29 +10,30 @@ import { ProfilePage } from '@/pages/profile'
 export const publicRoutes: RouteObject[] = [
   {
     element: <SignInPage />,
-    path: ROUTES.signIn,
+    path: ROUTES.SIGN_IN,
   },
   {
     element: <SignUpPage />,
-    path: ROUTES.signUp,
+    path: ROUTES.SIGN_UP,
   },
   {
     element: <ResetPasswordPage />,
 
-    path: ROUTES.recoverPassword,
+    path: ROUTES.RECOVER_PASSWORD,
   },
   {
     element: <CheckEmailPage />,
 
-    path: ROUTES.checkEmail,
+    path: ROUTES.CHECK_EMAIL,
   },
 ]
 
 export const privateRoutes: RouteObject[] = [
   {
     element: <Decks />,
-    path: '/',
+    path: ROUTES.HOME,
   },
-  { element: <Learn />, path: '/decks/:id/learn' },
-  { element: <ProfilePage />, path: ROUTES.profile },
+  { element: <Learn />, path: ROUTES.CARD_LEARN() },
+  { element: <Cards />, path: ROUTES.CARDS() },
+  { element: <ProfilePage />, path: ROUTES.PROFILE },
 ]

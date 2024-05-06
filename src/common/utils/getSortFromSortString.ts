@@ -1,4 +1,4 @@
-import { SortType } from '@/components/ui/table-header'
+import { SortType } from '../types'
 
 export const getSortFromSortString = (sortString: null | string) => {
   if (!sortString) {

@@ -1,11 +1,11 @@
 import { PARAMS } from '@/common/constants'
+import { SortType } from '@/common/types'
 import { getSortString } from '@/common/utils'
 import { CreateNewDeck } from '@/components/decks/ui/create-new-deck'
 import { DeckFilters } from '@/components/decks/ui/deck-filters'
 import { DecksTable } from '@/components/decks/ui/decks-table'
 import { Page } from '@/components/layout'
 import { Pagination, Typography } from '@/components/ui'
-import { SortType } from '@/components/ui/table-header'
 import { useMeQuery } from '@/services/auth'
 import { useGetDecksQuery, useGetMinMaxCardsQuery } from '@/services/decks'
 
@@ -36,7 +36,7 @@ export const Decks = () => {
   const { data: decks, isFetching } = useGetDecksQuery(queryParams)
 
   // handlers
-  const handleSortChange = (sort: SortType | null) => {
+  const handleSortChange = (sort: SortType) => {
     const sortString = getSortString(sort)
 
     if (sortString) {

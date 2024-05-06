@@ -58,8 +58,8 @@ export const SignIn = (props: Props) => {
           label={'Remember me'}
           name={'rememberMe'}
         />
-        <Typography className={s.forgot} variant={'body2'}>
-          <Link to={ROUTES.recoverPassword}>Forgot Password?</Link>
+        <Typography as={Link} className={s.forgot} to={ROUTES.RECOVER_PASSWORD} variant={'body2'}>
+          Forgot Password?
         </Typography>
         <Button className={s.button} disabled={isSubmitting} fullWidth>
           Sign In
@@ -69,8 +69,8 @@ export const SignIn = (props: Props) => {
         <Typography className={s.text} variant={'body2'}>
           Already have an account?
         </Typography>
-        <Typography variant={'linkForm'}>
-          <Link to={ROUTES.signUp}>Sign Up</Link>
+        <Typography as={Link} to={ROUTES.SIGN_UP} variant={'linkForm'}>
+          Sign Up
         </Typography>
       </div>
     </Card>

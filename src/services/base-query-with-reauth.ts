@@ -45,8 +45,8 @@ export const baseQueryWithReauth: BaseQueryFn<
         } else {
           const path = window.location.pathname
 
-          if (path !== ROUTES.signUp && path !== ROUTES.checkEmail) {
-            router.navigate(ROUTES.signIn)
+          if (path !== ROUTES.SIGN_UP && path !== ROUTES.CHECK_EMAIL) {
+            router.navigate(ROUTES.SIGN_IN)
           }
         }
       } finally {

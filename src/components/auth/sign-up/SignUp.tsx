@@ -78,8 +78,8 @@ export const SignUp = (props: Props) => {
         <Typography className={s.text} variant={'body2'}>
           Already have an account?
         </Typography>
-        <Typography as={'a'} href={'/login'} variant={'linkForm'}>
-          <Link to={ROUTES.signIn}>Sign In</Link>
+        <Typography as={Link} to={ROUTES.SIGN_IN} variant={'linkForm'}>
+          Sign In
         </Typography>
       </div>
     </Card>

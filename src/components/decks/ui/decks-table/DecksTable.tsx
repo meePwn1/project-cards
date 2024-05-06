@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom'
 
 import cover from '@/assets/image-placeholder.png'
+import { ROUTES } from '@/common/constants'
 import { SORT_BY } from '@/common/constants/sortBy'
+import { SortType, TableColumn } from '@/common/types'
 import { Button, Icon, ScrollArea, Table } from '@/components/ui'
 import { Spinner } from '@/components/ui/spinner'
-import { SortType, TableColumn, TableHeader } from '@/components/ui/table-header'
+import { TableHeader } from '@/components/ui/table-header'
 import { DecksResponse } from '@/services/decks'
 
 import s from './DecksTable.module.scss'
@@ -38,18 +40,20 @@ export const DecksTable = ({ decks, isLoading, onSort, sort, userID }: Props) =>
 
             return (
               <Table.Row key={item.id}>
-                <Table.Cell className={s.name}>
-                  <div className={s.cover}>
-                    <img alt={'deck cover'} src={item.cover || cover} />
-                  </div>
-                  {item.name}
+                <Table.Cell>
+                  <Link className={s.name} to={ROUTES.CARDS(item.id)}>
+                    <div className={s.cover}>
+                      <img alt={'deck cover'} src={item.cover || cover} />
+                    </div>
+                    {item.name}
+                  </Link>
                 </Table.Cell>
                 <Table.Cell>{item.cardsCount}</Table.Cell>
                 <Table.Cell>{new Date(item.updated).toLocaleDateString()}</Table.Cell>
                 <Table.Cell>{item.author.name}</Table.Cell>
                 <Table.Cell>
                   <div className={s.actions}>
-                    <Button as={Link} to={`/decks/${item.id}/learn`} variant={'icon'}>
+                    <Button as={Link} to={ROUTES.CARD_LEARN(item.id)} variant={'icon'}>
                       <Icon name={'common/play'} size={20} />
                     </Button>
 

@@ -16,10 +16,10 @@ export const Header = () => {
   return (
     <header className={s.header}>
       <div className={clsx(s.container, 'container')}>
-        <Logo to={ROUTES.home} />
+        <Logo to={ROUTES.HOME} />
         {isError ? (
-          <Button variant={'secondary'}>
-            <Link to={ROUTES.signIn}>Sign In</Link>
+          <Button as={Link} to={ROUTES.SIGN_IN} variant={'secondary'}>
+            Sign In
           </Button>
         ) : (
           <HeaderProfile />

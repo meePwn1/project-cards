@@ -8,5 +8,5 @@ export const baseApi = createApi({
     return {}
   },
   reducerPath: 'baseApi',
-  tagTypes: ['Decks', 'Me', 'Learn'],
+  tagTypes: ['Decks', 'Me', 'Cards'],
 })

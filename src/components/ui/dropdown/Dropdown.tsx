@@ -104,9 +104,9 @@ export const DropdownMenuItemWithIcon = ({ icon, ...rest }: DropdownMenuItemWith
   return <DropdownMenuItem {...rest} icon={icon} />
 }
 
-type DropdownMenuLabelProps = RadixUIDropdown.DropdownMenuLabelProps & {
+type DropdownMenuLabelProps = {
   icon?: ReactNode
-}
+} & RadixUIDropdown.DropdownMenuLabelProps
 export const DropdownMenuLabel = ({
   children,
   className,

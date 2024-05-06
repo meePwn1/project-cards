@@ -2,8 +2,10 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { useState } from 'react'
 
+import { SortType, TableColumn } from '@/common/types'
+
 import { Table, Typography } from '..'
-import { SortType, TableColumn, TableHeader } from '../table-header'
+import { TableHeader } from '../table-header'
 
 const meta: Meta<typeof Table.Root> = {
   component: Table.Root,

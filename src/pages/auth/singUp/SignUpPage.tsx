@@ -14,7 +14,7 @@ export const SignUpPage = () => {
     singUp({ email, password })
       .unwrap()
       .then(() => login({ email, password }))
-      .then(() => router.navigate(ROUTES.home))
+      .then(() => router.navigate(ROUTES.HOME))
   }
 
   return (
