@@ -1,18 +1,12 @@
 import { ComponentPropsWithoutRef } from 'react'
 
+import { SortType, TableColumn } from '@/common/types'
 import clsx from 'clsx'
 
 import s from './TableHeader.module.scss'
 
 import { Icon, Table } from '..'
 import { getSortDirection } from './lib/get-sort-direction'
-
-export type TableColumn = { key: null | string; sortable?: boolean; title: string }
-
-export type SortType = {
-  direction: 'asc' | 'desc'
-  sortBy: null | string
-} | null
 
 type Props = {
   columns: TableColumn[]

@@ -4,9 +4,6 @@ import { Icon } from '@/components/ui'
 
 const meta: Meta<typeof Icon> = {
   argTypes: {
-    name: {
-      control: 'none',
-    },
     size: {
       control: {
         type: 'number',

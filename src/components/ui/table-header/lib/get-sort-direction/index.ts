@@ -1,4 +1,4 @@
-import { SortType } from '../..'
+import { SortType } from '@/common/types'
 
 export const getSortDirection = (
   key: null | string,
