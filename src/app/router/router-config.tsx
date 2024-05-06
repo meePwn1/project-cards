@@ -16,7 +16,7 @@ export const router = createBrowserRouter([
       ...publicRoutes,
     ],
     element: <Layout />,
-    path: ROUTES.home,
+    path: ROUTES.HOME,
   },
 ])
 
@@ -29,7 +29,7 @@ function PrivateRoutes() {
 
   const isAuthenticated = !isError
 
-  return isAuthenticated ? <Outlet /> : <Navigate to={ROUTES.signIn} />
+  return isAuthenticated ? <Outlet /> : <Navigate to={ROUTES.SIGN_IN} />
 }
 export const Router = () => {
   return <RouterProvider router={router} />
