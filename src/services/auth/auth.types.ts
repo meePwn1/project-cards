@@ -24,6 +24,6 @@ export type RecoverPasswordArgs = {
 }
 
 export type UpdateUserDataArgs = {
-  avatar?: string
+  avatar?: File
   name?: string
 }

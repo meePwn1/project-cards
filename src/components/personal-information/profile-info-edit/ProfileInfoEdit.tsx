@@ -11,7 +11,7 @@ import s from './ProfileInfoEdit.module.scss'
 
 type Props = {
   className?: string
-  onEditModeDeactivate?: (value: boolean) => void
+  onEditModeDeactivate: (value: boolean) => void
 }
 type FormValue = Pick<FormValues, 'username'>
 const schema = formSchema.pick({ username: true })
@@ -25,21 +25,23 @@ export const ProfileInfoEdit = ({ className, onEditModeDeactivate }: Props) => {
     defaultValues: { username: '' },
     resolver: zodResolver(schema),
   })
+
   const [updateUserData] = useUpdateUserDataMutation()
 
   const handleUpdateUsername = (data: FormValue) => {
-    updateUserData({ name: data.username })
+    const formData = new FormData()
+
+    formData.append('name', data.username)
+    updateUserData(formData)
       .unwrap()
       .then(() => isValid && onEditModeDeactivate?.(false))
-    // .unwrap()
-    // .then(() => {
-    //   isValid && onEditModeDeactivate?.(false)
   }
 
   return (
     <div className={clsx(s.profileInfoEdit, className)}>
       <form onSubmit={handleSubmit(handleUpdateUsername)}>
         <DevTool control={control} />
+
         <FormTextField
           className={s.nicknameField}
           control={control}
@@ -48,9 +50,14 @@ export const ProfileInfoEdit = ({ className, onEditModeDeactivate }: Props) => {
           name={'username'}
           placeholder={'Nickname'}
         />
-        <Button disabled={isSubmitting} fullWidth type={'submit'}>
-          Save Changes
-        </Button>
+        <div className={s.buttons}>
+          <Button disabled={isSubmitting} type={'submit'}>
+            Save Changes
+          </Button>
+          <Button onClick={() => onEditModeDeactivate(false)} variant={'secondary'}>
+            Cancel
+          </Button>
+        </div>
       </form>
     </div>
   )

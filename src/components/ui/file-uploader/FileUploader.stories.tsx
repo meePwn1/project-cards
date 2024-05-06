@@ -15,6 +15,7 @@ export const Default: Story = {
   args: {
     name: 'file',
     setFile: () => {},
+    text: 'Upload file',
   },
 }
 export const FullWidth: Story = {
@@ -22,5 +23,14 @@ export const FullWidth: Story = {
     fullWidth: true,
     name: 'file',
     setFile: () => {},
+    text: 'Upload file',
+  },
+}
+
+export const Icon: Story = {
+  args: {
+    name: 'file',
+    setFile: () => {},
+    variant: 'icon',
   },
 }

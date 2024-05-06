@@ -1,23 +1,26 @@
-import { Avatar, Button, Icon } from '@/components/ui'
+import { ReactNode } from 'react'
+
+import { Avatar } from '@/components/ui'
 import { useMeQuery } from '@/services/auth/auth.service'
-import clsx from 'clsx'
 
 import s from './ProfileAvatar.module.scss'
 type Props = {
+  children?: ReactNode
   className?: string
   editable?: boolean
+  img?: string
 }
-export const ProfileAvatar = ({ className, editable = false }: Props) => {
+export const ProfileAvatar = ({ children, className, editable = false, img }: Props) => {
   const { data } = useMeQuery()
 
+  const avatar = img ? img : data?.avatar
+
   return (
-    <div className={clsx(s.profileAvatar, className)}>
-      <Avatar size={96} src={data?.avatar} />
-      {!editable && (
-        <Button className={s.editButton} variant={'secondary'}>
-          <Icon name={'common/edit'} size={16} />
-        </Button>
-      )}
+    <div className={className}>
+      <div className={s.profileAvatar}>
+        <Avatar size={96} src={avatar} />
+        {editable && <div className={s.editChildren}>{children}</div>}
+      </div>
     </div>
   )
 }

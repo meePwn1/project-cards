@@ -33,7 +33,7 @@ export const Learn = () => {
     getNextQuestion({ cardId: learn!.id, grade: +grade, id: deckId || '' })
   }
 
-  const handleChangeGrade = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const handleChangeGrade = (e: React.MouseEvent<HTMLButtonElement>) => {
     setGrade(e.target.value)
   }
 
