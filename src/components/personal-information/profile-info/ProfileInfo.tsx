@@ -20,7 +20,7 @@ export const ProfileInfo = ({ className, onEditModeActivate }: Props) => {
     logout()
       .unwrap()
       .then(() => {
-        return <Navigate to={ROUTES.signIn} />
+        return <Navigate to={ROUTES.SIGN_IN} />
       })
   }
   const handleEditMode = () => {

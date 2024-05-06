@@ -14,7 +14,7 @@ export const ResetPasswordPage = () => {
       html: '<h1>Hi, ##name##</h1><p>Click <a href="##token##">here</a> to recover your password</p>',
     })
       .unwrap()
-      .then(() => router.navigate(ROUTES.checkEmail))
+      .then(() => router.navigate(ROUTES.CHECK_EMAIL))
   }
 
   return (

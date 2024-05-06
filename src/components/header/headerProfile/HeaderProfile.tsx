@@ -35,7 +35,7 @@ export const HeaderProfile = () => {
         </DropdownMenuLabel>
         <DropdownMenuItemWithIcon
           icon={<Icon name={'common/edit'} size={16} />}
-          onClick={() => router.navigate(ROUTES.profile)}
+          onClick={() => router.navigate(ROUTES.PROFILE)}
           text={'My Profile'}
         />
         <DropdownMenuItemWithIcon

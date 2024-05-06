@@ -11,7 +11,7 @@ export const SignInPage = () => {
   const handleLogin = (data: FormValue) => {
     login(data)
       .unwrap()
-      .then(() => router.navigate(ROUTES.home))
+      .then(() => router.navigate(ROUTES.HOME))
   }
 
   return (
