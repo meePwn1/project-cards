@@ -2,4 +2,11 @@
   display: inline-flex;
   gap: 5px;
   align-items: center;
+  transition: color 0.3s ease 0s;
+
+  @media (any-hover: hover) {
+    &:hover {
+      color: var(--color-dark-100);
+    }
+  }
 }

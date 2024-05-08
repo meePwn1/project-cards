@@ -33,7 +33,7 @@ export const privateRoutes: RouteObject[] = [
     element: <Decks />,
     path: ROUTES.HOME,
   },
-  { element: <Learn />, path: ROUTES.CARD_LEARN() },
+  { element: <Learn />, path: ROUTES.LEARN() },
   { element: <Cards />, path: ROUTES.CARDS() },
   { element: <ProfilePage />, path: ROUTES.PROFILE },
 ]
