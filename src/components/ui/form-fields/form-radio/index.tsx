@@ -2,9 +2,10 @@ import { Control, FieldValues, UseControllerProps, useController } from 'react-h
 
 import { RadioGroup, RadioGroupProps } from '@/components/ui'
 
-type Props<T extends FieldValues> = Omit<UseControllerProps<T>, 'control'> & {
+type Props<T extends FieldValues> = {
   control: Control<T>
-} & Omit<RadioGroupProps, 'id' | 'onBlur' | 'onValueChange' | 'value'>
+} & Omit<RadioGroupProps, 'id' | 'onBlur' | 'onValueChange' | 'value'> &
+  Omit<UseControllerProps<T>, 'control'>
 
 export const FormRadio = <T extends FieldValues>({
   control,

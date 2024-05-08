@@ -2,9 +2,10 @@ import { Control, FieldValues, UseControllerProps, useController } from 'react-h
 
 import { Checkbox, CheckboxProps } from '@/components/ui'
 
-type Props<T extends FieldValues> = Omit<UseControllerProps<T>, 'control'> & {
+type Props<T extends FieldValues> = {
   control: Control<T>
-} & Omit<CheckboxProps, 'checked' | 'id' | 'onBlur' | 'onCheckedChange'>
+} & Omit<CheckboxProps, 'checked' | 'id' | 'onBlur' | 'onCheckedChange'> &
+  Omit<UseControllerProps<T>, 'control'>
 
 export const FormCheckbox = <T extends FieldValues>({
   control,
