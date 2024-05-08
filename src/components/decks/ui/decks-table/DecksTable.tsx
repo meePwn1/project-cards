@@ -53,7 +53,7 @@ export const DecksTable = ({ decks, isLoading, onSort, sort, userID }: Props) =>
                 <Table.Cell>{item.author.name}</Table.Cell>
                 <Table.Cell>
                   <div className={s.actions}>
-                    <Button as={Link} to={ROUTES.CARD_LEARN(item.id)} variant={'icon'}>
+                    <Button as={Link} to={ROUTES.LEARN(item.id)} variant={'icon'}>
                       <Icon name={'common/play'} size={20} />
                     </Button>
 
