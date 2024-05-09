@@ -13,7 +13,6 @@ type Story = StoryObj<typeof FileUploader>
 
 export const Default: Story = {
   args: {
-    name: 'file',
     setFile: () => {},
     text: 'Upload file',
   },
@@ -21,7 +20,6 @@ export const Default: Story = {
 export const FullWidth: Story = {
   args: {
     fullWidth: true,
-    name: 'file',
     setFile: () => {},
     text: 'Upload file',
   },
@@ -29,7 +27,6 @@ export const FullWidth: Story = {
 
 export const Icon: Story = {
   args: {
-    name: 'file',
     setFile: () => {},
     variant: 'icon',
   },

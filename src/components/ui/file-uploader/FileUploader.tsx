@@ -10,8 +10,8 @@ type Props = {
   className?: string
   fullWidth?: boolean
   icon?: IconName
-  name: string
-  setFile: (file: File) => void
+  setFile?: (file: File) => void
+  setImageUrl?: (dataUrl: string) => void
   text?: string
   variant?: 'icon' | 'primary' | 'secondary'
 }
@@ -22,8 +22,8 @@ export const FileUploader = (props: Props) => {
     className,
     fullWidth,
     icon = 'common/edit',
-    name,
     setFile,
+    setImageUrl,
     text,
     variant = 'secondary',
   } = props
@@ -34,10 +34,21 @@ export const FileUploader = (props: Props) => {
 
     e.target.value = ''
 
-    if (file && file.size <= 1024 * 1024) {
-      setFile(file)
+    if (file && file.size <= 5 * 1024 * 1024) {
+      setFile?.(file)
+      if (setImageUrl) {
+        const reader = new FileReader()
+
+        reader.onload = () => {
+          const dataUrl = reader.result?.toString() || ''
+
+          setImageUrl(dataUrl)
+        }
+
+        reader.readAsDataURL(file)
+      }
     } else {
-      toast.error('Max image size is 1MB')
+      toast.error('Max image size is 5MB')
     }
   }
 
@@ -56,7 +67,6 @@ export const FileUploader = (props: Props) => {
       <input
         accept={accept}
         hidden
-        name={name}
         onChange={handleChange}
         ref={inputRef}
         style={{ display: 'none' }}
