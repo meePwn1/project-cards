@@ -56,7 +56,7 @@ export const FileUploaderWithPreview = ({ img, setImg }: Props) => {
             Delete file
           </Button>
         )}
-        <FileUploader fullWidth={!img} name={'file'} setFile={handleSetImage} />
+        <FileUploader fullWidth={!img} setFile={handleSetImage} text={'Upload file'} />I
       </div>
     </div>
   )
