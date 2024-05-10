@@ -1,7 +1,8 @@
 import { useState } from 'react'
 
-import { Button, FileUploader, FormCheckbox, FormTextField } from '@/components/ui'
-import { ImageCropper, ImagePreviewData } from '@/components/ui/image-cropper'
+import { FileUploaderWithImageCropper } from '@/components/file-uploader-with-image-cropper/FileUploaderWithImageCropper'
+import { Button, FormCheckbox, FormTextField, Icon } from '@/components/ui'
+import { CroppedImageData } from '@/components/ui/image-cropper'
 
 import s from './CreateDeckForm.module.scss'
 
@@ -15,9 +16,7 @@ type Props = {
 }
 
 export const CreateDeckForm = ({ isLoading, onSubmit, setOpen, submitText }: Props) => {
-  const [imgSrc, setImgSrc] = useState('')
-  const [croppedImageData, setCroppedImageData] = useState<ImagePreviewData>(null)
-  const [modalOpen, setModalOpen] = useState(false)
+  const [croppedImageData, setCroppedImageData] = useState<CroppedImageData>(null)
   const { control, errors, handleSubmit, onHandleSubmit } = useCreateDeckForm(
     onSubmit,
     croppedImageData?.blob
@@ -26,23 +25,18 @@ export const CreateDeckForm = ({ isLoading, onSubmit, setOpen, submitText }: Pro
   const handleCancelClick = () => {
     setOpen?.(false)
   }
-  const handleSetImageUrl = (dataUrl: string) => {
-    setImgSrc(dataUrl)
-    setModalOpen(true)
-  }
 
   return (
     <form onSubmit={handleSubmit(onHandleSubmit)}>
-      <ImageCropper
-        imgSrc={imgSrc}
-        open={modalOpen}
+      <FileUploaderWithImageCropper
+        croppedImageData={croppedImageData}
         setCroppedImageData={setCroppedImageData}
-        setOpenModal={setModalOpen}
+        trigger={
+          <>
+            <Icon name={'common/edit'} /> {croppedImageData?.url ? 'Change image' : 'Upload image'}
+          </>
+        }
       />
-      {croppedImageData && (
-        <img alt={'Upload'} src={croppedImageData.url} style={{ maxWidth: '100%' }} />
-      )}
-      <FileUploader setImageUrl={handleSetImageUrl} text={'Upload file'} />
       <FormTextField
         className={s.formItem}
         control={control}
