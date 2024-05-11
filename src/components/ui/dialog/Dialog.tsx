@@ -34,7 +34,7 @@ export const Dialog = ({
   return (
     <>
       <Modal modal={modal} onOpenChange={onOpenChange} open={open} title={title} trigger={trigger}>
-        <div className={s.content}>{children}</div>
+        {children}
         <div className={s.buttons}>
           <Button onClick={handleCancelClick} variant={'secondary'}>
             Cancel
