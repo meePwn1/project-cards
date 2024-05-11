@@ -4,7 +4,7 @@ import { toast } from 'react-toastify'
 
 import s from './FileUploaderWithImageCropper.module.scss'
 
-import { Dialog } from '../ui'
+import { Button, Dialog } from '../ui'
 import { CroppedImageData } from '../ui/image-cropper'
 import { centerAspectCrop } from '../ui/image-cropper/lib/centerAspectCrop'
 import { getImagePreviewData } from '../ui/image-cropper/lib/get-image-preview-data'
@@ -50,8 +50,8 @@ export const FileUploaderWithImageCropper = ({
     }
   }
   const handleImageLoad = (e: SyntheticEvent<HTMLImageElement>) => {
-    const width = e.currentTarget.naturalWidth
-    const height = e.currentTarget.naturalHeight
+    const width = e.currentTarget.width
+    const height = e.currentTarget.height
 
     setCrop(centerAspectCrop(width, height, ASPECT_RATIO))
   }
@@ -93,9 +93,9 @@ export const FileUploaderWithImageCropper = ({
           style={{ maxWidth: '100%', objectFit: 'cover', width: '100%' }}
         />
       )}
-      <button onClick={() => inputRef.current?.click()} type={'button'}>
+      <Button fullWidth onClick={() => inputRef.current?.click()} type={'button'} variant={'icon'}>
         {trigger || 'trigger'}
-      </button>
+      </Button>
       <input
         accept={'image/*,.png,.jpg,.jpeg,.webp'}
         hidden
