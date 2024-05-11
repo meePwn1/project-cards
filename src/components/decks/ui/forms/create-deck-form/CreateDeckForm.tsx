@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { Button, FileUploader, FormCheckbox, FormTextField } from '@/components/ui'
-import { ImageCropper, ImagePreviewData } from '@/components/ui/image-cropper'
+import { CroppedImageData, ImageCropper } from '@/components/ui/image-cropper'
 
 import s from './CreateDeckForm.module.scss'
 
@@ -16,7 +16,7 @@ type Props = {
 
 export const CreateDeckForm = ({ isLoading, onSubmit, setOpen, submitText }: Props) => {
   const [imgSrc, setImgSrc] = useState('')
-  const [croppedImageData, setCroppedImageData] = useState<ImagePreviewData>(null)
+  const [croppedImageData, setCroppedImageData] = useState<CroppedImageData>(null)
   const [modalOpen, setModalOpen] = useState(false)
   const { control, errors, handleSubmit, onHandleSubmit } = useCreateDeckForm(
     onSubmit,
