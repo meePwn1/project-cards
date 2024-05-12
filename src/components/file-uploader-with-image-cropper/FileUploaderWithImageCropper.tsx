@@ -1,10 +1,10 @@
-import { ChangeEvent, ReactNode, SyntheticEvent, useRef, useState } from 'react'
-import ReactCrop, { Crop, PixelCrop } from 'react-image-crop'
+import { ChangeEvent, ReactElement, SyntheticEvent, cloneElement, useRef, useState } from 'react'
+import ReactCrop, { Crop, ReactCropProps, convertToPixelCrop } from 'react-image-crop'
 import { toast } from 'react-toastify'
 
 import s from './FileUploaderWithImageCropper.module.scss'
 
-import { Button, Dialog } from '../ui'
+import { Dialog } from '../ui'
 import { CroppedImageData } from '../ui/image-cropper'
 import { centerAspectCrop } from '../ui/image-cropper/lib/centerAspectCrop'
 import { getImagePreviewData } from '../ui/image-cropper/lib/get-image-preview-data'
@@ -12,28 +12,28 @@ import { getImagePreviewData } from '../ui/image-cropper/lib/get-image-preview-d
 type Props = {
   croppedImageData?: CroppedImageData
   setCroppedImageData?: (data: CroppedImageData) => void
-  trigger?: ReactNode
-}
-
-const ASPECT_RATIO = 16 / 9
+  trigger: ReactElement
+} & Pick<ReactCropProps, 'circularCrop' | 'ruleOfThirds'>
 
 export const FileUploaderWithImageCropper = ({
   croppedImageData,
   setCroppedImageData,
   trigger,
+  ...rest
 }: Props) => {
   const [imgSrc, setImgSrc] = useState('')
   const [crop, setCrop] = useState<Crop>()
-  const [completedCrop, setCompletedCrop] = useState<PixelCrop>()
   const [modalOpen, setModalOpen] = useState(false)
   const [croppedImage, setCroppedImage] = useState<CroppedImageData>(() => croppedImageData || null)
   const inputRef = useRef<HTMLInputElement | null>(null)
   const imgRef = useRef<HTMLImageElement | null>(null)
+  const ASPECT_RATIO = rest.circularCrop ? 1 : 16 / 9
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
 
     e.target.value = ''
+    setCrop(undefined)
     setImgSrc('')
     if (file && file.size <= 5 * 1024 * 1024) {
       const reader = new FileReader()
@@ -56,8 +56,9 @@ export const FileUploaderWithImageCropper = ({
     setCrop(centerAspectCrop(width, height, ASPECT_RATIO))
   }
   const handleCropSubmit = async () => {
-    if (imgRef.current && completedCrop) {
-      const data = await getImagePreviewData(imgRef.current, completedCrop)
+    if (imgRef.current && crop) {
+      const pixelCrop = convertToPixelCrop(crop, imgRef.current.width, imgRef.current.height)
+      const data = await getImagePreviewData(imgRef.current, pixelCrop)
 
       setCroppedImageData?.(data) || setCroppedImage(data)
       setModalOpen(false)
@@ -66,36 +67,36 @@ export const FileUploaderWithImageCropper = ({
 
   return (
     <>
-      <Dialog onConfirm={handleCropSubmit} onOpenChange={setModalOpen} open={modalOpen}>
+      <Dialog
+        buttonText={'Crop'}
+        onConfirm={handleCropSubmit}
+        onOpenChange={setModalOpen}
+        open={modalOpen}
+      >
         <div className={s.cropperWrapper}>
           <ReactCrop
             aspect={ASPECT_RATIO}
             crop={crop}
-            keepSelection
             minHeight={110}
             onChange={(_, percentageCrop) => setCrop(percentageCrop)}
-            onComplete={c => setCompletedCrop(c)}
+            {...rest}
           >
             <img
               alt={'Upload'}
               onLoad={handleImageLoad}
               ref={imgRef}
               src={imgSrc}
-              style={{ maxHeight: '65svh', objectFit: 'cover' }}
+              style={{ objectFit: 'cover' }}
             />
           </ReactCrop>
         </div>
       </Dialog>
       {croppedImage?.url && (
-        <img
-          alt={'cropped image'}
-          src={croppedImage?.url}
-          style={{ maxWidth: '100%', objectFit: 'cover', width: '100%' }}
-        />
+        <img alt={'cropped image'} className={s.croppedImage} src={croppedImage?.url} />
       )}
-      <Button fullWidth onClick={() => inputRef.current?.click()} type={'button'} variant={'icon'}>
-        {trigger || 'trigger'}
-      </Button>
+      {cloneElement(trigger, {
+        onClick: () => inputRef.current?.click(),
+      })}
       <input
         accept={'image/*,.png,.jpg,.jpeg,.webp'}
         hidden
