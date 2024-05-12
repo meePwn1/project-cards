@@ -6,7 +6,7 @@ import s from './Button.module.scss'
 
 import { Spinner } from '../spinner'
 
-type Props<T extends ElementType = 'button'> = {
+export type ButtonProps<T extends ElementType = 'button'> = {
   as?: T
   children?: ReactNode
   className?: string
@@ -15,7 +15,7 @@ type Props<T extends ElementType = 'button'> = {
   variant?: 'icon' | 'primary' | 'secondary'
 } & ComponentPropsWithoutRef<T>
 
-export const Button = <T extends ElementType = 'button'>(props: Props<T>) => {
+export const Button = <T extends ElementType = 'button'>(props: ButtonProps<T>) => {
   const {
     as: Component = 'button',
     children,
