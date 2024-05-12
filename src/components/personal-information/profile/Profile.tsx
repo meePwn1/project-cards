@@ -27,7 +27,7 @@ export const Profile = () => {
         Personal Information
       </Typography>
       <ProfileAvatar editable>
-        <FileUploader name={'file'} setFile={handleUpdateUserAvatar} variant={'icon'} />
+        <FileUploader setFile={handleUpdateUserAvatar} variant={'icon'} />
       </ProfileAvatar>
       {isEditMode ? (
         <ProfileInfoEdit onEditModeDeactivate={setIsEditMode} />

@@ -1,43 +1,40 @@
 import { useState } from 'react'
 import { toast } from 'react-toastify'
 
-import { Button, Dialog, Icon } from '@/components/ui'
+import { Button, Icon } from '@/components/ui'
 import { useDeleteDeckMutation } from '@/services/decks'
 
+import { DeleteDeckModal } from '../modals/delete-deck-modal'
+
 type Props = {
-  deckName?: string
+  deckName: string
   id?: string
 }
 export const DeleteDeck = ({ deckName, id }: Props) => {
   const [open, setOpen] = useState(false)
   const [deleteDeck, { isLoading }] = useDeleteDeckMutation()
 
-  const handleOpenDialog = () => {
-    setOpen(true)
-  }
-
   const handleDeleteDeck = () => {
     deleteDeck({ id: id ?? '' })
       .unwrap()
       .then(() => {
-        setOpen(false)
+        setOpen?.(false)
         toast.success(`${deckName} deleted successfully`)
       })
+  }
+  const handleOpenDialog = () => {
+    setOpen(true)
   }
 
   return (
     <>
-      <Dialog
-        buttonText={'Delete deck'}
+      <DeleteDeckModal
+        deckName={deckName}
         isLoading={isLoading}
         onConfirm={handleDeleteDeck}
-        onOpenChange={setOpen}
         open={open}
-        title={'Delete deck'}
-      >
-        Do you really want to remove <b>{deckName}</b>? <br />
-        All cards will be deleted.
-      </Dialog>
+        setOpen={setOpen}
+      />
       <Button onClick={handleOpenDialog} variant={'icon'}>
         <Icon name={'common/trash'} size={20} />
       </Button>
