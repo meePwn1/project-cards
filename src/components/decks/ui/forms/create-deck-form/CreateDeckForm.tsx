@@ -32,9 +32,9 @@ export const CreateDeckForm = ({ isLoading, onSubmit, setOpen, submitText }: Pro
         croppedImageData={croppedImageData}
         setCroppedImageData={setCroppedImageData}
         trigger={
-          <>
+          <Button fullWidth type={'button'} variant={'secondary'}>
             <Icon name={'common/edit'} /> {croppedImageData?.url ? 'Change image' : 'Upload image'}
-          </>
+          </Button>
         }
       />
       <FormTextField
