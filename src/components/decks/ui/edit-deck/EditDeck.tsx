@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { toast } from 'react-toastify'
 
-import { Button, Icon, Modal } from '@/components/ui'
+import { Button, Icon } from '@/components/ui'
 import { useUpdateDeckMutation } from '@/services/decks'
 
-import { CreateDeckForm } from '../forms/create-deck-form'
+import { EditDeckModal } from '../modals/edit-deck-modal'
 
 type Props = { id?: string }
 
@@ -23,14 +23,7 @@ export const EditDeck = ({ id }: Props) => {
 
   return (
     <>
-      <Modal onOpenChange={setOpen} open={open} title={'Edit deck'}>
-        <CreateDeckForm
-          isLoading={isLoading}
-          onSubmit={handleSubmit}
-          setOpen={setOpen}
-          submitText={'Update deck'}
-        />
-      </Modal>
+      <EditDeckModal isLoading={isLoading} onSubmit={handleSubmit} open={open} setOpen={setOpen} />
       <Button onClick={() => setOpen(true)} variant={'icon'}>
         <Icon name={'common/edit'} size={20} />
       </Button>

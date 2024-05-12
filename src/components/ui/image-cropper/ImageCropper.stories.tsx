@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 
 import { FileUploader } from '..'
-import { ImageCropper, ImagePreviewData } from './ImageCropper'
+import { CroppedImageData, ImageCropper } from './ImageCropper'
 
 const meta: Meta<typeof ImageCropper> = {
   component: ImageCropper,
@@ -18,7 +18,7 @@ export const Default: Story = {
   render: () => {
     const [open, setOpen] = useState(false)
     const [imgSrc, setImgSrc] = useState<string>('')
-    const [previewImageData, setPreviewImageData] = useState<ImagePreviewData>(null)
+    const [previewImageData, setPreviewImageData] = useState<CroppedImageData>(null)
 
     const handleSetImageUrl = (dataUrl: string) => {
       setImgSrc(dataUrl)

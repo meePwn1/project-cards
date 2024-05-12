@@ -5,7 +5,7 @@ import { Dialog } from '..'
 import { centerAspectCrop } from './lib/centerAspectCrop'
 import { getImagePreviewData } from './lib/get-image-preview-data'
 
-export type ImagePreviewData = {
+export type CroppedImageData = {
   blob: Blob | null
   url: string
 } | null
@@ -13,7 +13,7 @@ export type ImagePreviewData = {
 type Props = {
   imgSrc?: string
   open?: boolean
-  setCroppedImageData?: (data: ImagePreviewData) => void
+  setCroppedImageData?: (data: CroppedImageData) => void
   setOpenModal?: (value: boolean) => void
 } & Pick<ReactCropProps, 'circularCrop' | 'ruleOfThirds'>
 const ASPECT_RATIO = 16 / 9

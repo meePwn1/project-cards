@@ -1,7 +1,8 @@
 import { useState } from 'react'
 
-import { FileUploaderWithPreview } from '@/components/file-uploader-with-preview'
-import { Button, FormCheckbox, FormTextField } from '@/components/ui'
+import { FileUploaderWithImageCropper } from '@/components/file-uploader-with-image-cropper/FileUploaderWithImageCropper'
+import { Button, FormCheckbox, FormTextField, Icon } from '@/components/ui'
+import { CroppedImageData } from '@/components/ui/image-cropper'
 
 import s from './CreateDeckForm.module.scss'
 
@@ -9,23 +10,33 @@ import { useCreateDeckForm } from './lib/use-form'
 
 type Props = {
   isLoading?: boolean
-  onSubmit: (data: FormData) => void
-  setOpen(value: boolean): void
+  onSubmit?: (data: FormData) => void
+  setOpen?: (value: boolean) => void
   submitText?: string
 }
 
 export const CreateDeckForm = ({ isLoading, onSubmit, setOpen, submitText }: Props) => {
-  const [img, setImg] = useState<File | null>(null)
-  const { control, errors, handleSubmit, onHandleSubmit } = useCreateDeckForm(onSubmit, img)
+  const [croppedImageData, setCroppedImageData] = useState<CroppedImageData>(null)
+  const { control, errors, handleSubmit, onHandleSubmit } = useCreateDeckForm(
+    onSubmit,
+    croppedImageData?.blob
+  )
 
   const handleCancelClick = () => {
-    setImg(null)
-    setOpen(false)
+    setOpen?.(false)
   }
 
   return (
     <form onSubmit={handleSubmit(onHandleSubmit)}>
-      <FileUploaderWithPreview img={img} setImg={setImg} />
+      <FileUploaderWithImageCropper
+        croppedImageData={croppedImageData}
+        setCroppedImageData={setCroppedImageData}
+        trigger={
+          <Button fullWidth type={'button'} variant={'secondary'}>
+            <Icon name={'common/edit'} /> {croppedImageData?.url ? 'Change image' : 'Upload image'}
+          </Button>
+        }
+      />
       <FormTextField
         className={s.formItem}
         control={control}

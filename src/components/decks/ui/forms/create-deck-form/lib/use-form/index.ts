@@ -10,7 +10,7 @@ const schema = z.object({
 
 type formValues = z.infer<typeof schema>
 
-export const useCreateDeckForm = (onSubmit: (data: FormData) => void, img: File | null) => {
+export const useCreateDeckForm = (onSubmit?: (data: FormData) => void, img?: Blob | null) => {
   const {
     control,
     formState: { errors },
@@ -31,7 +31,7 @@ export const useCreateDeckForm = (onSubmit: (data: FormData) => void, img: File 
     form.append('cover', img ?? '')
     form.append('isPrivate', `${data.isPrivate}`)
     form.append('name', data.name)
-    onSubmit(form)
+    onSubmit?.(form)
   }
 
   return { control, errors, handleSubmit, onHandleSubmit, reset }
