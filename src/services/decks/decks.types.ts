@@ -16,7 +16,7 @@ export type Deck = {
   updated: string
   userId: string
 }
-export type DeckByIdResponse = Omit<Deck, 'author'>
+export type DeckById = Omit<Deck, 'author'>
 export type Pagination = {
   currentPage: number
   itemsPerPage: number

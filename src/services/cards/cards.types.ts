@@ -7,6 +7,7 @@ export type Card = {
   /** @format date-time */
   created: string
   deckId: string
+  grade: number
   id: string
   question: string
   questionImg: string

@@ -1,4 +1,4 @@
-import { Deck, DeckByIdResponse, DecksParams, DecksResponse, MinMaxCards } from '.'
+import { Deck, DeckById, DecksParams, DecksResponse, MinMaxCards } from '.'
 import { baseApi } from '..'
 
 const decksService = baseApi.injectEndpoints({
@@ -19,7 +19,7 @@ const decksService = baseApi.injectEndpoints({
           url: `/v1/decks/${id}`,
         }),
       }),
-      getDeckById: build.query<DeckByIdResponse, { id: string }>({
+      getDeckById: build.query<DeckById, { id: string }>({
         providesTags: ['Decks'],
         query: ({ id }) => {
           return {
