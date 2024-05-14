@@ -15,9 +15,10 @@ type Props = {
   open?: boolean
   title?: string
   trigger?: ReactNode
+  variant?: 'cover' | 'default'
 }
 export const Modal = (props: Props) => {
-  const { children, modal = true, onOpenChange, open, title, trigger } = props
+  const { children, modal = true, onOpenChange, open, title, trigger, variant = 'default' } = props
 
   return (
     <Dialog.Root modal={modal} onOpenChange={onOpenChange} open={open}>
@@ -25,17 +26,23 @@ export const Modal = (props: Props) => {
       <Dialog.Portal>
         <Dialog.Overlay className={s.dialogOverlay} />
         <div className={s.wrapper}>
-          <Dialog.Content className={s.dialogContent} forceMount>
-            <div className={s.header}>
-              <Typography variant={'h3'}>{title}</Typography>
-              <Dialog.Close className={s.closeButton}>
-                <Icon className={s.closeIcon} name={'common/close'} />
-              </Dialog.Close>
-            </div>
-            <ScrollArea className={s.scrollArea} mh={575}>
-              <div className={s.content}>{children}</div>
-            </ScrollArea>
-          </Dialog.Content>
+          {variant === 'default' ? (
+            <Dialog.Content className={s.dialogContent} forceMount>
+              <div className={s.header}>
+                <Typography variant={'h3'}>{title}</Typography>
+                <Dialog.Close>
+                  <Icon className={s.closeIcon} name={'common/close'} />
+                </Dialog.Close>
+              </div>
+              <ScrollArea className={s.scrollArea} mh={575}>
+                <div className={s.content}>{children}</div>
+              </ScrollArea>
+            </Dialog.Content>
+          ) : (
+            <Dialog.Content className={s.imagePreview} forceMount>
+              <ScrollArea mh={'90vh'}>{children}</ScrollArea>
+            </Dialog.Content>
+          )}
         </div>
       </Dialog.Portal>
     </Dialog.Root>

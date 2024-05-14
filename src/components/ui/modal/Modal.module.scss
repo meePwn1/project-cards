@@ -78,6 +78,11 @@
   line-height: var(--line-height-m);
 }
 
+.closeButton {
+  display: block;
+  margin-left: auto;
+}
+
 .closeIcon {
   transition: color 0.3s ease 0s;
 
