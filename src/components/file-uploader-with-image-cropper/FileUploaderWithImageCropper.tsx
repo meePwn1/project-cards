@@ -10,12 +10,14 @@ import { centerAspectCrop } from '../ui/image-cropper/lib/centerAspectCrop'
 import { getImagePreviewData } from '../ui/image-cropper/lib/get-image-preview-data'
 
 type Props = {
+  className?: string
   croppedImageData?: CroppedImageData
   setCroppedImageData?: (data: CroppedImageData) => void
   trigger: ReactElement
 } & Pick<ReactCropProps, 'circularCrop' | 'ruleOfThirds'>
 
 export const FileUploaderWithImageCropper = ({
+  className,
   croppedImageData,
   setCroppedImageData,
   trigger,
@@ -81,13 +83,15 @@ export const FileUploaderWithImageCropper = ({
             onChange={(_, percentageCrop) => setCrop(percentageCrop)}
             {...rest}
           >
-            <img
-              alt={'Upload'}
-              onLoad={handleImageLoad}
-              ref={imgRef}
-              src={imgSrc}
-              style={{ objectFit: 'cover' }}
-            />
+            {imgSrc && (
+              <img
+                alt={'Upload'}
+                onLoad={handleImageLoad}
+                ref={imgRef}
+                src={imgSrc}
+                style={{ objectFit: 'cover' }}
+              />
+            )}
           </ReactCrop>
         </div>
       </Dialog>
@@ -95,6 +99,7 @@ export const FileUploaderWithImageCropper = ({
         <img alt={'cropped image'} className={s.croppedImage} src={croppedImage?.url} />
       )}
       {cloneElement(trigger, {
+        className,
         onClick: () => inputRef.current?.click(),
       })}
       <input
