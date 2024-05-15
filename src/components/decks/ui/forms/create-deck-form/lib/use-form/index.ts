@@ -8,31 +8,38 @@ const schema = z.object({
   name: z.string().min(3).max(30),
 })
 
-type formValues = z.infer<typeof schema>
+type FormValues = z.infer<typeof schema>
 
-export const useCreateDeckForm = (onSubmit?: (data: FormData) => void, img?: Blob | null) => {
+export const useCreateDeckForm = (
+  onSubmit?: (data: FormData) => void,
+  img?: Blob | null,
+  defaultValues?: FormValues
+) => {
   const {
     control,
     formState: { errors },
     handleSubmit,
     reset,
-  } = useForm<formValues>({
-    defaultValues: {
-      isPrivate: false,
-      name: '',
-    },
+    watch,
+  } = useForm<FormValues>({
+    defaultValues,
     mode: 'onBlur',
     resolver: zodResolver(schema),
   })
 
-  const onHandleSubmit = (data: formValues) => {
+  const isDisabled =
+    watch('isPrivate') === defaultValues?.isPrivate &&
+    watch('name') === defaultValues?.name &&
+    img === null
+
+  const onHandleSubmit = (data: FormValues) => {
     const form = new FormData()
 
-    form.append('cover', img ?? '')
+    img && form.append('cover', img ?? '')
     form.append('isPrivate', `${data.isPrivate}`)
     form.append('name', data.name)
     onSubmit?.(form)
   }
 
-  return { control, errors, handleSubmit, onHandleSubmit, reset }
+  return { control, errors, handleSubmit, isDisabled, onHandleSubmit, reset }
 }

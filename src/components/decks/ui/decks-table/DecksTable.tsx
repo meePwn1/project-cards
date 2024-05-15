@@ -59,7 +59,7 @@ export const DecksTable = ({ decks, isLoading, onSort, sort, userID }: Props) =>
 
                     {isMyDeck && (
                       <>
-                        <EditDeck id={item.id} />
+                        <EditDeck deck={item} />
                         <DeleteDeck deckName={item.name} id={item.id} />
                       </>
                     )}

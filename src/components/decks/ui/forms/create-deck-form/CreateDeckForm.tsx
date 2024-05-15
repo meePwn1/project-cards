@@ -3,23 +3,36 @@ import { useState } from 'react'
 import { FileUploaderWithImageCropper } from '@/components/file-uploader-with-image-cropper/FileUploaderWithImageCropper'
 import { Button, FormCheckbox, FormTextField, Icon } from '@/components/ui'
 import { CroppedImageData } from '@/components/ui/image-cropper'
+import { DeckById } from '@/services/decks'
 
 import s from './CreateDeckForm.module.scss'
 
 import { useCreateDeckForm } from './lib/use-form'
 
 type Props = {
+  deck?: DeckById
   isLoading?: boolean
   onSubmit?: (data: FormData) => void
   setOpen?: (value: boolean) => void
   submitText?: string
 }
 
-export const CreateDeckForm = ({ isLoading, onSubmit, setOpen, submitText }: Props) => {
-  const [croppedImageData, setCroppedImageData] = useState<CroppedImageData>(null)
-  const { control, errors, handleSubmit, onHandleSubmit } = useCreateDeckForm(
+export const CreateDeckForm = ({ deck, isLoading, onSubmit, setOpen, submitText }: Props) => {
+  const [croppedImageData, setCroppedImageData] = useState<CroppedImageData>(() =>
+    deck?.cover
+      ? {
+          blob: null,
+          url: deck?.cover,
+        }
+      : null
+  )
+  const { control, errors, handleSubmit, isDisabled, onHandleSubmit } = useCreateDeckForm(
     onSubmit,
-    croppedImageData?.blob
+    croppedImageData?.blob,
+    {
+      isPrivate: deck?.isPrivate ?? false,
+      name: deck?.name ?? '',
+    }
   )
 
   const handleCancelClick = () => {
@@ -49,7 +62,7 @@ export const CreateDeckForm = ({ isLoading, onSubmit, setOpen, submitText }: Pro
         <Button onClick={handleCancelClick} type={'button'} variant={'secondary'}>
           Cancel
         </Button>
-        <Button isLoading={isLoading} type={'submit'}>
+        <Button disabled={isDisabled} isLoading={isLoading} type={'submit'}>
           {submitText ?? 'Send'}
         </Button>
       </div>
