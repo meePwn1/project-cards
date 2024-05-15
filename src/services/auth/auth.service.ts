@@ -1,10 +1,14 @@
+import { onQueryStartedErrorToast } from '@/common/utils/onQueryStartedError'
+
 import { LoginArgs, RecoverPasswordArgs, SignUnArgs, User } from '.'
 import { baseApi } from './../base-api'
+
 export const authService = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
       login: builder.mutation<void, LoginArgs>({
         invalidatesTags: ['Me'],
+        onQueryStarted: onQueryStartedErrorToast,
         query: args => ({
           body: args,
           method: 'POST',
@@ -13,12 +17,14 @@ export const authService = baseApi.injectEndpoints({
       }),
       logout: builder.mutation<void, void>({
         invalidatesTags: ['Me'],
+        onQueryStarted: onQueryStartedErrorToast,
         query: () => ({
           method: 'POST',
           url: '/v1/auth/logout',
         }),
       }),
       me: builder.query<User, void>({
+        onQueryStarted: onQueryStartedErrorToast,
         providesTags: ['Me'],
         query: () => ({
           method: 'GET',
@@ -27,6 +33,8 @@ export const authService = baseApi.injectEndpoints({
       }),
       recoverPassword: builder.mutation<any, RecoverPasswordArgs>({
         invalidatesTags: ['Me'],
+        onQueryStarted: onQueryStartedErrorToast,
+
         query: args => ({
           body: args,
           method: 'POST',
@@ -35,6 +43,7 @@ export const authService = baseApi.injectEndpoints({
       }),
       singUp: builder.mutation<User, SignUnArgs>({
         invalidatesTags: ['Me'],
+        onQueryStarted: onQueryStartedErrorToast,
         query: args => ({
           body: args,
           method: 'POST',
@@ -43,6 +52,7 @@ export const authService = baseApi.injectEndpoints({
       }),
       updateUserData: builder.mutation<User, FormData>({
         invalidatesTags: ['Me'],
+        onQueryStarted: onQueryStartedErrorToast,
         query: args => ({
           body: args,
           method: 'PATCH',
