@@ -8,27 +8,12 @@
   margin-bottom: 24px;
 }
 
+.search {
+  margin-bottom: 24px;
+}
+
 .deckInfo {
   display: inline-flex;
   gap: 5px;
   align-items: center;
-}
-
-.dropdown {
-  padding: 12px;
-}
-
-.cover {
-  display: inline-block;
-  margin-bottom: 24px;
-
-  img {
-    max-width: 100%;
-    max-height: 200px;
-    object-fit: cover;
-  }
-}
-
-.search {
-  margin-bottom: 24px;
 }
