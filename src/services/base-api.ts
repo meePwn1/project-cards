@@ -4,6 +4,7 @@ import { baseQueryWithReauth } from './base-query-with-reauth'
 
 export const baseApi = createApi({
   baseQuery: baseQueryWithReauth,
+
   endpoints: () => {
     return {}
   },

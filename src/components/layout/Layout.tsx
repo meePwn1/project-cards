@@ -4,18 +4,6 @@ import { ToastContainer } from 'react-toastify'
 import { Header } from '../header'
 
 export const Layout = () => {
-  // const { isError } = useMeQuery()
-
-  // const pathname = window.location.pathname
-
-  // refactoring
-  // if (!isError) {
-  //   if (pathname !== ROUTES.profile) {
-  //     return <Navigate to={ROUTES.home} />
-  //     // router.navigate(ROUTES.home)
-  //   }
-  // }
-
   return (
     <>
       <Header />
