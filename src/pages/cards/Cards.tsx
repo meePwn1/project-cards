@@ -37,10 +37,11 @@ export const Cards = () => {
   return (
     <Page pt={24}>
       <BackToPage className={s.back} />
+      {window.innerWidth < 768 && <div>asds</div>}
       <div className={s.pageHeader}>
         <div className={s.deckInfo}>
           <Typography variant={'h1'}>{deck?.name}</Typography>
-          <CardsMoreDropdown deck={deck} isMyDeck={isMyDeck} />
+          {isMyDeck && <CardsMoreDropdown deck={deck} />}
         </div>
         {!isEmptyDeck &&
           (isMyDeck ? (

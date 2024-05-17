@@ -11,10 +11,9 @@ import s from './CardsMoreDropdown.module.scss'
 
 type Props = {
   deck?: DeckById
-  isMyDeck?: boolean
 }
 
-export const CardsMoreDropdown = ({ deck, isMyDeck }: Props) => {
+export const CardsMoreDropdown = ({ deck }: Props) => {
   const [openDeleteDeckModal, setOpenDeleteDeckModal] = useState(false)
   const [openEditDeckModal, setOpenEditDeckModal] = useState(false)
   const [deleteDeck, { isLoading: isDeleteDeckLoading }] = useDeleteDeckMutation()
@@ -60,38 +59,34 @@ export const CardsMoreDropdown = ({ deck, isMyDeck }: Props) => {
         open={openDeleteDeckModal}
         setOpen={setOpenDeleteDeckModal}
       />
-      {deck && (
-        <EditDeckModal
-          deck={deck}
-          isLoading={isEditDeckLoading}
-          onSubmit={handleEditDeck}
-          open={openEditDeckModal}
-          setOpen={setOpenEditDeckModal}
-        />
-      )}
 
-      {isMyDeck && (
-        <DropdownMenu className={s.dropdown} trigger={<Icon name={'common/more'} />}>
-          <DropdownMenuItemWithIcon
-            icon={<Icon name={'common/play'} size={16} />}
-            onSelect={handleLearnCards}
-          >
-            <Typography variant={'caption'}>Learn</Typography>
-          </DropdownMenuItemWithIcon>
-          <DropdownMenuItemWithIcon
-            icon={<Icon name={'common/edit'} size={16} />}
-            onSelect={handleOpenEditDeckModal}
-          >
-            <Typography variant={'caption'}>Edit</Typography>
-          </DropdownMenuItemWithIcon>
-          <DropdownMenuItemWithIcon
-            icon={<Icon name={'common/trash'} size={16} />}
-            onSelect={handleOpenDeleteDeckModal}
-          >
-            <Typography variant={'caption'}>Delete</Typography>
-          </DropdownMenuItemWithIcon>
-        </DropdownMenu>
-      )}
+      <EditDeckModal
+        deck={deck}
+        isLoading={isEditDeckLoading}
+        onSubmit={handleEditDeck}
+        open={openEditDeckModal}
+        setOpen={setOpenEditDeckModal}
+      />
+      <DropdownMenu className={s.dropdown} trigger={<Icon name={'common/more'} />}>
+        <DropdownMenuItemWithIcon
+          icon={<Icon name={'common/play'} size={16} />}
+          onSelect={handleLearnCards}
+        >
+          <Typography variant={'caption'}>Learn</Typography>
+        </DropdownMenuItemWithIcon>
+        <DropdownMenuItemWithIcon
+          icon={<Icon name={'common/edit'} size={16} />}
+          onSelect={handleOpenEditDeckModal}
+        >
+          <Typography variant={'caption'}>Edit</Typography>
+        </DropdownMenuItemWithIcon>
+        <DropdownMenuItemWithIcon
+          icon={<Icon name={'common/trash'} size={16} />}
+          onSelect={handleOpenDeleteDeckModal}
+        >
+          <Typography variant={'caption'}>Delete</Typography>
+        </DropdownMenuItemWithIcon>
+      </DropdownMenu>
     </>
   )
 }
