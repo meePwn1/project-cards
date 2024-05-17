@@ -1,3 +1,45 @@
+.tableContainer {
+  table {
+    min-width: 767px;
+  }
+
+  @media (max-width: $mobile) {
+    padding-bottom: 30px;
+  }
+}
+
+.table {
+  th {
+    &:nth-child(5) {
+      width: 100px;
+    }
+  }
+
+  td {
+    word-break: break-all;
+  }
+}
+
 .rating {
+  display: flex;
+  gap: 5px;
   white-space: nowrap;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.tableCell {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+
+  img {
+    flex: 0 0 100px;
+    max-height: 52px;
+  }
 }
