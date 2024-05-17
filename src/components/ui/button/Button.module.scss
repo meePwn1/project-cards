@@ -76,13 +76,19 @@
     left: 50%;
     transform: translate(-50%, -50%) scale(0);
 
-    width: 25px;
-    height: 25px;
+    width: 150%;
+    height: 150%;
 
-    background-color: var(--color-dark-100);
+    background-color: var(--color-dark-300);
     border-radius: 50%;
 
-    transition: transform 0.3s ease 0s;
+    transition:
+      transform 0.3s ease,
+      background-color 0.3s ease;
+  }
+
+  &:active::before {
+    background-color: var(--color-dark-100);
   }
 
   svg {
