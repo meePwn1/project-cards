@@ -1,10 +1,13 @@
 import { SORT_BY } from '@/common/constants'
 import { TableColumn } from '@/common/types'
-import { Button, Icon, Rating, Table } from '@/components/ui'
+import { Rating, Table } from '@/components/ui'
 import { TableHeader } from '@/components/ui/table-header'
 import { CardsResponse } from '@/services'
 
 import s from './CardsTable.module.scss'
+
+import { DeleteCard } from '../delete-card'
+import { EditCard } from '../edit-card'
 
 const columnsWithActions: TableColumn[] = [
   {
@@ -63,34 +66,42 @@ type Props = {
 }
 export const CardsTable = ({ cards, isMyDeck }: Props) => {
   return (
-    <Table.Root className={s.table}>
-      <TableHeader columns={columnsWithoutActions} />
-      <Table.Body>
-        {cards?.map(item => {
-          return (
-            <Table.Row key={item.id}>
-              <Table.Cell>{item.question}</Table.Cell>
-              <Table.Cell>{item.answer}</Table.Cell>
-              <Table.Cell>{new Date(item.updated).toLocaleDateString()}</Table.Cell>
-              <Table.Cell>
-                <Rating className={s.rating} readonly value={item.grade} />
-              </Table.Cell>
-              {isMyDeck && (
+    <div className={s.tableContainer}>
+      <Table.Root className={s.table}>
+        <TableHeader columns={isMyDeck ? columnsWithActions : columnsWithoutActions} />
+        <Table.Body>
+          {cards?.map(item => {
+            return (
+              <Table.Row key={item.id}>
                 <Table.Cell>
-                  <div className={s.actions}>
-                    <Button type={'button'} variant={'icon'}>
-                      <Icon name={'common/edit'} size={20} />
-                    </Button>
-                    <Button variant={'icon'}>
-                      <Icon name={'common/trash'} size={20} />
-                    </Button>
+                  <div className={s.tableCell}>
+                    {item.questionImg && <img alt={'question image'} src={item.questionImg} />}
+                    {item.question}
                   </div>
                 </Table.Cell>
-              )}
-            </Table.Row>
-          )
-        })}
-      </Table.Body>
-    </Table.Root>
+                <Table.Cell>
+                  <div className={s.tableCell}>
+                    {item.answerImg && <img alt={'question image'} src={item.answerImg} />}
+                    {item.answer}
+                  </div>
+                </Table.Cell>
+                <Table.Cell>{new Date(item.updated).toLocaleDateString()}</Table.Cell>
+                <Table.Cell>
+                  <Rating className={s.rating} readonly value={item.grade} />
+                </Table.Cell>
+                {isMyDeck && (
+                  <Table.Cell>
+                    <div className={s.actions}>
+                      <EditCard card={item} />
+                      <DeleteCard cardId={item.id} />
+                    </div>
+                  </Table.Cell>
+                )}
+              </Table.Row>
+            )
+          })}
+        </Table.Body>
+      </Table.Root>
+    </div>
   )
 }

@@ -28,7 +28,7 @@ export const CreateDeckForm = ({ deck, isLoading, onSubmit, setOpen, submitText 
   )
   const { control, errors, handleSubmit, isDisabled, onHandleSubmit } = useCreateDeckForm(
     onSubmit,
-    croppedImageData?.blob,
+    croppedImageData?.blob || null,
     {
       isPrivate: deck?.isPrivate ?? false,
       name: deck?.name ?? '',

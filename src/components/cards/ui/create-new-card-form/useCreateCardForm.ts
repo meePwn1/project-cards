@@ -1,18 +1,17 @@
 import { useForm } from 'react-hook-form'
 
+import { formSchema } from '@/common/schemas'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
-const schema = z.object({
-  isPrivate: z.boolean(),
-  name: z.string().min(3).max(30),
-})
+const schema = formSchema.pick({ answer: true, question: true })
 
 type FormValues = z.infer<typeof schema>
 
-export const useCreateDeckForm = (
+export const useCreateCardForm = (
   onSubmit?: (data: FormData) => void,
-  img?: Blob | null,
+  questionImg?: Blob | null,
+  answerImg?: Blob | null,
   defaultValues?: FormValues
 ) => {
   const {
@@ -27,16 +26,18 @@ export const useCreateDeckForm = (
   })
 
   const isDisabled =
-    watch('isPrivate') === defaultValues?.isPrivate &&
-    watch('name') === defaultValues?.name &&
-    img === null
+    watch('answer') === defaultValues?.answer &&
+    watch('question') === defaultValues?.question &&
+    questionImg === null &&
+    answerImg === null
 
   const onHandleSubmit = (data: FormValues) => {
     const form = new FormData()
 
-    img && form.append('cover', img ?? '')
-    form.append('isPrivate', `${data.isPrivate}`)
-    form.append('name', data.name)
+    questionImg && form.append('questionImg', questionImg ?? '')
+    answerImg && form.append('answerImg', answerImg ?? '')
+    form.append('question', data.question)
+    form.append('answer', data.answer)
     onSubmit?.(form)
   }
 

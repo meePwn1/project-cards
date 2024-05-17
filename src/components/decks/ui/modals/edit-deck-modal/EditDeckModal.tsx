@@ -4,7 +4,7 @@ import { DeckById } from '@/services/decks'
 import { CreateDeckForm } from '../../forms/create-deck-form'
 
 type Props = {
-  deck: DeckById
+  deck?: DeckById
   isLoading?: boolean
   onSubmit?: (data: FormData) => void
   open?: boolean
