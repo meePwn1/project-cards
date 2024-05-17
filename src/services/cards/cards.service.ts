@@ -4,12 +4,12 @@ import { baseApi } from '..'
 const cardsService = baseApi.injectEndpoints({
   endpoints: build => {
     return {
-      createCard: build.mutation<Card, FormData>({
+      createCard: build.mutation<Card, { data: FormData; id: string }>({
         invalidatesTags: ['Cards'],
-        query: data => ({
+        query: ({ data, id }) => ({
           body: data,
           method: 'POST',
-          url: '/v1/cards',
+          url: `/v1/decks/${id}/cards`,
         }),
       }),
       deleteCard: build.mutation<void, { id: string }>({
