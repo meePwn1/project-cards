@@ -19,7 +19,6 @@ export const useCreateDeckForm = (
     control,
     formState: { errors },
     handleSubmit,
-    reset,
     watch,
   } = useForm<FormValues>({
     defaultValues,
@@ -41,5 +40,5 @@ export const useCreateDeckForm = (
     onSubmit?.(form)
   }
 
-  return { control, errors, handleSubmit, isDisabled, onHandleSubmit, reset }
+  return { control, errors, handleSubmit, isDisabled, onHandleSubmit }
 }
