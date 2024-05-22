@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 import { ROUTES } from '@/common/constants'
@@ -7,31 +6,24 @@ import { CardsMoreDropdown, CardsTable, CreateNewCard, EmptyCards } from '@/comp
 import { DeckCover } from '@/components/cards/ui/deck-cover/DeckCover'
 import { Page } from '@/components/layout'
 import { Button, TextField, Typography } from '@/components/ui'
-import { Spinner } from '@/components/ui/spinner'
+import { LinearLoader } from '@/components/ui/linear-loader'
 import { useGetCardsQuery, useGetDeckByIdQuery, useMeQuery } from '@/services'
 
 import s from './Cards.module.scss'
 
 export const Cards = () => {
-  const [isPageLoaded, setIsPageLoaded] = useState(false)
   const { deckId } = useParams()
 
   // queries
-  const { data: me } = useMeQuery()
-  const { data: cards } = useGetCardsQuery({ id: deckId || '' })
-  const { data: deck } = useGetDeckByIdQuery({ id: deckId || '' })
+  const { data: me, isLoading: isMeLoading } = useMeQuery()
+  const { data: cards, isLoading: isCardsLoading } = useGetCardsQuery({ id: deckId || '' })
+  const { data: deck, isLoading: isDeckLoading } = useGetDeckByIdQuery({ id: deckId || '' })
 
   const isMyDeck = me?.id === deck?.userId
   const isEmptyDeck = cards?.items?.length === 0
 
-  if (isPageLoaded) {
-    return (
-      <div
-        style={{ alignItems: 'center', display: 'flex', flexDirection: 'column', height: '100%' }}
-      >
-        <Spinner size={50} />
-      </div>
-    )
+  if (isMeLoading || isCardsLoading || isDeckLoading) {
+    return <LinearLoader />
   }
 
   return (
