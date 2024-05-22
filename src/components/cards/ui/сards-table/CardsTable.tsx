@@ -1,5 +1,5 @@
 import { SORT_BY } from '@/common/constants'
-import { TableColumn } from '@/common/types'
+import { SortType, TableColumn } from '@/common/types'
 import { Rating, Table } from '@/components/ui'
 import { TableHeader } from '@/components/ui/table-header'
 import { CardsResponse } from '@/services'
@@ -63,12 +63,18 @@ const columnsWithoutActions: TableColumn[] = [
 type Props = {
   cards?: CardsResponse['items']
   isMyDeck?: boolean
+  onSort?: (sort: SortType) => void
+  sort?: SortType
 }
-export const CardsTable = ({ cards, isMyDeck }: Props) => {
+export const CardsTable = ({ cards, isMyDeck, onSort, sort }: Props) => {
   return (
     <div className={s.tableContainer}>
       <Table.Root className={s.table}>
-        <TableHeader columns={isMyDeck ? columnsWithActions : columnsWithoutActions} />
+        <TableHeader
+          columns={isMyDeck ? columnsWithActions : columnsWithoutActions}
+          onSort={onSort}
+          sort={sort}
+        />
         <Table.Body>
           {cards?.map(item => {
             return (
