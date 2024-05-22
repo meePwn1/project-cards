@@ -2,7 +2,7 @@ import { baseApi } from '@/services/base-api'
 import { setupListeners } from '@reduxjs/toolkit/query/react'
 import { configureStore } from '@reduxjs/toolkit/react'
 
-import { appReducer } from '../app.slise'
+import { appReducer } from '../app.slice'
 
 export const store = configureStore({
   middleware: getDefaultMiddleware => getDefaultMiddleware().concat(baseApi.middleware),
