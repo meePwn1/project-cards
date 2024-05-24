@@ -1,0 +1,15 @@
+.readMore {
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.moreButton {
+  color: var(--color-accent-500);
+  text-decoration: underline;
+
+  @media (any-hover: hover) {
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
