@@ -7,10 +7,7 @@ import { GetCardsParams } from '@/services'
 
 export const PER_PAGE = 5
 
-type Args = {
-  deckId: string | undefined
-}
-export const useCardsQueryParams = ({ deckId }: Args) => {
+export const useCardsQueryParams = () => {
   const [searchParams, setSearchParams] = useSearchParams()
 
   // query params
@@ -20,18 +17,17 @@ export const useCardsQueryParams = ({ deckId }: Args) => {
   const perPage = Number(searchParams.get(PARAMS.PER_PAGE)) || PER_PAGE
   const sort = getSortFromSortString(orderBy)
 
+  const searchError = question.length > 30 ? 'Max length is 30' : undefined
+
   // debounced values
-  const debouncedQuestion = useDebounce<string>(question, 500)
+  const debouncedSearch = useDebounce<string>(question, 500)
 
   // query
-
-  const queryParams: GetCardsParams = {
-    id: deckId ? deckId : '',
-    params: {
-      currentPage: page === 1 ? undefined : page,
-      itemsPerPage: perPage,
-      question: debouncedQuestion || undefined,
-    },
+  const queryParams: GetCardsParams['params'] = {
+    currentPage: page === 1 ? undefined : page,
+    itemsPerPage: perPage,
+    orderBy: orderBy || undefined,
+    question: debouncedSearch || undefined,
   }
 
   return {
@@ -39,8 +35,7 @@ export const useCardsQueryParams = ({ deckId }: Args) => {
     perPage,
     queryParams,
     question,
-    searchParams,
-    setSearchParams,
+    searchError,
     sort,
   }
 }

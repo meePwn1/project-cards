@@ -8,22 +8,8 @@
   margin-bottom: 24px;
 }
 
-.search {
-  margin-bottom: 24px;
-}
-
 .deckInfo {
   display: inline-flex;
   gap: 5px;
   align-items: center;
-}
-
-.pagination {
-  display: flex;
-  justify-content: center;
-  margin-top: 24px;
-
-  @media (max-width: em(620)) {
-    flex-direction: column;
-  }
 }

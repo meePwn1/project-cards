@@ -39,7 +39,10 @@ export const Modal = (props: Props) => {
               </ScrollArea>
             </Dialog.Content>
           ) : (
-            <Dialog.Content className={s.imagePreview} forceMount>
+            <Dialog.Content className={s.cover} forceMount>
+              <Dialog.Close className={s.closeButton}>
+                <Icon name={'common/close'} size={36} />
+              </Dialog.Close>
               <ScrollArea mh={'90vh'}>{children}</ScrollArea>
             </Dialog.Content>
           )}
