@@ -149,14 +149,14 @@ const PerPageSelect = ({ onPerPageChange, perPage, perPageOptions }: PerPageSele
 
   return (
     <div className={s.select}>
-      Показать
+      Show
       <Select
         onValueChange={handlePerPageChange}
         options={selectOptions}
         value={String(perPage)}
         variant={'pagination'}
       />
-      на странице
+      on page
     </div>
   )
 }
