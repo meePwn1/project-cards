@@ -6,7 +6,7 @@ import s from './Card.module.scss'
 
 type Props<T extends ElementType = 'div'> = {
   as?: T
-  children: ReactNode
+  children?: ReactNode
 } & ComponentPropsWithoutRef<T>
 
 export const Card = <T extends ElementType = 'div'>(props: Props<T>) => {
