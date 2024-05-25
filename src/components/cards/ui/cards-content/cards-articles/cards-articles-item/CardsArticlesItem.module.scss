@@ -1,0 +1,55 @@
+.article {
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+}
+
+.field {
+  &:not(:last-child) {
+    margin-bottom: 10px;
+  }
+
+  p {
+    word-wrap: break-word;
+  }
+}
+
+.cardImageButton {
+  display: block;
+  width: 100%;
+
+  img {
+    width: 100%;
+    max-height: 200px;
+  }
+}
+
+.cover {
+  max-width: 100%;
+  max-height: 90dvh;
+  object-fit: cover;
+}
+
+.actions {
+  display: flex;
+  border-top: 1px solid var(--color-dark-500);
+
+  button {
+    display: flex;
+    flex: 1 1 50%;
+    align-items: center;
+    justify-content: center;
+
+    padding: 5px 0;
+
+    transition: background-color 0.3s ease 0s;
+
+    &:nth-child(1) {
+      border-right: 1px solid var(--color-dark-500);
+    }
+  }
+}
