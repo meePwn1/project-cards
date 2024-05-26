@@ -7,7 +7,10 @@ import { useCreateCardMutation } from '@/services'
 
 import { CreateNewCardForm } from '../create-new-card-form'
 
-export const CreateNewCard = () => {
+type Props = {
+  matches?: boolean
+}
+export const CreateNewCard = ({ matches }: Props) => {
   const { deckId } = useParams()
   const [open, setOpen] = useState(false)
   const [createCard, { isLoading }] = useCreateCardMutation()
@@ -21,6 +24,10 @@ export const CreateNewCard = () => {
       })
   }
 
+  const handleOpenModal = () => {
+    setOpen(true)
+  }
+
   return (
     <>
       <Modal onOpenChange={setOpen} open={open} title={'Add New Card'}>
@@ -31,7 +38,9 @@ export const CreateNewCard = () => {
           submitText={'Add New Card'}
         />
       </Modal>
-      <Button onClick={() => setOpen(true)}>Add New Card</Button>
+      <Button fullWidth={matches} onClick={handleOpenModal}>
+        Add New Card
+      </Button>
     </>
   )
 }
