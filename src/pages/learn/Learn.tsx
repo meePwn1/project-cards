@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 
+import { router } from '@/app/router'
 import { BackToPage } from '@/components/back-to-page/BackToPage'
 import { Page } from '@/components/layout'
 import { Button, Card, RadioGroup, Typography } from '@/components/ui'
@@ -39,7 +40,7 @@ export const Learn = () => {
 
   return (
     <Page centered pt={24}>
-      <BackToPage className={s.back} />
+      <BackToPage className={s.back} onClick={() => router.navigate(-1)} to={'..'} />
       {!isError ? (
         <Card className={s.root}>
           <Typography className={s.title} variant={'h1'}>

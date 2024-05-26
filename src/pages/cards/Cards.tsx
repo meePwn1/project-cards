@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom'
 
+import { ROUTES } from '@/common/constants'
 import { BackToPage } from '@/components/back-to-page'
 import {
   CardsContent,
@@ -9,7 +10,7 @@ import {
 } from '@/components/cards/ui'
 import { DeckCover } from '@/components/cards/ui/deck-cover'
 import { Page } from '@/components/layout'
-import { LinearLoader, Typography } from '@/components/ui'
+import { Typography } from '@/components/ui'
 import { useGetCardsQuery, useGetDeckByIdQuery, useMeQuery } from '@/services'
 
 import s from './Cards.module.scss'
@@ -37,20 +38,22 @@ export const Cards = () => {
   const isEmptyDeck = cards?.items?.length === 0
 
   if (isMeLoading || isCardsLoading || isDeckLoading) {
-    return <LinearLoader />
+    return null
   }
 
   return (
     <Page pt={24}>
-      <BackToPage className={s.back} />
+      <BackToPage className={s.back} to={ROUTES.HOME} />
       <div className={s.pageHeader}>
-        <div className={s.deckInfo}>
-          <Typography variant={'h1'}>{deck?.name}</Typography>
-          {isMyDeck && <CardsMoreDropdown deck={deck} />}
+        <div className={s.pageHeaderContent}>
+          <div className={s.deckInfo}>
+            <Typography variant={'h1'}>{deck?.name}</Typography>
+            {isMyDeck && <CardsMoreDropdown deck={deck} />}
+          </div>
+          <DeckCover cover={deck?.cover} />
         </div>
         {!isEmptyDeck && <CardsHeaderButton deckId={deckId} isMyDeck={isMyDeck} />}
       </div>
-      <DeckCover cover={deck?.cover} />
 
       {isEmptyDeck ? (
         <EmptyCards isMyDeck={isMyDeck} />
