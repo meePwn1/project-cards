@@ -1,10 +1,10 @@
 import { useSearchParams } from 'react-router-dom'
 
-import { PARAMS } from '@/common/constants'
+import { PARAMS, SORT_BY } from '@/common/constants'
 import { useBreakpoint } from '@/common/hooks'
 import { SortType } from '@/common/types'
 import { getSortString } from '@/common/utils'
-import { Pagination, TextField } from '@/components/ui'
+import { Pagination, Select, TextField } from '@/components/ui'
 import { PER_PAGE } from '@/pages/cards/lib'
 import { CardsResponse } from '@/services'
 
@@ -14,6 +14,17 @@ import { CardsArticles } from './cards-articles'
 import { CardsTable } from './сards-table'
 
 const perPageOptions = [5, 10, 15]
+const SelectOptions = [
+  {
+    text: 'Last updated',
+    value: SORT_BY.UPDATED,
+  },
+  {
+    text: 'Added recently',
+    value: SORT_BY.CREATED,
+  },
+  { text: 'More grade', value: SORT_BY.GRADE },
+]
 
 type Props = {
   cards?: CardsResponse
@@ -37,7 +48,7 @@ export const CardsContent = ({
   sort,
 }: Props) => {
   const [searchParams, setSearchParams] = useSearchParams()
-  const windowWidth = useBreakpoint(991.98)
+  const matches = useBreakpoint(991.98)
 
   // handlers
   const handlePageChange = (currentPage: number) => {
@@ -46,15 +57,18 @@ export const CardsContent = ({
     } else {
       searchParams.delete(PARAMS.PAGE)
     }
+    window.scrollTo({ behavior: 'smooth', top: 100 })
     setSearchParams(searchParams)
   }
 
   const handlePerPageChange = (perPage: number) => {
     if (perPage !== PER_PAGE) {
       searchParams.set(PARAMS.PER_PAGE, perPage.toString())
+      searchParams.set(PARAMS.PAGE, '1')
     } else {
       searchParams.delete(PARAMS.PER_PAGE)
     }
+    window.scrollTo({ behavior: 'smooth', top: 100 })
     setSearchParams(searchParams)
   }
 
@@ -78,8 +92,26 @@ export const CardsContent = ({
     setSearchParams(searchParams)
   }
 
+  const handleSelectValueChange = (value: string) => {
+    if (value !== SORT_BY.UPDATED) {
+      searchParams.set(PARAMS.SORTING, `${value}-desc`)
+    } else {
+      searchParams.delete(PARAMS.SORTING)
+    }
+    setSearchParams(searchParams)
+  }
+
   return (
     <>
+      {matches && (
+        <Select
+          className={s.filter}
+          defaultValue={SelectOptions[0].value}
+          onValueChange={handleSelectValueChange}
+          options={SelectOptions}
+          value={sort?.sortBy || SORT_BY.UPDATED}
+        />
+      )}
       <TextField
         className={s.search}
         error={searchError}
@@ -88,7 +120,9 @@ export const CardsContent = ({
         search
         value={question}
       />
-      {windowWidth ? (
+      {matches ? (
+        <CardsArticles cards={cards?.items} isMyDeck={isMyDeck} />
+      ) : (
         <CardsTable
           cards={cards?.items}
           isLoading={isCardsFetching}
@@ -96,8 +130,6 @@ export const CardsContent = ({
           onSort={handleSortChange}
           sort={sort}
         />
-      ) : (
-        <CardsArticles cards={cards?.items} isMyDeck={isMyDeck} />
       )}
       {cards && cards.pagination.totalPages > 1 && (
         <Pagination
