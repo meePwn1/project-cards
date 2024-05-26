@@ -14,17 +14,19 @@ type Option =
   | { disabled?: boolean; text: string; value: string }
 
 type SelectProps = {
+  className?: string
   label?: string
   options?: Option[]
   placeholder?: string
-  variant: 'default' | 'pagination'
+  variant?: 'default' | 'pagination'
 } & RadixUISelect.SelectProps
 
 export const Select = forwardRef<ElementRef<typeof RadixUISelect.Root>, SelectProps>(
   (
     {
+      className,
       defaultValue,
-      label = 'Select box',
+      label,
       options,
       placeholder = 'Select...',
       variant = 'default',
@@ -34,11 +36,11 @@ export const Select = forwardRef<ElementRef<typeof RadixUISelect.Root>, SelectPr
   ) => {
     return (
       <>
-        {variant !== 'pagination' && <label className={s.label}>{label}</label>}
+        {variant !== 'pagination' && label && <label className={s.label}>{label}</label>}
         <RadixUISelect.Root defaultValue={defaultValue} {...rest}>
           <RadixUISelect.Trigger
             aria-label={'number'}
-            className={clsx(s.trigger, variant === 'pagination' && s.pagination)}
+            className={clsx(s.trigger, variant === 'pagination' && s.pagination, className)}
             ref={ref}
           >
             <RadixUISelect.Value placeholder={placeholder} />
