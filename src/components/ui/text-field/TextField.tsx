@@ -59,7 +59,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     return (
       <div className={clsx(s.field, className)}>
         {label && (
-          <label className={clsx(s.label, error && s.error)} htmlFor={inputId}>
+          <label className={clsx(s.label)} htmlFor={inputId}>
             {label}
           </label>
         )}

@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import { ROUTES } from '@/common/constants'
 import { FormValues, formSchema } from '@/common/schemas'
 import { Button, Card, FormCheckbox, FormTextField, Typography } from '@/components/ui'
-import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './SignIn.module.scss'
@@ -20,6 +19,10 @@ export const SignIn = (props: Props) => {
     formState: { errors, isSubmitting },
     handleSubmit,
   } = useForm<FormValue>({
+    defaultValues: {
+      email: 'test-zxc@gmail.com',
+      password: 'sagesage',
+    },
     mode: 'onBlur',
     resolver: zodResolver(schema),
   })
@@ -30,7 +33,6 @@ export const SignIn = (props: Props) => {
 
   return (
     <Card className={s.root}>
-      <DevTool control={control} />
       <Typography className={s.title} variant={'h1'}>
         Sign In
       </Typography>
@@ -67,7 +69,7 @@ export const SignIn = (props: Props) => {
       </form>
       <div className={s.footer}>
         <Typography className={s.text} variant={'body2'}>
-          Already have an account?
+          Don&apos;t have an account?
         </Typography>
         <Typography as={Link} to={ROUTES.SIGN_UP} variant={'linkForm'}>
           Sign Up

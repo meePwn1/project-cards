@@ -1,4 +1,4 @@
-import { AriaAttributes } from 'react'
+import { AriaAttributes, useState } from 'react'
 
 import * as RadixUISlider from '@radix-ui/react-slider'
 
@@ -24,7 +24,28 @@ type Props = {
   value: number[]
 }
 
-export const Slider = ({ defaultValue, label, max, min = 0, value, ...rest }: Props) => {
+export const Slider = ({ defaultValue, label, max = 15, min = 0, value, ...rest }: Props) => {
+  const [minValue, setMinValue] = useState(value[0])
+  const [maxValue, setMaxValue] = useState(value[1])
+
+  const handleMinBlur = () => {
+    if (minValue > value[1]) {
+      setMinValue(value[1])
+    }
+    if (minValue < min) {
+      setMinValue(min)
+    }
+  }
+
+  const handleMaxBlur = () => {
+    if (maxValue < value[0]) {
+      setMaxValue(value[0])
+    }
+    if (maxValue > max) {
+      setMaxValue(max)
+    }
+  }
+
   return (
     <div>
       {label && (
@@ -33,13 +54,23 @@ export const Slider = ({ defaultValue, label, max, min = 0, value, ...rest }: Pr
         </Typography>
       )}
       <div className={s.body}>
-        <span className={s.value}>{value[0]}</span>
+        <input
+          autoComplete={'off'}
+          className={s.value}
+          max={max}
+          min={min}
+          onBlur={handleMinBlur}
+          onChange={e => setMinValue(Number(e.target.value))}
+          step={1}
+          type={'number'}
+          value={minValue}
+        />
         <RadixUISlider.Root
           className={s.root}
           defaultValue={defaultValue}
           max={max}
           min={min}
-          value={value}
+          value={[minValue, maxValue]}
           {...rest}
         >
           <RadixUISlider.Track className={s.track}>
@@ -48,7 +79,17 @@ export const Slider = ({ defaultValue, label, max, min = 0, value, ...rest }: Pr
           <RadixUISlider.Thumb aria-label={'Volume'} className={s.thumb} />
           <RadixUISlider.Thumb aria-label={'Volume'} className={s.thumb} />
         </RadixUISlider.Root>
-        <span className={s.value}>{value[1]}</span>
+        <input
+          autoComplete={'off'}
+          className={s.value}
+          max={max}
+          min={min}
+          onBlur={handleMaxBlur}
+          onChange={e => setMaxValue(Number(e.target.value))}
+          step={1}
+          type={'number'}
+          value={maxValue}
+        />
       </div>
     </div>
   )

@@ -2,7 +2,6 @@ import { useForm } from 'react-hook-form'
 
 import { FormValues, formSchema } from '@/common/schemas'
 import { Button, Card, FormTextField, Typography } from '@/components/ui'
-import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './CreateNewPassword.module.scss'
@@ -28,7 +27,6 @@ export const CreateNewPassword = (props: Props) => {
 
   return (
     <Card className={s.root}>
-      <DevTool control={control} />
       <Typography className={s.title} variant={'h1'}>
         Create new password
       </Typography>

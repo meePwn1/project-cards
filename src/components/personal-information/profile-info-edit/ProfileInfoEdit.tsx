@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form'
 import { FormValues, formSchema } from '@/common/schemas'
 import { Button, FormTextField } from '@/components/ui'
 import { useUpdateUserDataMutation } from '@/services/auth/auth.service'
-import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 import clsx from 'clsx'
 
@@ -40,8 +39,6 @@ export const ProfileInfoEdit = ({ className, onEditModeDeactivate }: Props) => {
   return (
     <div className={clsx(s.profileInfoEdit, className)}>
       <form onSubmit={handleSubmit(handleUpdateUsername)}>
-        <DevTool control={control} />
-
         <FormTextField
           className={s.nicknameField}
           control={control}

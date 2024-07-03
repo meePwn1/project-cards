@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import { ROUTES } from '@/common/constants'
 import { FormValues, formSchema } from '@/common/schemas'
 import { Button, Card, FormTextField, Typography } from '@/components/ui'
-import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './SignUp.module.scss'
@@ -42,7 +41,6 @@ export const SignUp = (props: Props) => {
 
   return (
     <Card className={s.root}>
-      <DevTool control={control} />
       <Typography className={s.title} variant={'h1'}>
         Sign Up
       </Typography>

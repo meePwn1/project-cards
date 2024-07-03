@@ -15,6 +15,9 @@ const slice = createSlice({
   extraReducers: builder => {
     builder
       .addMatcher(isPending, (state, action) => {
+        if ((action.meta.arg as { endpointName: string }).endpointName === 'me') {
+          return
+        }
         state.status = 'loading'
       })
       .addMatcher(isFulfilled, (state, action) => {
