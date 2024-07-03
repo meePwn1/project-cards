@@ -64,3 +64,14 @@ h6 {
   font-size: inherit;
   font-weight: inherit;
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  margin: 0;
+  appearance: none;
+}
+
+/* Firefox */
+input[type='number'] {
+  appearance: textfield;
+}

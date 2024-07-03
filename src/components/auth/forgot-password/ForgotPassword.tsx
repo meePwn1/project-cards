@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import { ROUTES } from '@/common/constants'
 import { FormValues, formSchema } from '@/common/schemas'
 import { Button, Card, FormTextField, Typography } from '@/components/ui'
-import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './ForgotPassword.module.scss'
@@ -31,7 +30,6 @@ export const ForgotPassword = (props: Props) => {
 
   return (
     <Card className={s.root}>
-      <DevTool control={control} />
       <Typography className={s.title} variant={'h1'}>
         Forgot your password?
       </Typography>
